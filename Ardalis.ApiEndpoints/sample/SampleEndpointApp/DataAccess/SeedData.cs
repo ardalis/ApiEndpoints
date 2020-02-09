@@ -1,7 +1,7 @@
 ﻿using SampleEndpointApp.DomainModel;
 using System.Collections.Generic;
 
-namespace SampleEndpointApp
+namespace SampleEndpointApp.DataAccess
 {
     public static class SeedData
     {
@@ -15,14 +15,14 @@ namespace SampleEndpointApp
                 {
                     Id = id++,
                     Name="Steve Smith",
-                    PluralsightUrl="",
+                    PluralsightUrl="https://www.pluralsight.com/authors/steve-smith",
                     TwitterAlias="ardalis"
                 },
                 new Author
                 {
                     Id = id++,
                     Name="Julie Lerman",
-                    PluralsightUrl="",
+                    PluralsightUrl="https://www.pluralsight.com/authors/julie-lerman",
                     TwitterAlias="julialerman"
                 }
             };

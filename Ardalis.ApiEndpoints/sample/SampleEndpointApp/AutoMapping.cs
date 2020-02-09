@@ -9,8 +9,12 @@ namespace SampleEndpointApp
         public AutoMapping()
         {
             CreateMap<CreateAuthorCommand, Author>();
+            CreateMap<UpdateAuthorCommand, Author>();
+
             CreateMap<Author, CreateAuthorResult>();
+            CreateMap<Author, UpdatedAuthorResult>();
             CreateMap<Author, AuthorListResult>();
+            CreateMap<Author, AuthorResult>();
         }
     }
 }
