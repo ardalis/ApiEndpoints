@@ -14,9 +14,9 @@ That's what ASP.NET Core API Endpoints are all about.
 
 The .NET team already did *this exact thing* with razor pages. They recognized that dealing with Views, ViewModels, Controllers, and Actions was way more complicated than necessary. It required a developer to jump around between at least 3 (and often more) different folders in order to add or modify a new page/view to their project. Razor pages addressed this by rethinking the model for page-based ASP.NET Core MVC endpoints.
 
-Razor Pages group each page's razor markup, its related action(s), and its model into two linked files. It uses the same MVC intrinsics as the rest of the platform, so you still get routing, model binding, model validation, filters, the works. You literally give up nothing. But now when you need to add or modify a page you need to look at exactly 2 files, which are linked in the IDE so you don't need to scroll around the file system looking for them.
+Razor Pages group each page's razor markup, its related action(s), and its model into two linked files. It uses the same MVC features as the rest of the platform, so you still get routing, model binding, model validation, filters, the works. You literally give up nothing. But now when you need to add or modify a page you need to look at exactly 2 files, which are linked in the IDE so you don't need to scroll around the file system looking for them.
 
-## ASP.NET Core API Endpoints
+## Introducing ASP.NET Core API Endpoints
 
 ASP.NET Core API Endpoints are essentially Razor Pages for APIs. They break apart bloated controllers and group the API models used by individual endpoints with the endpoint logic itself. They provide a simple way to have a single file for the logic and linked files for the model types.
 
@@ -40,11 +40,10 @@ I'll look to add detailed documentation in the future but for now here's all you
 
 Below are what I expect will be some common questions:
 
-### How do I use shared routing conventions?
+### How do I use shared routing conventions
 
 If you want to create a common route template for all or some subset of your Endpoints, simply create a BaseEndpoint of your own that inherits from `Ardalis.Api.Endpoints.BaseEndpoint` and add a `[Route]` attribute to it.
 
-### Can I add more than one public routable method to an Endpoint class?
+### Can I add more than one public routable method to an Endpoint class
 
 Technically, yes. But don't do that. If you really want that, you should just use a Controller.
-
