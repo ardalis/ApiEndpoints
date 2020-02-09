@@ -44,3 +44,7 @@ Below are what I expect will be some common questions:
 
 If you want to create a common route template for all or some subset of your Endpoints, simply create a BaseEndpoint of your own that inherits from `Ardalis.Api.Endpoints.BaseEndpoint` and add a `[Route]` attribute to it.
 
+### Can I add more than one public routable method to an Endpoint class?
+
+Technically, yes. But don't do that. If you really want that, you should just use a Controller.
+
