@@ -2,6 +2,10 @@
 
 A project for supporting API Endpoints in ASP.NET Core web applications.
 
+## Give a Star! :star:
+
+If you like or are using this project to learn or start your solution, please give it a star. Thanks!
+
 ## Motivation
 
 MVC Controllers are essentially an antipattern. They're dinosaurs. They are collections of methods that never call one another and rarely operate on the same state. They're not cohesive. They tend to become bloated and to grow out of control. Their private methods, if any, are usually only called by a single public method. Most developers recognize that controllers should be as small as possible ([unscientific poll](https://twitter.com/ardalis/status/1223312390391058432)), but they're the only solution offered out of the box, so that's the tool 99% of ASP.NET Core developers use.
@@ -47,3 +51,19 @@ If you want to create a common route template for all or some subset of your End
 ### Can I add more than one public routable method to an Endpoint class
 
 Technically, yes. But don't do that. If you really want that, you should just use a Controller.
+
+## Roadmap
+
+The following are some things I'd like to add to the project/package.
+
+### Roslyn Analyzer
+
+An analyzer could detect if more than one public method were added to a Handler, for instance.
+
+### Item Template
+
+Visual Studio and/or CLI item templates would make it much easier to create Endpoints and their associated models, with the correct naming so they're linked in the IDE.
+
+### Route Conventions
+
+One thing that Controllers do have is built-in support in the framework to use their name in routes (e.g. "/[controller]/{id?}"). Currently in the sample app routes are hard-coded strings. It would be nice if there were an easy way to use a convention based on foldername or namespace or something (using foldername would align with how Razor Pages routing works).
