@@ -2,15 +2,16 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
+using System.Threading.Tasks;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Update : BaseEndpoint<UpdateAuthorCommand, UpdatedAuthorResult>
+    public class Update : BaseAsyncEndpoint<UpdateAuthorCommand, UpdatedAuthorResult>
     {
-        private readonly IRepository _repository;
+        private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
 
-        public Update(IRepository repository,
+        public Update(IAsyncRepository<Author> repository,
             IMapper mapper)
         {
             _repository = repository;
@@ -18,11 +19,11 @@ namespace SampleEndpointApp.Authors
         }
 
         [HttpPut("/authors")]
-        public override ActionResult<UpdatedAuthorResult> Handle([FromBody]UpdateAuthorCommand request)
+        public override async Task<ActionResult<UpdatedAuthorResult>> HandleAsync([FromBody]UpdateAuthorCommand request)
         {
-            var author = _repository.GetById<Author>(request.Id);
+            var author = await _repository.GetByIdAsync(request.Id);
             _mapper.Map(request, author);
-            _repository.Update(author);
+            await _repository.UpdateAsync(author);
 
             var result = _mapper.Map<UpdatedAuthorResult>(author);
             return Ok(result);

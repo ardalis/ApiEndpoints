@@ -1,48 +1,51 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SampleEndpointApp.DomainModel;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 
 namespace SampleEndpointApp.DataAccess
 {
-    public class EfRepository : IRepository
+    /// <summary>
+    /// Source: My reference app https://github.com/dotnet-architecture/eShopOnWeb
+    /// Check it out if you need filtering/paging/etc.
+    /// </summary>
+    public class EfRepository<T> : IAsyncRepository<T> where T : BaseEntity
     {
-        private readonly AppDbContext _dbContext;
+        protected readonly AppDbContext _dbContext;
 
         public EfRepository(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public T GetById<T>(int id) where T : BaseEntity
+        public virtual async Task<T> GetByIdAsync(int id)
         {
-            return _dbContext.Set<T>().SingleOrDefault(e => e.Id == id);
+            return await _dbContext.Set<T>().FindAsync(id);
         }
 
-        public List<T> List<T>() where T : BaseEntity
+        public async Task<IReadOnlyList<T>> ListAllAsync()
         {
-            return _dbContext.Set<T>().ToList();
+            return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public T Add<T>(T entity) where T : BaseEntity
+        public async Task<T> AddAsync(T entity)
         {
-            _dbContext.Set<T>().Add(entity);
-            _dbContext.SaveChanges();
+            await _dbContext.Set<T>().AddAsync(entity);
+            await _dbContext.SaveChangesAsync();
 
             return entity;
         }
 
-        public void Delete<T>(T entity) where T : BaseEntity
-        {
-            _dbContext.Set<T>().Remove(entity);
-            _dbContext.SaveChanges();
-        }
-
-        public void Update<T>(T entity) where T : BaseEntity
+        public async Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(T entity)
+        {
+            _dbContext.Set<T>().Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
     }
-
 }
