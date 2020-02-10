@@ -15,7 +15,7 @@
     <PackageReleaseNotes>Added XML doc comments.</PackageReleaseNotes>
     <Version>0.9.3</Version>
     <AssemblyName>Ardalis.ApiEndpoints</AssemblyName>
-    <!--<PackageIconUrl>https://user-images.githubusercontent.com/782127/52231271-7d561400-2887-11e9-9ca5-648259e60b37.png</PackageIconUrl>-->
+    <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
