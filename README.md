@@ -1,3 +1,5 @@
+![dotnet core - build](https://github.com/ardalis/ApiEndpoints/workflows/dotnet%20core%20-%20build/badge.svg)
+
 # ASP.NET Core API Endpoints
 
 A project for supporting API Endpoints in ASP.NET Core web applications.
