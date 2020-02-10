@@ -2,15 +2,16 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
+using System.Threading.Tasks;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Get : BaseEndpoint<int, AuthorResult>
+    public class Get : BaseAsyncEndpoint<int, AuthorResult>
     {
-        private readonly IRepository _repository;
+        private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
 
-        public Get(IRepository repository,
+        public Get(IAsyncRepository<Author> repository,
             IMapper mapper)
         {
             _repository = repository;
@@ -18,9 +19,9 @@ namespace SampleEndpointApp.Authors
         }
 
         [HttpGet("/authors/{id}")]
-        public override ActionResult<AuthorResult> Handle(int id)
+        public override async Task<ActionResult<AuthorResult>> HandleAsync(int id)
         {
-            var author = _repository.GetById<Author>(id);
+            var author = await _repository.GetByIdAsync(id);
 
             var result = _mapper.Map<AuthorResult>(author);
 
