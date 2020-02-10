@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Ardalis.ApiEndpoints</PackageId>
     <Title>Ardalis.ApiEndpoints</Title>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Steve Smith (@ardalis)</Authors>
     <Company>Ardalis.com</Company>
     <PackageProjectUrl>https://github.com/ardalis/ApiEndpoints</PackageProjectUrl>
