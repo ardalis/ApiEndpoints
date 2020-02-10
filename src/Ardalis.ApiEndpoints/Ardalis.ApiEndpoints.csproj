@@ -12,8 +12,8 @@
     <Summary>Controllers promote creating bloated classes that lack cohesion. This project provides a simpler alternative that follows SOLID principles. An alternative to Controllers for ASP.NET Core API Endpoints.</Summary>
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <PackageTags>aspnet asp.net aspnetcore asp.net core api web api rest endpoint controller</PackageTags>
-    <PackageReleaseNotes>Initial release.</PackageReleaseNotes>
-    <Version>0.9.2</Version>
+    <PackageReleaseNotes>Added XML doc comments.</PackageReleaseNotes>
+    <Version>0.9.3</Version>
     <AssemblyName>Ardalis.ApiEndpoints</AssemblyName>
     <!--<PackageIconUrl>https://user-images.githubusercontent.com/782127/52231271-7d561400-2887-11e9-9ca5-648259e60b37.png</PackageIconUrl>-->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
