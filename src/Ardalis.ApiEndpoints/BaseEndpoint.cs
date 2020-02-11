@@ -16,7 +16,8 @@ namespace Ardalis.ApiEndpoints
     /// <summary>
     /// A base calss for an endpoint that has no parameters.
     /// </summary>
-    /// <typeparam name="TResponse">The type to return from the Handle method's ActionResult<T>.</    [ApiController]
+    /// <typeparam name="TResponse">The type to return from the Handle method's ActionResult<T>.</typeparam>
+    [ApiController]
     public abstract class BaseEndpoint<TResponse> : ControllerBase
     {
         public abstract ActionResult<TResponse> Handle();
