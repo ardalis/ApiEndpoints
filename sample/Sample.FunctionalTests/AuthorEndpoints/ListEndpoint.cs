@@ -10,17 +10,17 @@ using Xunit;
 
 namespace Sample.FunctionalTests.AuthorEndpoints
 {
-    public class ListTests : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class ListEndpoint : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public ListTests(CustomWebApplicationFactory<Startup> factory)
+        public ListEndpoint(CustomWebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateClient();
         }
 
         [Fact]
-        public async Task ReturnsTwoAuthors()
+        public async Task ReturnsTwoGivenTwoAuthors()
         {
             var response = await _client.GetAsync($"/authors");
             response.EnsureSuccessStatusCode();

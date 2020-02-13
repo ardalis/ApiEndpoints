@@ -9,11 +9,11 @@ using Xunit;
 
 namespace Sample.FunctionalTests.AuthorEndpoints
 {
-    public class GetTests : IClassFixture<CustomWebApplicationFactory<Startup>>
+    public class GetEndpoint : IClassFixture<CustomWebApplicationFactory<Startup>>
     {
         private readonly HttpClient _client;
 
-        public GetTests(CustomWebApplicationFactory<Startup> factory)
+        public GetEndpoint(CustomWebApplicationFactory<Startup> factory)
         {
             _client = factory.CreateClient();
         }
