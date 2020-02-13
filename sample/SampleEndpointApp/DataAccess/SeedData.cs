@@ -29,5 +29,12 @@ namespace SampleEndpointApp.DataAccess
 
             return authors;
         }
+
+        public static void PopulateTestData(AppDbContext dbContext)
+        {
+            dbContext.Authors.AddRange(Authors());
+
+            dbContext.SaveChanges();
+        }
     }
 }
