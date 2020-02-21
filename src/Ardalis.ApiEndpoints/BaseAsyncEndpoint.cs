@@ -15,7 +15,7 @@ namespace Ardalis.ApiEndpoints
     }
 
     /// <summary>
-    /// A base calss for an endpoint that has no parameters.
+    /// A base class for an endpoint that has no parameters.
     /// </summary>
     /// <typeparam name="TResponse"></typeparam>
     [ApiController]
