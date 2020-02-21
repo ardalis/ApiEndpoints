@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using SampleEndpointApp;
 using SampleEndpointApp.DataAccess;
 using System;
+using System.Linq;
 
 namespace Sample.FunctionalTests
 {
@@ -18,6 +19,16 @@ namespace Sample.FunctionalTests
                 .UseSolutionRelativeContentRoot("sample/SampleEndpointApp")
                 .ConfigureServices(services =>
                 {
+                    var descriptor = services.SingleOrDefault(
+              d => d.ServiceType ==
+                 typeof(DbContextOptions<AppDbContext>));
+
+                    if (descriptor != null)
+                    {
+                        // remove default (real) implementation
+                        services.Remove(descriptor);
+                    }
+
                     // Create a new service provider.
                     var serviceProvider = new ServiceCollection()
                         .AddEntityFrameworkInMemoryDatabase()
