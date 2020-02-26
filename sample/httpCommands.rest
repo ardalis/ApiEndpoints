@@ -1,0 +1,36 @@
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+curl 'https://localhost:5001/authors' -H 'authority: localhost:5001' -H 'accept: text/plain' -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36' -H 'sec-fetch-site: same-origin' -H 'sec-fetch-mode: cors' -H 'referer: https://localhost:5001/swagger/index.html' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: en-US,en;q=0.9' -H 'cookie: language=en; continueCode=Emar5w1qXgvdzLt5U2H9TWF2iqqho9S7zuMyU3jFlQf96cLB07VR6ZWlzo4j; io=EgQuVp9O41q_g70OAAAp' --compressed
+
+###
+
+GET https://localhost:5001/authors
+
+###
+
+GET https://localhost:5001/authors/1
+
+###
+
+POST https://localhost:5001/authors HTTP/1.1
+content-type: application/json
+
+{
+    "name": "John Doe",
+    "pluralsightUrl": "https://www.pluralsight.com/authors/julie-lerman",
+    "twitterAlias" : "julielerman"
+}
+
+###
+
+PUT https://localhost:5001/authors HTTP/1.1
+content-type: application/json
+
+{
+    "id": 3,
+    "name": "Julia Lerman"
+}
+
+###
+
+DELETE https://localhost:5001/authors/4 HTTP/1.1

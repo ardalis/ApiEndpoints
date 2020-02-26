@@ -18,6 +18,7 @@ namespace SampleEndpointApp.Authors
         public override async Task<ActionResult<DeletedAuthorResult>> HandleAsync(int id)
         {
             var author = await _repository.GetByIdAsync(id);
+            if (author == null) return NotFound(id);
             await _repository.DeleteAsync(author);
 
             return Ok(new DeletedAuthorResult { DeletedAuthorId = id });
