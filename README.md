@@ -54,7 +54,7 @@ If you want to create a common route template for all or some subset of your End
 
 ### Can I add more than one public routable method to an Endpoint class
 
-Technically, yes. But don't do that. If you really want that, you should just use a Controller.
+Technically, yes. But **don't do that**. If you really want that, you should just use a Controller.
 
 ## Roadmap
 
@@ -71,3 +71,8 @@ Visual Studio and/or CLI item templates would make it much easier to create Endp
 ### Route Conventions
 
 One thing that Controllers do have is built-in support in the framework to use their name in routes (e.g. "/[controller]/{id?}"). Currently in the sample app routes are hard-coded strings. It would be nice if there were an easy way to use a convention based on foldername or namespace or something (using foldername would align with how Razor Pages routing works).
+
+## Related Articles
+
+- [Moving from Controllers and Actions to Endpoints](https://ardalis.com/moving-from-controllers-and-actions-to-endpoints-with-mediatr)
+
