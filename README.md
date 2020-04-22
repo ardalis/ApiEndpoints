@@ -32,6 +32,8 @@ When working with ASP.NET Core API Endpoints your project won't need any Control
 
 Most REST APIs have groups of endpoints for a given resource. In Controller-based projects you would have a controller per resource. When using API Endpoints you can simply create a folder per resource, just as you would use folders to group related pages in Razor Pages.
 
+Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Response(REPR). The REPR (reaper) pattern is much simpler and groups everything that has to do with a particular API endpoint together. It follows SOLID principles, in particular SRP and OCP. It also has all the benefits of feature folders and better follows the Common Closure Principle by grouping together things that change together.
+
 ## Getting Started
 
 I'll look to add detailed documentation in the future but for now here's all you need to get started (you can also check the sample project):
@@ -43,6 +45,12 @@ I'll look to add detailed documentation in the future but for now here's all you
 5. Define your `TResponse` type in a file in the same folder as its corresponding endpoint. 
 6. Define your `TRequest` type (if any) just like the `TResponse` class.
 7. Test your ASP.NET Core API Endpoint. If you're using Swagger/OpenAPI it should just work with it automatically.
+
+## Animated Screenshots
+
+### Working with Endpoints, Requests, and Results in Visual Studio
+
+![api-endpoints](https://user-images.githubusercontent.com/782127/80016785-9bfef580-84a1-11ea-8b9f-58e37fd52d3b.gif)
 
 ## Open Questions
 
