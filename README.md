@@ -38,11 +38,11 @@ Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Resp
 
 I'll look to add detailed documentation in the future but for now here's all you need to get started (you can also check the sample project):
 
-1. Add the Ardalis.ApiEndpoints NuGet package to your ASP.NET Core web project.
+1. Add the [Ardalis.ApiEndpoints NuGet package](https://www.nuget.org/packages/Ardalis.ApiEndpoints/) to your ASP.NET Core web project.
 2. Create Endpoint classes by inheriting from either `BaseEndpoint<TRequest,TResponse>` (for endpoints that accept a model as input) or `BaseEndpoint<TResponse>` (for endpoints that simply return a response). For example, a POST endpoint that creates a resource and then returns the newly created record would use version that includes both a Request and a Response. A GET endpoint that just returns a list of records and doesn't accept any arguments would use the second version.
 3. Implement the base class's abstract `Handle()` method.
 4. Make sure to add a `[HttpGet]` or similar attribute to your `Handle()` method, specifying its route.
-5. Define your `TResponse` type in a file in the same folder as its corresponding endpoint. 
+5. Define your `TResponse` type in a file in the same folder as its corresponding endpoint (or in the same file if you prefer). 
 6. Define your `TRequest` type (if any) just like the `TResponse` class.
 7. Test your ASP.NET Core API Endpoint. If you're using Swagger/OpenAPI it should just work with it automatically.
 
@@ -54,7 +54,7 @@ In a standard Web API controller, methods in the same class are grouped together
 ``` bash
 dotnet add package Swashbuckle.AspNetCore.Annotations
 ```
-2. Add EnableAnnotations to the Swagger configuation in Startup.cs
+2. Add EnableAnnotations to the Swagger configuration in Startup.cs
 ``` csharp
 services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
@@ -121,3 +121,12 @@ One thing that Controllers do have is built-in support in the framework to use t
 
 - [Moving from Controllers and Actions to Endpoints](https://ardalis.com/moving-from-controllers-and-actions-to-endpoints-with-mediatr)
 
+## Related / Similar Projects
+
+- [SimpleEndpoints](https://github.com/dasiths/SimpleEndpoints)
+
+## Projects Using ApiEndpoints
+
+If you're using them or find one not in this list, feel free to add it here via a pull request!
+
+- [CleanArchitecture](https://github.com/ardalis/CleanArchitecture): A solution template for ASP.NET 3.x solutions using Clean Architecture.
