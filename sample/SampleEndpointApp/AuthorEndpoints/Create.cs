@@ -2,6 +2,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Threading.Tasks;
 
 namespace SampleEndpointApp.Authors
@@ -19,6 +20,12 @@ namespace SampleEndpointApp.Authors
         }
 
         [HttpPost("/authors")]
+        [SwaggerOperation(
+            Summary = "Creates a new Author",
+            Description = "Creates a new Author",
+            OperationId = "Author.Create",
+            Tags = new[] { "AuthorEndpoint" })
+        ]
         public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request)
         {
             var author = new Author();
