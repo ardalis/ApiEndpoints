@@ -46,6 +46,43 @@ I'll look to add detailed documentation in the future but for now here's all you
 6. Define your `TRequest` type (if any) just like the `TResponse` class.
 7. Test your ASP.NET Core API Endpoint. If you're using Swagger/OpenAPI it should just work with it automatically.
 
+### Adding common endpoint groupings using Swagger
+
+In a standard Web API controller, methods in the same class are grouped together in the Swagger UI. To add this same functionality for endpoints:
+
+1. Install the Swashbuckle.AspNetCore.Annotations
+``` bash
+dotnet add package Swashbuckle.AspNetCore.Annotations
+```
+2. Add EnableAnnotations to the Swagger configuation in Startup.cs
+``` csharp
+services.AddSwaggerGen(c => {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    c.EnableAnnotations();
+});
+```
+3. Add the following attribtue to endpoint methods
+``` csharp
+[HttpPost("/authors")]
+[SwaggerOperation(
+    Summary = "Creates a new Author",
+    Description = "Creates a new Author",
+    OperationId = "Author.Create",
+    Tags = new[] { "AuthorEndpoint" })
+]
+public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request)
+{
+    var author = new Author();
+    _mapper.Map(request, author);
+    await _repository.AddAsync(author);
+
+    var result = _mapper.Map<CreateAuthorResult>(author);
+    return Ok(result);
+}
+```
+
+Examples of the configuration can be found in the sample API project
+
 ## Animated Screenshots
 
 ### Working with Endpoints, Requests, and Results in Visual Studio
