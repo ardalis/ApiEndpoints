@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 using System.Threading.Tasks;
 
+using Swashbuckle.AspNetCore.Annotations;
+
 namespace SampleEndpointApp.Authors
 {
     public class Delete : BaseAsyncEndpoint<int, DeletedAuthorResult>
@@ -15,6 +17,12 @@ namespace SampleEndpointApp.Authors
         }
 
         [HttpDelete("/authors/{id}")]
+		[SwaggerOperation(
+			Summary = "Deletes an Author",
+			Description = "Deletes an Author",
+			OperationId = "Author.Delete",
+			Tags = new[] { "AuthorEndpoint" })
+		]
         public override async Task<ActionResult<DeletedAuthorResult>> HandleAsync(int id)
         {
             var author = await _repository.GetByIdAsync(id);
