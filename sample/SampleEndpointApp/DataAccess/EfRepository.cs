@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SampleEndpointApp.DomainModel;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SampleEndpointApp.DataAccess
@@ -28,7 +29,15 @@ namespace SampleEndpointApp.DataAccess
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        public async Task<T> AddAsync(T entity)
+		/// <inheritdoc />
+		public async Task<IReadOnlyList<T>> ListAllAsync(
+			int perPage,
+			int page)
+		{
+			return await this._dbContext.Set<T>().Skip(perPage * (page - 1)).Take(perPage).ToListAsync();
+		}
+
+		public async Task<T> AddAsync(T entity)
         {
             await _dbContext.Set<T>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();

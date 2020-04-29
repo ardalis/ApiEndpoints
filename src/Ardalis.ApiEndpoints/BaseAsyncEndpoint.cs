@@ -9,7 +9,7 @@ namespace Ardalis.ApiEndpoints
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
     [ApiController]
-    public abstract class BaseAsyncEndpoint<TRequest, TResponse> : ControllerBase
+    public abstract class BaseAsyncEndpoint<TRequest, TResponse> : BaseAsyncEndpoint
     {
         public abstract Task<ActionResult<TResponse>> HandleAsync(TRequest request);
     }
@@ -19,8 +19,16 @@ namespace Ardalis.ApiEndpoints
     /// </summary>
     /// <typeparam name="TResponse"></typeparam>
     [ApiController]
-    public abstract class BaseAsyncEndpoint<TResponse> : ControllerBase
+    public abstract class BaseAsyncEndpoint<TResponse> : BaseAsyncEndpoint
     {
         public abstract Task<ActionResult<TResponse>> HandleAsync();
     }
+    
+	/// <summary>
+	/// A base class for all asynchronous endpoints.
+	/// </summary>
+	[ApiController]
+	public abstract class BaseAsyncEndpoint : ControllerBase
+	{
+	}
 }

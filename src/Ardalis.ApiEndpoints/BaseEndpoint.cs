@@ -8,7 +8,7 @@ namespace Ardalis.ApiEndpoints
     /// <typeparam name="TRequest">The type to be model bound by the Handle method.</typeparam>
     /// <typeparam name="TResponse">The type to return from the Handle method's ActionResult<T>.</typeparam>
     [ApiController]
-    public abstract class BaseEndpoint<TRequest, TResponse> : ControllerBase
+    public abstract class BaseEndpoint<TRequest, TResponse> : BaseEndpoint
     {
         public abstract ActionResult<TResponse> Handle(TRequest request);
     }
@@ -18,8 +18,16 @@ namespace Ardalis.ApiEndpoints
     /// </summary>
     /// <typeparam name="TResponse">The type to return from the Handle method's ActionResult<T>.</typeparam>
     [ApiController]
-    public abstract class BaseEndpoint<TResponse> : ControllerBase
+	public abstract class BaseEndpoint<TResponse> : BaseEndpoint
     {
-        public abstract ActionResult<TResponse> Handle();
+		public abstract ActionResult<TResponse> Handle();
     }
+
+    /// <summary>
+    /// A base class for all synchronous endpoints.
+    /// </summary>
+	[ApiController]
+	public abstract class BaseEndpoint : ControllerBase
+	{
+	}
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SampleEndpointApp.Authors
 {
-    public class List : BaseAsyncEndpoint<List<AuthorListResult>>
+    public class List : BaseAsyncEndpoint
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -21,9 +21,9 @@ namespace SampleEndpointApp.Authors
         }
 
         [HttpGet("/authors")]
-        public override async Task<ActionResult<List<AuthorListResult>>> HandleAsync()
+        public async Task<ActionResult> HandleAsync([FromQuery] int page = 1, int perPage = 10)
         {
-            var result = (await _repository.ListAllAsync())
+            var result = (await _repository.ListAllAsync(perPage, page))
                 .Select(i => _mapper.Map<AuthorListResult>(i));
 
             return Ok(result);

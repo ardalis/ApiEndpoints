@@ -11,6 +11,7 @@ namespace SampleEndpointApp.DomainModel
     {
         Task<T> GetByIdAsync(int id);
         Task<IReadOnlyList<T>> ListAllAsync();
+		Task<IReadOnlyList<T>> ListAllAsync(int perPage, int page);
         //Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
