@@ -21,6 +21,7 @@ namespace SampleEndpointApp.Authors
             if (author == null) return NotFound(id);
             await _repository.DeleteAsync(author);
 
+            // return NoContent(); another option; see https://restfulapi.net/http-methods/#delete
             return Ok(new DeletedAuthorResult { DeletedAuthorId = id });
         }
     }
