@@ -124,6 +124,7 @@ One thing that Controllers do have is built-in support in the framework to use t
 ## Related / Similar Projects
 
 - [SimpleEndpoints](https://github.com/dasiths/SimpleEndpoints)
+- [FunctionMonkey](https://github.com/JamesRandall/FunctionMonkey) A similar approach for Azure Functions.
 
 ## Projects Using ApiEndpoints
 
