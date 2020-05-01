@@ -125,6 +125,7 @@ One thing that Controllers do have is built-in support in the framework to use t
 
 - [SimpleEndpoints](https://github.com/dasiths/SimpleEndpoints)
 - [FunctionMonkey](https://github.com/JamesRandall/FunctionMonkey) A similar approach for Azure Functions.
+- [https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints](https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints) A similar approach using MediatR and middleware.
 
 ## Projects Using ApiEndpoints
 
