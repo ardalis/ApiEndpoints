@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Swashbuckle.AspNetCore.Annotations;
+
 namespace SampleEndpointApp.Authors
 {
     public class List : BaseAsyncEndpoint
@@ -21,6 +23,12 @@ namespace SampleEndpointApp.Authors
         }
 
         [HttpGet("/authors")]
+		[SwaggerOperation(
+			Summary = "List all Authors",
+			Description = "List all Authors",
+			OperationId = "Author.List",
+			Tags = new[] { "AuthorEndpoint" })
+		]
         public async Task<ActionResult> HandleAsync([FromQuery] int page = 1, int perPage = 10)
         {
             var result = (await _repository.ListAllAsync(perPage, page))

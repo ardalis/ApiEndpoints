@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 using System.Threading.Tasks;
 
+using Swashbuckle.AspNetCore.Annotations;
+
 namespace SampleEndpointApp.Authors
 {
     public class Update : BaseAsyncEndpoint<UpdateAuthorCommand, UpdatedAuthorResult>
@@ -19,6 +21,13 @@ namespace SampleEndpointApp.Authors
         }
 
         [HttpPut("/authors")]
+        
+		[SwaggerOperation(
+			Summary = "Updates an existing Author",
+			Description = "Updates an existing Author",
+			OperationId = "Author.Update",
+			Tags = new[] { "AuthorEndpoint" })
+		]
         public override async Task<ActionResult<UpdatedAuthorResult>> HandleAsync([FromBody]UpdateAuthorCommand request)
         {
             var author = await _repository.GetByIdAsync(request.Id);

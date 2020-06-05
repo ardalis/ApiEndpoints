@@ -26,25 +26,62 @@ Razor Pages group each page's razor markup, its related action(s), and its model
 
 ## Introducing ASP.NET Core API Endpoints
 
-ASP.NET Core API Endpoints are essentially Razor Pages for APIs. They break apart bloated controllers and group the API models used by individual endpoints with the endpoint logic itself. They provide a simple way to have a single file for the logic and linked files for the model types.
+**ASP.NET Core API Endpoints are essentially Razor Pages for APIs.** They break apart bloated controllers and group the API models used by individual endpoints with the endpoint logic itself. They provide a simple way to have a single file for the logic and linked files for the model types.
 
 When working with ASP.NET Core API Endpoints your project won't need any Controller classes. You can organize the Endpoints however you want. By feature. In a giant Endpoints folder. It doesn't matter - they'll work regardless of where you put them.
 
 Most REST APIs have groups of endpoints for a given resource. In Controller-based projects you would have a controller per resource. When using API Endpoints you can simply create a folder per resource, just as you would use folders to group related pages in Razor Pages.
 
-Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Response(REPR). The REPR (reaper) pattern is much simpler and groups everything that has to do with a particular API endpoint together. It follows SOLID principles, in particular SRP and OCP. It also has all the benefits of feature folders and better follows the Common Closure Principle by grouping together things that change together.
+**Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Response(REPR). The REPR (reaper) pattern is much simpler and groups everything that has to do with a particular API endpoint together.** It follows SOLID principles, in particular SRP and OCP. It also has all the benefits of feature folders and better follows the Common Closure Principle by grouping together things that change together.
 
 ## Getting Started
 
 I'll look to add detailed documentation in the future but for now here's all you need to get started (you can also check the sample project):
 
-1. Add the Ardalis.ApiEndpoints NuGet package to your ASP.NET Core web project.
-2. Create Endpoint classes by inheriting from either `BaseEndpoint<TRequest,TResponse>` (for endpoints that accept a model as input) or `BaseEndpoint<TResponse>` (for endpoints that simply return a response). For example, a POST endpoint that creates a resource and then returns the newly created record would use version that includes both a Request and a Response. A GET endpoint that just returns a list of records and doesn't accept any arguments would use the second version.
+1. Add the [Ardalis.ApiEndpoints NuGet package](https://www.nuget.org/packages/Ardalis.ApiEndpoints/) to your ASP.NET Core web project.
+2. Create Endpoint classes by inheriting from either `BaseEndpoint<TRequest,TResponse>` (for endpoints that accept a model as input) or `BaseEndpoint<TResponse>` (for endpoints that simply return a response). For example, a POST endpoint that creates a resource and then returns the newly created record would use the version that includes both a Request and a Response. A GET endpoint that just returns a list of records and doesn't accept any arguments would use the second version.
 3. Implement the base class's abstract `Handle()` method.
 4. Make sure to add a `[HttpGet]` or similar attribute to your `Handle()` method, specifying its route.
-5. Define your `TResponse` type in a file in the same folder as its corresponding endpoint. 
+5. Define your `TResponse` type in a file in the same folder as its corresponding endpoint (or in the same file if you prefer). 
 6. Define your `TRequest` type (if any) just like the `TResponse` class.
 7. Test your ASP.NET Core API Endpoint. If you're using Swagger/OpenAPI it should just work with it automatically.
+
+### Adding common endpoint groupings using Swagger
+
+In a standard Web API controller, methods in the same class are grouped together in the Swagger UI. To add this same functionality for endpoints:
+
+1. Install the Swashbuckle.AspNetCore.Annotations
+``` bash
+dotnet add package Swashbuckle.AspNetCore.Annotations
+```
+2. Add EnableAnnotations to the Swagger configuration in Startup.cs
+``` csharp
+services.AddSwaggerGen(c => {
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+    c.EnableAnnotations();
+});
+```
+3. Add the following attribtue to endpoint methods
+``` csharp
+[HttpPost("/authors")]
+[SwaggerOperation(
+    Summary = "Creates a new Author",
+    Description = "Creates a new Author",
+    OperationId = "Author.Create",
+    Tags = new[] { "AuthorEndpoint" })
+]
+public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request)
+{
+    var author = new Author();
+    _mapper.Map(request, author);
+    await _repository.AddAsync(author);
+
+    var result = _mapper.Map<CreateAuthorResult>(author);
+    return Ok(result);
+}
+```
+
+Examples of the configuration can be found in the sample API project
 
 ## Animated Screenshots
 
@@ -84,3 +121,14 @@ One thing that Controllers do have is built-in support in the framework to use t
 
 - [Moving from Controllers and Actions to Endpoints](https://ardalis.com/moving-from-controllers-and-actions-to-endpoints-with-mediatr)
 
+## Related / Similar Projects
+
+- [SimpleEndpoints](https://github.com/dasiths/SimpleEndpoints)
+- [FunctionMonkey](https://github.com/JamesRandall/FunctionMonkey) A similar approach for Azure Functions.
+- [https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints](https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints) A similar approach using MediatR and middleware.
+
+## Projects Using ApiEndpoints
+
+If you're using them or find one not in this list, feel free to add it here via a pull request!
+
+- [CleanArchitecture](https://github.com/ardalis/CleanArchitecture): A solution template for ASP.NET 3.x solutions using Clean Architecture.
