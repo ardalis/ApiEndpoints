@@ -1,13 +1,16 @@
 ﻿// https://raw.githubusercontent.com/dotnet/samples/master/csharp/roslyn-sdk/Tutorials/MakeConst/MakeConst.Test/Verifiers/CodeFixVerifier.cs
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Formatting;
+using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test.Verifiers
@@ -124,7 +127,16 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test.Verifiers
 
             //after applying all of the code fixes, compare the resulting string to the inputted one
             var actual = GetStringFromDocument(document);
-            Assert.AreEqual(newSource, actual);
+            Assert.AreEqual(
+                RemoveMostWhiteSpace(newSource),
+                RemoveMostWhiteSpace(actual));
+        }
+
+        private string RemoveMostWhiteSpace(string code)
+        {
+            var options = RegexOptions.None;
+            var regex = new Regex("[ ]{2,}", options);
+            return regex.Replace(code, " ");
         }
     }
 }
