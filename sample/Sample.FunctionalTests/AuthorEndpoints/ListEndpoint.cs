@@ -34,13 +34,16 @@ namespace Sample.FunctionalTests.AuthorEndpoints
         }
 
         [Fact]
-        public async Task GivenLongRunningRequest_WhenTokenSourceCallsForCancellation_RequestIsTermainated()
+        public async Task GivenLongRunningListRequest_WhenTokenSourceCallsForCancellation_RequestIsTermainated()
         {
-            // Arrange, generate a token source that times out after 1 millisecond
-            var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(1));
+            // Arrange, generate a token source that times out instantly
+            var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
 
-            // Act/Assert
-            var response = await Assert.ThrowsAsync<OperationCanceledException>(async () => await _client.GetAsync("/authors", tokenSource.Token));
+            // Act
+            var request = _client.GetAsync("/authors", tokenSource.Token);
+
+            // Assert
+            var response = await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
         }
     }
 }

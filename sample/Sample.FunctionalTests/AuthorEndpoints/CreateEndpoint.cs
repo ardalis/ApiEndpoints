@@ -3,9 +3,11 @@ using SampleEndpointApp;
 using SampleEndpointApp.Authors;
 using SampleEndpointApp.DataAccess;
 using SampleEndpointApp.DomainModel;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -43,6 +45,26 @@ namespace Sample.FunctionalTests.AuthorEndpoints
             Assert.Equal(result.Name, newAuthor.Name);
             Assert.Equal(result.PluralsightUrl, newAuthor.PluralsightUrl);
             Assert.Equal(result.TwitterAlias, newAuthor.TwitterAlias);
+        }
+
+        [Fact]
+        public async Task GivenLongRunningCreateRequest_WhenTokenSourceCallsForCancellation_RequestIsTermainated()
+        {
+            // Arrange, generate a token source that times out instantly
+            var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
+            var lastAuthor = SeedData.Authors().Last();
+            var newAuthor = new CreateAuthorCommand()
+            {
+                Name = "James Eastham",
+                PluralsightUrl = "https://app.pluralsight.com",
+                TwitterAlias = "jeasthamdev",
+            };
+
+            // Act
+            var request = _client.PostAsync("/authors", new StringContent(JsonConvert.SerializeObject(newAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
         }
     }
 }
