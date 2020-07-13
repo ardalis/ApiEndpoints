@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Ardalis.ApiEndpoints
 {
@@ -11,7 +12,7 @@ namespace Ardalis.ApiEndpoints
     [ApiController]
     public abstract class BaseAsyncEndpoint<TRequest, TResponse> : BaseAsyncEndpoint
     {
-        public abstract Task<ActionResult<TResponse>> HandleAsync(TRequest request);
+        public abstract Task<ActionResult<TResponse>> HandleAsync(TRequest request, CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -21,14 +22,14 @@ namespace Ardalis.ApiEndpoints
     [ApiController]
     public abstract class BaseAsyncEndpoint<TResponse> : BaseAsyncEndpoint
     {
-        public abstract Task<ActionResult<TResponse>> HandleAsync();
+        public abstract Task<ActionResult<TResponse>> HandleAsync(CancellationToken cancellationToken = default);
     }
-    
-	/// <summary>
-	/// A base class for all asynchronous endpoints.
-	/// </summary>
-	[ApiController]
-	public abstract class BaseAsyncEndpoint : ControllerBase
-	{
-	}
+
+    /// <summary>
+    /// A base class for all asynchronous endpoints.
+    /// </summary>
+    [ApiController]
+    public abstract class BaseAsyncEndpoint : ControllerBase
+    {
+    }
 }

@@ -3,6 +3,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 using Swashbuckle.AspNetCore.Annotations;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SampleEndpointApp.Authors
@@ -26,11 +27,11 @@ namespace SampleEndpointApp.Authors
             OperationId = "Author.Create",
             Tags = new[] { "AuthorEndpoint" })
         ]
-        public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request)
+        public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author();
             _mapper.Map(request, author);
-            await _repository.AddAsync(author);
+            await _repository.AddAsync(author, cancellationToken);
 
             var result = _mapper.Map<CreateAuthorResult>(author);
             return Ok(result);
