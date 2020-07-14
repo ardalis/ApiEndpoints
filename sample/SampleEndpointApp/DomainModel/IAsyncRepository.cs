@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SampleEndpointApp.DomainModel
@@ -9,13 +10,20 @@ namespace SampleEndpointApp.DomainModel
     /// <typeparam name="T"></typeparam>
     public interface IAsyncRepository<T> where T : BaseEntity
     {
-        Task<T> GetByIdAsync(int id);
-        Task<IReadOnlyList<T>> ListAllAsync();
-		Task<IReadOnlyList<T>> ListAllAsync(int perPage, int page);
+        Task<T> GetByIdAsync(int id, CancellationToken cancellationToken);
+
+        Task<IReadOnlyList<T>> ListAllAsync(CancellationToken cancellationToken);
+
+        Task<IReadOnlyList<T>> ListAllAsync(int perPage, int page, CancellationToken cancellationToken);
+
         //Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
-        Task<T> AddAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+
+        Task<T> AddAsync(T entity, CancellationToken cancellationToken);
+
+        Task UpdateAsync(T entity, CancellationToken cancellationToken);
+
+        Task DeleteAsync(T entity, CancellationToken cancellationToken);
+
         //Task<int> CountAsync(ISpecification<T> spec);
     }
 }

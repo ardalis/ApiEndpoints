@@ -2,11 +2,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 using Swashbuckle.AspNetCore.Annotations;
+using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
@@ -29,9 +29,9 @@ namespace SampleEndpointApp.Authors
 			OperationId = "Author.List",
 			Tags = new[] { "AuthorEndpoint" })
 		]
-        public async Task<ActionResult> HandleAsync([FromQuery] int page = 1, int perPage = 10)
+        public async Task<ActionResult> HandleAsync([FromQuery] int page = 1, int perPage = 10, CancellationToken cancellationToken = default)
         {
-            var result = (await _repository.ListAllAsync(perPage, page))
+            var result = (await _repository.ListAllAsync(perPage, page, cancellationToken))
                 .Select(i => _mapper.Map<AuthorListResult>(i));
 
             return Ok(result);
