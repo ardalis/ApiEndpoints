@@ -14,7 +14,7 @@ namespace SampleEndpointApp.DomainModel
 
         Task<IReadOnlyList<T>> ListAllAsync(CancellationToken cancellationToken);
 
-		Task<IReadOnlyList<T>> ListAllAsync(int perPage, int page, CancellationToken cancellationToken);
+        Task<IReadOnlyList<T>> ListAllAsync(int perPage, int page, CancellationToken cancellationToken);
 
         //Task<IReadOnlyList<T>> ListAsync(ISpecification<T> spec);
 
