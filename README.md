@@ -61,7 +61,7 @@ services.AddSwaggerGen(c => {
     c.EnableAnnotations();
 });
 ```
-3. Add the following attribtue to endpoint methods
+3. Add the following attribute to endpoint methods
 ``` csharp
 [HttpPost("/authors")]
 [SwaggerOperation(
