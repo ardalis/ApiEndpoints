@@ -34,7 +34,7 @@ namespace Sample.FunctionalTests.AuthorEndpoints
         }
 
         [Fact]
-        public async Task GivenLongRunningPaginatedListRequest_WhenTokenSourceCallsForCancellation_RequestIsTermainated()
+        public async Task GivenLongRunningPaginatedListRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
         {
             // Arrange, generate a token source that times out instantly
             var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
