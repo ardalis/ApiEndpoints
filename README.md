@@ -105,10 +105,6 @@ Technically, yes. But **don't do that**. If you really want that, you should jus
 
 The following are some things I'd like to add to the project/package.
 
-### Roslyn Analyzer
-
-An analyzer could detect if more than one public method were added to a Handler, for instance.
-
 ### Item Template
 
 Visual Studio and/or CLI item templates would make it much easier to create Endpoints and their associated models, with the correct naming so they're linked in the IDE.
