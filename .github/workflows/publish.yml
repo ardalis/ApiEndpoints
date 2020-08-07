@@ -1,10 +1,10 @@
-name: publish to nuget
+name: publish ApiEndpoints to nuget
 on:
   push:
     branches:
       - master # Your default release branch
     paths:
-      - '/src/Ardalis.ApiEndpoints/**'
+      - 'src/Ardalis.ApiEndpoints/**'
 jobs:
   publish:
     name: list on nuget

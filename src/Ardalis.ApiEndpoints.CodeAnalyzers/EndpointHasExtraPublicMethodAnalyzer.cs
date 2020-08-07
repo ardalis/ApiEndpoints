@@ -40,7 +40,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
         
         private void AnalyzeMethodDeclaration(SymbolAnalysisContext context)
         {
-            //string name = "";
+            //string name = "";  
             try
             {
                 var methodSymbol = context.Symbol as IMethodSymbol;
