@@ -61,7 +61,7 @@ services.AddSwaggerGen(c => {
     c.EnableAnnotations();
 });
 ```
-3. Add the following attribtue to endpoint methods
+3. Add the following attribute to endpoint methods
 ``` csharp
 [HttpPost("/authors")]
 [SwaggerOperation(
@@ -126,9 +126,11 @@ One thing that Controllers do have is built-in support in the framework to use t
 - [SimpleEndpoints](https://github.com/dasiths/SimpleEndpoints)
 - [FunctionMonkey](https://github.com/JamesRandall/FunctionMonkey) A similar approach for Azure Functions.
 - [https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints](https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints) A similar approach using MediatR and middleware.
+- [Voyager](https://github.com/smithgeek/voyager) A similar approach using MediatR that works for ASP.NET core and Azure Functions.
 
 ## Projects Using ApiEndpoints
 
 If you're using them or find one not in this list, feel free to add it here via a pull request!
 
 - [CleanArchitecture](https://github.com/ardalis/CleanArchitecture): A solution template for ASP.NET 3.x solutions using Clean Architecture.
+- [PayrollProcessor](https://github.com/KyleMcMaster/payroll-processor): A smorgasbord of modern .NET tech written with functional and asynchronous patterns.

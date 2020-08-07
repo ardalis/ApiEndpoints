@@ -5,6 +5,7 @@ using SampleEndpointApp.DomainModel;
 using System.Threading.Tasks;
 
 using Swashbuckle.AspNetCore.Annotations;
+using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
@@ -28,11 +29,11 @@ namespace SampleEndpointApp.Authors
 			OperationId = "Author.Update",
 			Tags = new[] { "AuthorEndpoint" })
 		]
-        public override async Task<ActionResult<UpdatedAuthorResult>> HandleAsync([FromBody]UpdateAuthorCommand request)
+        public override async Task<ActionResult<UpdatedAuthorResult>> HandleAsync([FromBody]UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
-            var author = await _repository.GetByIdAsync(request.Id);
+            var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
             _mapper.Map(request, author);
-            await _repository.UpdateAsync(author);
+            await _repository.UpdateAsync(author, cancellationToken);
 
             var result = _mapper.Map<UpdatedAuthorResult>(author);
             return Ok(result);

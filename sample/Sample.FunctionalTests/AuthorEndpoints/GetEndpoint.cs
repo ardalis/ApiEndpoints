@@ -2,8 +2,10 @@ using Newtonsoft.Json;
 using SampleEndpointApp;
 using SampleEndpointApp.DataAccess;
 using SampleEndpointApp.DomainModel;
+using System;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -33,6 +35,20 @@ namespace Sample.FunctionalTests.AuthorEndpoints
             Assert.Equal(firstAuthor.Name, result.Name);
             Assert.Equal(firstAuthor.PluralsightUrl, result.PluralsightUrl);
             Assert.Equal(firstAuthor.TwitterAlias, result.TwitterAlias);
+        }
+
+        [Fact]
+        public async Task GivenLongRunningGetRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
+        {
+            // Arrange, generate a token source that times out instantly
+            var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
+            var firstAuthor = SeedData.Authors().First();
+
+            // Act
+            var request = _client.GetAsync($"/authors/{firstAuthor}", tokenSource.Token);
+
+            // Assert
+            await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
         }
     }
 }
