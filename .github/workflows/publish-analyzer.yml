@@ -1,4 +1,4 @@
-name: publish to nuget
+name: publish analyzer to nuget
 on:
   push:
     branches:
