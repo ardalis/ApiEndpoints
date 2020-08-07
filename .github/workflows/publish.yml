@@ -1,4 +1,4 @@
-name: publish to nuget
+name: publish ApiEndpoints to nuget
 on:
   push:
     branches:
