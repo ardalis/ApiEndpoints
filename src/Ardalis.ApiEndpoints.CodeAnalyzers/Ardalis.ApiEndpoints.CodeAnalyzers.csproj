@@ -18,6 +18,8 @@
     <Summary>Code Analyzers increasing productivity of developers using the Api Endpoints framework.</Summary>
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <NoPackageAnalysis>true</NoPackageAnalysis>
+    <PackageTags>api endpoints code analyzers roslyn</PackageTags>
+    <PackageReleaseNotes>Initial version; still has some false positives like constructors</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
