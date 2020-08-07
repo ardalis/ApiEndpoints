@@ -29,7 +29,4 @@
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Ardalis.ApiEndpoints.CodeAnalyzers\Ardalis.ApiEndpoints.CodeAnalyzers.csproj" />
-  </ItemGroup>
 </Project>

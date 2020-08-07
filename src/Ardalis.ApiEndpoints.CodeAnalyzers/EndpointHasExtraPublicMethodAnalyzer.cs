@@ -40,13 +40,18 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
         
         private void AnalyzeMethodDeclaration(SymbolAnalysisContext context)
         {
+            //string name = "";
             try
             {
                 var methodSymbol = context.Symbol as IMethodSymbol;
 
                 if (null == methodSymbol)
                     return;
-                
+
+                //name += methodSymbol.MethodKind.ToString();
+
+                if (methodSymbol.MethodKind == MethodKind.Constructor) return;
+               
                 var isApiEndpoint =
                     methodSymbol
                         .ContainingType
@@ -62,6 +67,8 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                 // isn't a new public method
                 if (methodSymbol.IsOverride || methodSymbol.DeclaredAccessibility != Accessibility.Public) 
                     return;
+
+                //name += ";" + methodSymbol.Name;
 
                 // at this point, we have a new public method on a BaseEndpoint that violates the rule
                 var diagnostic = Diagnostic.Create(
