@@ -4,7 +4,7 @@ on:
     branches:
       - master # Your default release branch
     paths:
-      - '/src/Ardalis.ApiEndpoints/**'
+      - 'src/Ardalis.ApiEndpoints/**'
 jobs:
   publish:
     name: list on nuget
