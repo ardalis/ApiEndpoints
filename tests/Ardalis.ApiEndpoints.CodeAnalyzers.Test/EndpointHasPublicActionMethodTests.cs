@@ -49,6 +49,23 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                 }
             }";
 
+        private const string ValidEndpointUsingNonGenericBaseClass = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseAsyncEndpoint
+                {
+                    public async Task<ActionResult<object>> HandleAsync([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
         private const string ValidEndpointWithExtraNonPublicMethods = @"
             using System;            
             using System.Threading.Tasks;
@@ -297,18 +314,202 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                 }
             }";
 
+        private const string InvalidEndpointWithMultipleHandleMethods = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseEndpoint
+                {
+                    public ActionResult<object> Handle3([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    // the most valid
+                    public ActionResult<object> Handle([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
+        private const string InvalidEndpointWithMultipleHandleMethods_Fixed = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseEndpoint
+                {
+                    internal ActionResult<object> Handle3([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    // the most valid
+                    public ActionResult<object> Handle([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
+        private const string InvalidEndpointWithMultipleHandleMethods2 = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseEndpoint
+                {
+                    // the most valid
+                    public ActionResult<object> Handle([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    public ActionResult<object> Handle3([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
+        private const string InvalidEndpointWithMultipleHandleMethods2_Fixed = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseEndpoint
+                {
+                    // the most valid
+                    public ActionResult<object> Handle([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    internal ActionResult<object> Handle3([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
+        private const string InvalidEndpointWithHandleAndHandleAsyncMethods = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseEndpoint
+                {
+                    public ActionResult<object> HandleAsync([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    // the most valid
+                    public ActionResult<object> Handle([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
+        private const string InvalidEndpointWithHandleAndHandleAsyncMethods_Fixed = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseEndpoint
+                {
+                    internal ActionResult<object> HandleAsync([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    // the most valid
+                    public ActionResult<object> Handle([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
+        private const string InvalidEndpointWithInvalidHandleMethod = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseAsyncEndpoint<object, object>
+                {
+                    public ActionResult<object> Handle([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    // the most valid
+                    public override ActionResult<object> HandleAsync([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
+        private const string InvalidEndpointWithInvalidHandleMethod_Fixed = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseAsyncEndpoint<object, object>
+                {
+                    internal ActionResult<object> Handle([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    // the most valid
+                    public override ActionResult<object> HandleAsync([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
         [DataTestMethod]
         [DataRow(""),
          DataRow(ValidEndpoint),
          DataRow(ValidEndpointWithExtraNonPublicMethods),
-         DataRow(ValidEndpointWithPublicConstructor)]
+         DataRow(ValidEndpointWithPublicConstructor),
+         DataRow(ValidEndpointUsingNonGenericBaseClass)]
         public void WhenTestCodeIsValidNoDiagnosticIsTriggered(string testCode)
         {
             VerifyCSharpDiagnostic(testCode);
         }
 
         [DataTestMethod]
-        
         [
         DataRow(
             InvalidEndpointWithExtraPublicMethod, 
@@ -334,7 +535,27 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
             InvalidEndpointIsNonPublic,
             InvalidEndpointIsNonPublic_Fixed,
             "Endpoint TestEndpoint has additional public method ExtraPublicMethod. Endpoints must have only one public method.",
-            16, 41)
+            16, 41),
+        DataRow(
+            InvalidEndpointWithMultipleHandleMethods,
+            InvalidEndpointWithMultipleHandleMethods_Fixed,
+            "Endpoint TestEndpoint has additional public method Handle3. Endpoints must have only one public method.",
+            11, 49),
+        DataRow(
+            InvalidEndpointWithMultipleHandleMethods2,
+            InvalidEndpointWithMultipleHandleMethods2_Fixed,
+            "Endpoint TestEndpoint has additional public method Handle3. Endpoints must have only one public method.",
+            17, 49),
+        DataRow(
+            InvalidEndpointWithHandleAndHandleAsyncMethods,
+            InvalidEndpointWithHandleAndHandleAsyncMethods_Fixed,
+            "Endpoint TestEndpoint has additional public method HandleAsync. Endpoints must have only one public method.",
+            11, 49),
+         DataRow(
+            InvalidEndpointWithInvalidHandleMethod,
+            InvalidEndpointWithInvalidHandleMethod_Fixed,
+            "Endpoint TestEndpoint has additional public method Handle. Endpoints must have only one public method.",
+            11, 49)
         ]
         public void WhenDiagnosticIsRaisedFixUpdatesCode(
             string test,
