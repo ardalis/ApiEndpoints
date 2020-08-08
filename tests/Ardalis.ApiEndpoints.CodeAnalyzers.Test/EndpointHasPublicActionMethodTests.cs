@@ -30,6 +30,25 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                 }
             }";
 
+        private const string ValidEndpointWithPublicConstructor = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseAsyncEndpoint<object, object>
+                {
+                    public TestEndpoint(object o){}
+
+                    public override async Task<ActionResult<object>> HandleAsync([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }";
+
         private const string ValidEndpointWithExtraNonPublicMethods = @"
             using System;            
             using System.Threading.Tasks;
@@ -281,7 +300,8 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
         [DataTestMethod]
         [DataRow(""),
          DataRow(ValidEndpoint),
-         DataRow(ValidEndpointWithExtraNonPublicMethods)]
+         DataRow(ValidEndpointWithExtraNonPublicMethods),
+         DataRow(ValidEndpointWithPublicConstructor)]
         public void WhenTestCodeIsValidNoDiagnosticIsTriggered(string testCode)
         {
             VerifyCSharpDiagnostic(testCode);
