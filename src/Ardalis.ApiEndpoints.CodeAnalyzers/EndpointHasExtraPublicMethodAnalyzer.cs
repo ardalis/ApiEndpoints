@@ -4,7 +4,6 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Ardalis.ApiEndpoints.CodeAnalyzers
@@ -40,18 +39,22 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
         
         private void AnalyzeMethodDeclaration(SymbolAnalysisContext context)
         {
-            //string name = "";  
             try
             {
                 var methodSymbol = context.Symbol as IMethodSymbol;
 
+                // not a method declaration
                 if (null == methodSymbol)
                     return;
 
-                //name += methodSymbol.MethodKind.ToString();
-
-                if (methodSymbol.MethodKind == MethodKind.Constructor) return;
+                // ignore constructors
+                if (methodSymbol.MethodKind == MethodKind.Constructor)
+                    return;
                
+                // isn't public
+                if (methodSymbol.DeclaredAccessibility != Accessibility.Public)
+                    return;
+
                 var isApiEndpoint =
                     methodSymbol
                         .ContainingType
@@ -64,11 +67,22 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                 if (!isApiEndpoint)
                     return;
 
-                // isn't a new public method
-                if (methodSymbol.IsOverride || methodSymbol.DeclaredAccessibility != Accessibility.Public) 
-                    return;
+                // gather all public methods
+                var allPublicMethods =
+                    methodSymbol
+                        .ContainingType
+                        .GetMembers()
+                        .OfType<IMethodSymbol>()
+                        .Where(m => m.DeclaredAccessibility == Accessibility.Public)
+                        .ToList();
 
-                //name += ";" + methodSymbol.Name;
+                // and sort the methods so the "most correct" is first
+                // the 'most correct' will not receive an error message, all others will
+                allPublicMethods.Sort(new MostCorrectMethodSorter());
+
+                // if our methodSymbol is the first method, then don't display error
+                if (allPublicMethods.First().IsEquivalent(methodSymbol))
+                    return;
 
                 // at this point, we have a new public method on a BaseEndpoint that violates the rule
                 var diagnostic = Diagnostic.Create(
@@ -87,9 +101,33 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                     throw;
             }
         }
+
+        public class MostCorrectMethodSorter : IComparer<IMethodSymbol>
+        {
+            public int Compare(IMethodSymbol x, IMethodSymbol y)
+            {
+                if ( (x.IsOverride || y.IsOverride) && x.IsOverride != y.IsOverride)
+                    return x.IsOverride ? -1 : 1;
+
+                if (x.Name == "Handle" && y.Name != "Handle")
+                    return -1;
+
+                if (y.Name == "Handle" && x.Name != "Handle")
+                    return 1;
+
+                if (x.Name == "HandleAsync" && y.Name != "HandleAsync")
+                    return -1;
+
+                if (y.Name == "HandleAsync" && x.Name != "HandleAsync")
+                    return 1;
+
+                // give precedence to whoever has the shorter method name
+                return x.Name.Length.CompareTo(y.Name.Length);
+            }
+        }
     }
 
-    public static class NamedTypeSymbolExtensions
+    public static class SymbolExtensions
     {
         public static List<INamedTypeSymbol> GetAllBaseTypes(this INamedTypeSymbol namedTypeSymbol)
         {
@@ -102,6 +140,30 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
             }
 
             return baseTypes;
+        }
+
+        public static bool IsEquivalent(this IMethodSymbol methodSymbol, IMethodSymbol other)
+        {
+            if (methodSymbol.Arity != other.Arity ||
+                methodSymbol.Name != other.Name || 
+
+                methodSymbol.TypeParameters.Length != other.TypeParameters.Length || 
+                methodSymbol.Parameters.Length != other.Parameters.Length)
+                return false;
+
+            for (var i = 0; i < methodSymbol.TypeParameters.Length; i++)
+            {
+                if (methodSymbol.TypeParameters[i].ToDisplayString() != other.TypeParameters[i].ToDisplayString())
+                    return false;
+            }
+
+            for (var i = 0; i < methodSymbol.Parameters.Length; i++)
+            {
+                if (methodSymbol.Parameters[i].ToDisplayString() != other.Parameters[i].ToDisplayString())
+                    return false;
+            }
+
+            return true;
         }
     }
 }
