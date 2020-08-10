@@ -44,16 +44,13 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                 var methodSymbol = context.Symbol as IMethodSymbol;
 
                 // not a method declaration
-                if (null == methodSymbol)
-                    return;
+                if (null == methodSymbol) return;
 
                 // ignore constructors
-                if (methodSymbol.MethodKind == MethodKind.Constructor)
-                    return;
+                if (methodSymbol.MethodKind == MethodKind.Constructor) return;
                
                 // isn't public
-                if (methodSymbol.DeclaredAccessibility != Accessibility.Public)
-                    return;
+                if (methodSymbol.DeclaredAccessibility != Accessibility.Public) return;
 
                 var isApiEndpoint =
                     methodSymbol
@@ -81,8 +78,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                 allPublicMethods.Sort(new MostCorrectMethodSorter());
 
                 // if our methodSymbol is the first method, then don't display error
-                if (allPublicMethods.First().IsEquivalent(methodSymbol))
-                    return;
+                if (allPublicMethods.First().IsEquivalent(methodSymbol)) return;
 
                 // at this point, we have a new public method on a BaseEndpoint that violates the rule
                 var diagnostic = Diagnostic.Create(
@@ -97,8 +93,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
             {
                 Debug.Write(e);
 
-                if (Debugger.IsAttached)
-                    throw;
+                if (Debugger.IsAttached) throw;
             }
         }
 
@@ -106,20 +101,30 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
         {
             public int Compare(IMethodSymbol x, IMethodSymbol y)
             {
-                if ( (x.IsOverride || y.IsOverride) && x.IsOverride != y.IsOverride)
+                if ((x.IsOverride || y.IsOverride) && x.IsOverride != y.IsOverride)
+                {
                     return x.IsOverride ? -1 : 1;
+                }
 
                 if (x.Name == "Handle" && y.Name != "Handle")
+                {
                     return -1;
+                }
 
                 if (y.Name == "Handle" && x.Name != "Handle")
+                {
                     return 1;
+                }
 
                 if (x.Name == "HandleAsync" && y.Name != "HandleAsync")
+                {
                     return -1;
+                }
 
                 if (y.Name == "HandleAsync" && x.Name != "HandleAsync")
+                {
                     return 1;
+                }
 
                 // give precedence to whoever has the shorter method name
                 return x.Name.Length.CompareTo(y.Name.Length);
@@ -136,7 +141,9 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
             for (var visitor = namedTypeSymbol.BaseType; visitor != null; visitor = visitor.BaseType)
             {
                 if (!baseTypes.Contains(visitor))
+                {
                     baseTypes.Add(visitor);
+                }
             }
 
             return baseTypes;
@@ -145,22 +152,30 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
         public static bool IsEquivalent(this IMethodSymbol methodSymbol, IMethodSymbol other)
         {
             if (methodSymbol.Arity != other.Arity ||
-                methodSymbol.Name != other.Name || 
+                methodSymbol.Name != other.Name ||
 
-                methodSymbol.TypeParameters.Length != other.TypeParameters.Length || 
+                methodSymbol.TypeParameters.Length != other.TypeParameters.Length ||
                 methodSymbol.Parameters.Length != other.Parameters.Length)
+            {
                 return false;
+            }
 
             for (var i = 0; i < methodSymbol.TypeParameters.Length; i++)
             {
-                if (methodSymbol.TypeParameters[i].ToDisplayString() != other.TypeParameters[i].ToDisplayString())
+                if (methodSymbol.TypeParameters[i].ToDisplayString() !=
+                    other.TypeParameters[i].ToDisplayString())
+                {
                     return false;
+                }
             }
 
             for (var i = 0; i < methodSymbol.Parameters.Length; i++)
             {
-                if (methodSymbol.Parameters[i].ToDisplayString() != other.Parameters[i].ToDisplayString())
+                if (methodSymbol.Parameters[i].ToDisplayString() !=
+                    other.Parameters[i].ToDisplayString())
+                {
                     return false;
+                }
             }
 
             return true;

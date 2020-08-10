@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints.CodeAnalyzers</PackageId>
-    <Version>1.0.6</Version>
+    <Version>1.1.0</Version>
     <Authors>Steve Smith (@ardalis), Philip Pittle (@ppittle)</Authors>
     <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
     <Company>Ardalis.com</Company>
@@ -19,7 +19,7 @@
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageTags>api endpoints code analyzers roslyn</PackageTags>
-    <PackageReleaseNotes>Initial version; still has some false positives like constructors...</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixes several false positive matches.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
