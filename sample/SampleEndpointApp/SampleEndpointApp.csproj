@@ -5,7 +5,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="1.0.6" />
+    <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="1.1.0" />
     <PackageReference Include="Ardalis.EFCore.Extensions" Version="1.1.0" />
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />

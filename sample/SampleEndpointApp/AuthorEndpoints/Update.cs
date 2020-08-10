@@ -3,7 +3,6 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 using System.Threading.Tasks;
-
 using Swashbuckle.AspNetCore.Annotations;
 using System.Threading;
 
@@ -22,7 +21,6 @@ namespace SampleEndpointApp.Authors
         }
 
         [HttpPut("/authors")]
-        
 		[SwaggerOperation(
 			Summary = "Updates an existing Author",
 			Description = "Updates an existing Author",
