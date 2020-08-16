@@ -46,9 +46,12 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                 // not a method declaration
                 if (null == methodSymbol) return;
 
-                // ignore constructors
-                if (methodSymbol.MethodKind == MethodKind.Constructor) return;
-               
+                // ignore everything except 'ordinary' methods (delegates, operators, etc)
+                if (methodSymbol.MethodKind != MethodKind.Ordinary) return;
+
+                // ignore statics
+                if (methodSymbol.IsStatic) return;
+
                 // isn't public
                 if (methodSymbol.DeclaredAccessibility != Accessibility.Public) return;
 
@@ -70,7 +73,10 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                         .ContainingType
                         .GetMembers()
                         .OfType<IMethodSymbol>()
-                        .Where(m => m.DeclaredAccessibility == Accessibility.Public)
+                        .Where(m => 
+                            !m.IsStatic &&
+                            m.MethodKind == MethodKind.Ordinary &&
+                            m.DeclaredAccessibility == Accessibility.Public)
                         .ToList();
 
                 // and sort the methods so the "most correct" is first
@@ -126,8 +132,8 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                     return 1;
                 }
 
-                // give precedence to whoever has the shorter method name
-                return x.Name.Length.CompareTo(y.Name.Length);
+                // give precedence to which ever came first - so always x
+                return -1;
             }
         }
     }
