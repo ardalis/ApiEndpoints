@@ -30,6 +30,25 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                 }
             }";
 
+        private const string ValidEndpointWithExtraStaticMethod = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : BaseAsyncEndpoint<object, object>
+                {
+                    public override async Task<ActionResult<object>> HandleAsync([FromBody]object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    public static void ExtraMethod(){}
+                }
+            }";
+
         private const string ValidEndpointWithPublicConstructor = @"
             using System;
             using System.Threading.Tasks;
@@ -57,6 +76,48 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
+                public class TestEndpoint : BaseAsyncEndpoint
+                {
+                    public TestEndpoint() { }
+
+                    public override async Task<ActionResult<object>> HandleAsync([FromBody]object request)
+                    {
+                        return base.FooBar();
+                    }
+                }
+            }";
+
+         private const string ValidEndpointUsingCustomBaseClass = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public abstract class CustomBase : BaseAsyncEndpoint
+                {
+                    public abstract Task<ActionResult<object>> HandleAsync([FromBody]object request);
+                }
+
+                public class TestEndpoint : CustomBase
+                {
+                    public override async Task<ActionResult<object>> HandleAsync([FromBody]object request)
+                    {
+                        return base.FooBar();
+                    }
+                }
+            }";
+
+         private const string ValidEndpointWithCustomBaseAsyncEndpointDefined = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public abstract class BaseAsyncEndpoint { }
+
                 public class TestEndpoint : BaseAsyncEndpoint
                 {
                     public async Task<ActionResult<object>> HandleAsync([FromBody]object request)
@@ -501,9 +562,12 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
         [DataTestMethod]
         [DataRow(""),
          DataRow(ValidEndpoint),
+         DataRow(ValidEndpointWithExtraStaticMethod),
          DataRow(ValidEndpointWithExtraNonPublicMethods),
          DataRow(ValidEndpointWithPublicConstructor),
-         DataRow(ValidEndpointUsingNonGenericBaseClass)]
+         DataRow(ValidEndpointUsingNonGenericBaseClass),
+         DataRow(ValidEndpointUsingCustomBaseClass),
+         DataRow(ValidEndpointWithCustomBaseAsyncEndpointDefined)]
         public void WhenTestCodeIsValidNoDiagnosticIsTriggered(string testCode)
         {
             VerifyCSharpDiagnostic(testCode);
