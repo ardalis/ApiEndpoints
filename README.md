@@ -90,9 +90,9 @@ Option to use service dependency injection instead of constructor
     Tags = new[] { "AuthorEndpoint" })
 ]
 public override async Task<ActionResult<CreateAuthorResult>> HandleAsync(
-[FromServices] IAsyncRepository<Author> repository,
-[FromServices] IMapper mapper,
-[FromBody]CreateAuthorCommand request)
+    [FromServices] IAsyncRepository<Author> repository,
+    [FromServices] IMapper mapper,
+    [FromBody]CreateAuthorCommand request)
 {
     var author = new Author();
     mapper.Map(request, author);
