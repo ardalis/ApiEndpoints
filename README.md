@@ -80,6 +80,28 @@ public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBo
     return Ok(result);
 }
 ```
+Option to use service dependency injection instead of constructor
+``` csharp
+[HttpPost("/authors")]
+[SwaggerOperation(
+    Summary = "Creates a new Author",
+    Description = "Creates a new Author",
+    OperationId = "Author.Create",
+    Tags = new[] { "AuthorEndpoint" })
+]
+public override async Task<ActionResult<CreateAuthorResult>> HandleAsync(
+[FromServices] IAsyncRepository<Author> repository,
+[FromServices] IMapper mapper,
+[FromBody]CreateAuthorCommand request)
+{
+    var author = new Author();
+    mapper.Map(request, author);
+    await repository.AddAsync(author);
+
+    var result = mapper.Map<CreateAuthorResult>(author);
+    return Ok(result);
+}
+```
 
 Examples of the configuration can be found in the sample API project
 
