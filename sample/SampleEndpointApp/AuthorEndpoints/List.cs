@@ -12,16 +12,6 @@ namespace SampleEndpointApp.Authors
 {
     public class List : BaseAsyncEndpoint
     {
-        private readonly IAsyncRepository<Author> _repository;
-        private readonly IMapper _mapper;
-
-        public List(IAsyncRepository<Author> repository,
-            IMapper mapper)
-        {
-            _repository = repository;
-            _mapper = mapper;
-        }
-
         [HttpGet("/authors")]
 		[SwaggerOperation(
 			Summary = "List all Authors",
@@ -29,10 +19,14 @@ namespace SampleEndpointApp.Authors
 			OperationId = "Author.List",
 			Tags = new[] { "AuthorEndpoint" })
 		]
-        public async Task<ActionResult> HandleAsync([FromQuery] int page = 1, int perPage = 10, CancellationToken cancellationToken = default)
+        public async Task<ActionResult> HandleAsync(
+            [FromServices] IAsyncRepository<Author> repository,
+            [FromServices] IMapper mapper,
+            [FromQuery] int page = 1, int perPage = 10,
+            CancellationToken cancellationToken = default)
         {
-            var result = (await _repository.ListAllAsync(perPage, page, cancellationToken))
-                .Select(i => _mapper.Map<AuthorListResult>(i));
+            var result = (await repository.ListAllAsync(perPage, page, cancellationToken))
+                .Select(i => mapper.Map<AuthorListResult>(i));
 
             return Ok(result);
         }
