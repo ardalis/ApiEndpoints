@@ -141,6 +141,7 @@ One thing that Controllers do have is built-in support in the framework to use t
 ## Related Articles
 
 - [Moving from Controllers and Actions to Endpoints](https://ardalis.com/moving-from-controllers-and-actions-to-endpoints-with-mediatr)
+- [Decoupling Controllers with ApiEndpoints](https://betweentwobrackets.dev/posts/2020/09/decoupling-controllers-with-apiendpoints/)
 
 ## Related / Similar Projects
 
