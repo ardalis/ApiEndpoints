@@ -83,27 +83,44 @@ public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBo
 Option to use service dependency injection instead of constructor
 ``` csharp
 // File: sample/SampleEndpointApp/AuthorEndpoints/List.cs
-public class List : BaseAsyncEndpoint
-{
-    [HttpGet("/authors")]
-	[SwaggerOperation(
-		Summary = "List all Authors",
-		Description = "List all Authors",
-		OperationId = "Author.List",
-		Tags = new[] { "AuthorEndpoint" })
-	]
-    public async Task<ActionResult> HandleAsync(
-        [FromServices] IAsyncRepository<Author> repository,
-        [FromServices] IMapper mapper,
-        [FromQuery] int page = 1, int perPage = 10,
-        CancellationToken cancellationToken = default)
+ public class List : BaseAsyncEndpoints.WithRequest<AuthorListRequest>.WithResponse<IList<AuthorListResult>>
     {
-        var result = (await repository.ListAllAsync(perPage, page, cancellationToken))
-            .Select(i => mapper.Map<AuthorListResult>(i));
+        private readonly IAsyncRepository<Author> repository;
+        private readonly IMapper mapper;
 
-        return Ok(result);
+        public List(
+            IAsyncRepository<Author> repository,
+            IMapper mapper)
+        {
+            this.repository = repository;
+            this.mapper = mapper;
+        }
+        [HttpGet("/authors")]
+        [SwaggerOperation(
+            Summary = "List all Authors",
+            Description = "List all Authors",
+            OperationId = "Author.List",
+            Tags = new[] { "AuthorEndpoint" })
+        ]
+        public override async Task<ActionResult<IList<AuthorListResult>>> HandleAsync(
+
+            [FromQuery] AuthorListRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            if (request.PerPage == 0)
+            {
+                request.PerPage = 10;
+            }
+            if (request.Page == 0)
+            {
+                request.Page = 1;
+            }
+            var result = (await repository.ListAllAsync(request.PerPage, request.Page, cancellationToken))
+                .Select(i => mapper.Map<AuthorListResult>(i));
+
+            return Ok(result);
+        }
     }
-}
 ```
 
 Examples of the configuration can be found in the sample API project
@@ -142,6 +159,7 @@ One thing that Controllers do have is built-in support in the framework to use t
 
 - [Moving from Controllers and Actions to Endpoints](https://ardalis.com/moving-from-controllers-and-actions-to-endpoints-with-mediatr)
 - [Decoupling Controllers with ApiEndpoints](https://betweentwobrackets.dev/posts/2020/09/decoupling-controllers-with-apiendpoints/)
+- [Fluent Generics](https://tyrrrz.me/blog/fluent-generics)
 
 ## Related / Similar Projects
 
