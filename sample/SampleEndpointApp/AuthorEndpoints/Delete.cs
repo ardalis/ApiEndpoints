@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Delete : BaseAsyncEndpoint<int, DeletedAuthorResult>
+    public class Delete : BaseAsyncEndpoints.WithRequest<int>.WithResponse<DeletedAuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
 
