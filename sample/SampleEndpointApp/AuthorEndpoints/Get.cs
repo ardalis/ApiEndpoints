@@ -8,7 +8,9 @@ using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Get : BaseAsyncEndpoints.WithRequest<int>.WithResponse<AuthorResult>
+    public class Get : BaseAsyncEndpoint
+        .WithRequest<int>
+        .WithResponse<AuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;

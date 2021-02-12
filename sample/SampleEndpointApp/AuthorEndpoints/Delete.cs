@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 using System.Threading.Tasks;
-
 using Swashbuckle.AspNetCore.Annotations;
 using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Delete : BaseAsyncEndpoints.WithRequest<int>.WithResponse<DeletedAuthorResult>
+    public class Delete : BaseAsyncEndpoint
+        .WithRequest<DeleteAuthorRequest>
+        .WithoutResponse
     {
         private readonly IAsyncRepository<Author> _repository;
 
@@ -24,19 +25,19 @@ namespace SampleEndpointApp.Authors
 			OperationId = "Author.Delete",
 			Tags = new[] { "AuthorEndpoint" })
 		]
-        public override async Task<ActionResult<DeletedAuthorResult>> HandleAsync(int id, CancellationToken cancellationToken)
+        public override async Task<ActionResult> HandleAsync([FromRoute] DeleteAuthorRequest request, CancellationToken cancellationToken)
         {
-            var author = await _repository.GetByIdAsync(id, cancellationToken);
+            var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
             if (author is null)
             {
-                return NotFound(id);
+                return NotFound(request.Id);
             }
 
             await _repository.DeleteAsync(author, cancellationToken);
 
-            // return NoContent(); another option; see https://restfulapi.net/http-methods/#delete
-            return Ok(new DeletedAuthorResult { DeletedAuthorId = id });
+            // see https://restfulapi.net/http-methods/#delete
+            return NoContent();
         }
     }
 }

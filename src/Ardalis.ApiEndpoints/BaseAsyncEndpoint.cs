@@ -9,12 +9,11 @@ namespace Ardalis.ApiEndpoints
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public static class BaseAsyncEndpoints
+    public static class BaseAsyncEndpoint
     {
         public static class WithRequest<TRequest>
         {
-            [ApiController]
-            public abstract class WithResponse<TResponse> : BaseAsyncEndpoint
+            public abstract class WithResponse<TResponse> : BaseEndpointAsync
             {
                 public abstract Task<ActionResult<TResponse>> HandleAsync(
                     TRequest request,
@@ -22,8 +21,7 @@ namespace Ardalis.ApiEndpoints
                 );
             }
 
-            [ApiController]
-            public abstract class WithoutResponse : BaseAsyncEndpoint
+            public abstract class WithoutResponse : BaseEndpointAsync
             {
                 public abstract Task<ActionResult> HandleAsync(
                     TRequest request,
@@ -34,16 +32,14 @@ namespace Ardalis.ApiEndpoints
 
         public static class WithoutRequest
         {
-            [ApiController]
-            public abstract class WithResponse<TResponse> : BaseAsyncEndpoint
+            public abstract class WithResponse<TResponse> : BaseEndpointAsync
             {
                 public abstract Task<ActionResult<TResponse>> HandleAsync(
                     CancellationToken cancellationToken = default
                 );
             }
 
-            [ApiController]
-            public abstract class WithoutResponse : BaseAsyncEndpoint
+            public abstract class WithoutResponse : BaseEndpointAsync
             {
                 public abstract Task<ActionResult> HandleAsync(
                     CancellationToken cancellationToken = default
@@ -56,7 +52,7 @@ namespace Ardalis.ApiEndpoints
     /// A base class for all asynchronous endpoints.
     /// </summary>
     [ApiController]
-    public abstract class BaseAsyncEndpoint : ControllerBase
+    public abstract class BaseEndpointAsync : ControllerBase
     {
     }
 }

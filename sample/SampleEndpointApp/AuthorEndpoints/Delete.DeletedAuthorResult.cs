@@ -1,7 +1,7 @@
 ﻿namespace SampleEndpointApp.Authors
 {
-    public class DeletedAuthorResult
+    public class DeleteAuthorRequest
     {
-        public int DeletedAuthorId { get; set; }
+        public int Id { get; set; }
     }
 }

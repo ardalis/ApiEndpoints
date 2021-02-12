@@ -11,7 +11,9 @@ using System.Collections.Generic;
 
 namespace SampleEndpointApp.Authors
 {
-    public class List : BaseAsyncEndpoints.WithRequest<AuthorListRequest>.WithResponse<IList<AuthorListResult>>
+    public class List : BaseAsyncEndpoint
+        .WithRequest<AuthorListRequest>
+        .WithResponse<IList<AuthorListResult>>
     {
         private readonly IAsyncRepository<Author> repository;
         private readonly IMapper mapper;

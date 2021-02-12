@@ -5,29 +5,42 @@ namespace Ardalis.ApiEndpoints
     /// <summary>
     /// A base class for an endpoint that accepts parameters.
     /// </summary>
-    /// <typeparam name="TRequest">The type to be model bound by the Handle method.</typeparam>
-    /// <typeparam name="TResponse">The type to return from the Handle method's ActionResult<T>.</typeparam>
-    [ApiController]
-    public abstract class BaseEndpoint<TRequest, TResponse> : BaseEndpoint
+    /// <typeparam name="TRequest"></typeparam>
+    /// <typeparam name="TResponse"></typeparam>
+    public static class BaseEndpoint
     {
-        public abstract ActionResult<TResponse> Handle(TRequest request);
-    }
+        public static class WithRequest<TRequest>
+        {
+            public abstract class WithResponse<TResponse> : BaseEndpointSync
+            {
+                public abstract ActionResult<TResponse> Handle(TRequest request);
+            }
 
-    /// <summary>
-    /// A base class for an endpoint that has no parameters.
-    /// </summary>
-    /// <typeparam name="TResponse">The type to return from the Handle method's ActionResult<T>.</typeparam>
-    [ApiController]
-    public abstract class BaseEndpoint<TResponse> : BaseEndpoint
-    {
-        public abstract ActionResult<TResponse> Handle();
+            public abstract class WithoutResponse : BaseEndpointSync
+            {
+                public abstract ActionResult Handle(TRequest request);
+            }
+        }
+
+        public static class WithoutRequest
+        {
+            public abstract class WithResponse<TResponse> : BaseEndpointSync
+            {
+                public abstract ActionResult<TResponse> Handle();
+            }
+
+            public abstract class WithoutResponse : BaseEndpointSync
+            {
+                public abstract ActionResult Handle();
+            }
+        }
     }
 
     /// <summary>
     /// A base class for all synchronous endpoints.
     /// </summary>
 	[ApiController]
-    public abstract class BaseEndpoint : ControllerBase
+    public abstract class BaseEndpointSync : ControllerBase
     {
     }
 }
