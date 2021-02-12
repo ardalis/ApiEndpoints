@@ -131,7 +131,7 @@ Examples of the configuration can be found in the sample API project
 
 ### Working with Endpoints, Requests, and Results in Visual Studio
 
-![api-endpoints](https://user-images.githubusercontent.com/782127/80016785-9bfef580-84a1-11ea-8b9f-58e37fd52d3b.gif)
+![api-endpoints-2](https://user-images.githubusercontent.com/782127/107803375-7e509480-6d30-11eb-97bc-45da8396e8e8.gif)
 
 ## Open Questions
 
