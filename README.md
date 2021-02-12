@@ -83,44 +83,46 @@ public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBo
 Option to use service dependency injection instead of constructor
 ``` csharp
 // File: sample/SampleEndpointApp/AuthorEndpoints/List.cs
- public class List : BaseAsyncEndpoints.WithRequest<AuthorListRequest>.WithResponse<IList<AuthorListResult>>
+public class List : BaseAsyncEndpoint
+    .WithRequest<AuthorListRequest>
+    .WithResponse<IList<AuthorListResult>>
+{
+    private readonly IAsyncRepository<Author> repository;
+    private readonly IMapper mapper;
+
+    public List(
+        IAsyncRepository<Author> repository,
+        IMapper mapper)
     {
-        private readonly IAsyncRepository<Author> repository;
-        private readonly IMapper mapper;
-
-        public List(
-            IAsyncRepository<Author> repository,
-            IMapper mapper)
-        {
-            this.repository = repository;
-            this.mapper = mapper;
-        }
-        [HttpGet("/authors")]
-        [SwaggerOperation(
-            Summary = "List all Authors",
-            Description = "List all Authors",
-            OperationId = "Author.List",
-            Tags = new[] { "AuthorEndpoint" })
-        ]
-        public override async Task<ActionResult<IList<AuthorListResult>>> HandleAsync(
-
-            [FromQuery] AuthorListRequest request,
-            CancellationToken cancellationToken = default)
-        {
-            if (request.PerPage == 0)
-            {
-                request.PerPage = 10;
-            }
-            if (request.Page == 0)
-            {
-                request.Page = 1;
-            }
-            var result = (await repository.ListAllAsync(request.PerPage, request.Page, cancellationToken))
-                .Select(i => mapper.Map<AuthorListResult>(i));
-
-            return Ok(result);
-        }
+        this.repository = repository;
+        this.mapper = mapper;
     }
+    [HttpGet("/authors")]
+    [SwaggerOperation(
+        Summary = "List all Authors",
+        Description = "List all Authors",
+        OperationId = "Author.List",
+        Tags = new[] { "AuthorEndpoint" })
+    ]
+    public override async Task<ActionResult<IList<AuthorListResult>>> HandleAsync(
+
+        [FromQuery] AuthorListRequest request,
+        CancellationToken cancellationToken = default)
+    {
+        if (request.PerPage == 0)
+        {
+            request.PerPage = 10;
+        }
+        if (request.Page == 0)
+        {
+            request.Page = 1;
+        }
+        var result = (await repository.ListAllAsync(request.PerPage, request.Page, cancellationToken))
+            .Select(i => mapper.Map<AuthorListResult>(i));
+
+        return Ok(result);
+    }
+}
 ```
 
 Examples of the configuration can be found in the sample API project
@@ -129,7 +131,7 @@ Examples of the configuration can be found in the sample API project
 
 ### Working with Endpoints, Requests, and Results in Visual Studio
 
-![api-endpoints](https://user-images.githubusercontent.com/782127/80016785-9bfef580-84a1-11ea-8b9f-58e37fd52d3b.gif)
+![api-endpoints-2](https://user-images.githubusercontent.com/782127/107803375-7e509480-6d30-11eb-97bc-45da8396e8e8.gif)
 
 ## Open Questions
 
