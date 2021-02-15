@@ -10,6 +10,10 @@ A project for supporting API Endpoints in ASP.NET Core web applications.
 
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
 
+## Upgrade to 3.x Notes
+
+For version 3.0 we implemented a new way to define the base classes using "fluent generics". You can [watch a video of what you need to know to apply them to your site here](https://www.youtube.com/watch?v=hKiuj0huEI4&ab_channel=Ardalis).
+
 ## Motivation
 
 MVC Controllers are essentially an antipattern. They're dinosaurs. They are collections of methods that never call one another and rarely operate on the same state. They're not cohesive. They tend to become bloated and to grow out of control. Their private methods, if any, are usually only called by a single public method. Most developers recognize that controllers should be as small as possible ([unscientific poll](https://twitter.com/ardalis/status/1223312390391058432)), but they're the only solution offered out of the box, so that's the tool 99% of ASP.NET Core developers use.
