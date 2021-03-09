@@ -30,6 +30,27 @@ namespace Ardalis.ApiEndpoints
             }
         }
 
+        public static class WithRequest<TRequest1, TRequest2>
+        {
+            public abstract class WithResponse<TResponse> : BaseEndpointAsync
+            {
+                public abstract Task<ActionResult<TResponse>> HandleAsync(
+                    TRequest1 request1,
+                    TRequest2 request2,
+                    CancellationToken cancellationToken = default
+                );
+            }
+
+            public abstract class WithoutResponse : BaseEndpointAsync
+            {
+                public abstract Task<ActionResult> HandleAsync(
+                    TRequest1 request1,
+                    TRequest2 request2,
+                    CancellationToken cancellationToken = default
+                );
+            }
+        }
+
         public static class WithoutRequest
         {
             public abstract class WithResponse<TResponse> : BaseEndpointAsync
