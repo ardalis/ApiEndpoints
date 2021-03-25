@@ -2,7 +2,7 @@ name: publish analyzer to nuget
 on:
   push:
     branches:
-      - master # Your default release branch
+      - main # Your default release branch
     paths:
       - 'src/Ardalis.ApiEndpoints.CodeAnalyzers/**'
 jobs:
