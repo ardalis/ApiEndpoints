@@ -163,7 +163,7 @@ public class NewArticleRequest
     }
 ```
 
-Then, it's very important to include `[FromRoute]` in the method declaration:
+Then, it's very important to include `[FromRoute]` in the method declaration in your endpoint using that model:
 
 ```
 public override Task<ActionResult> HandleAsync([FromRoute] NewArticleRequest request)
