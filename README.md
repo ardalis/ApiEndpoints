@@ -141,13 +141,35 @@ Examples of the configuration can be found in the sample API project
 
 Below are what I expect will be some common questions:
 
-### How do I use shared routing conventions
+### How do I use shared routing conventions?
 
 If you want to create a common route template for all or some subset of your Endpoints, simply create a BaseEndpoint of your own that inherits from `Ardalis.Api.Endpoints.BaseEndpoint` and add a `[Route]` attribute to it.
 
-### Can I add more than one public routable method to an Endpoint class
+### Can I add more than one public routable method to an Endpoint class?
 
 Technically, yes. But **don't do that**. If you really want that, you should just use a Controller.
+
+### How can I bind parameters from multiple locations to my model?
+
+To do this, you'll need to decorate the properties of your model with the proper route attributes:
+
+```
+public class NewArticleRequest
+    {
+        [FromRoute(Name = "username")] public string Username { get; set; }
+        [FromRoute(Name ="category")] public string Category { get; set; }
+
+        [FromBody] public Article Article { get; set; }
+    }
+```
+
+Then, it's very important to include `[FromRoute]` in the method declaration:
+
+```
+public override Task<ActionResult> HandleAsync([FromRoute] NewArticleRequest request)
+```
+
+For more information, take a look at [this discussion](https://github.com/ardalis/ApiEndpoints/issues/42) and [this issue](https://github.com/ardalis/ApiEndpoints/pull/50). Thank you to @garywoodfine and @matt-lethargic.
 
 ## Roadmap
 
@@ -181,3 +203,4 @@ If you're using them or find one not in this list, feel free to add it here via 
 - [CleanArchitecture](https://github.com/ardalis/CleanArchitecture): A solution template for ASP.NET 3.x solutions using Clean Architecture.
 - [PayrollProcessor](https://github.com/KyleMcMaster/payroll-processor): A smorgasbord of modern .NET tech written with functional and asynchronous patterns.
 - [eShopOnWeb](https://github.com/dotnet-architecture/eShopOnWeb): Sample ASP.NET Core reference application, powered by Microsoft
+
