@@ -169,6 +169,29 @@ Then, it's very important to include `[FromRoute]` in the method declaration in 
 public override Task<ActionResult> HandleAsync([FromRoute] NewArticleRequest request)
 ```
 
+Note the `[Route("/article")]` and `[HttpPost("{username}/{category}")]` lines below. These lines form the route string used in the `NewArticleRequest` class above.
+
+```
+ [Route("/article")]
+    public class Post : BaseAsyncEndpoint
+        .WithRequest<NewArticleRequest>
+        .WithoutResponse
+    {
+        [HttpPost("{username}/{category}")]
+        [SwaggerOperation(
+            Summary = "Submit a new article",
+            Description = "Enables the submission of new articles",
+            OperationId = "B349A6C4-1198-4B53-B9BE-85232E06F16E",
+            Tags = new[] {"Article"})
+        ]
+        public override Task<ActionResult> HandleAsync([FromRoute] NewArticleRequest request,
+            CancellationToken cancellationToken = new CancellationToken())
+        {
+           //// your implementation
+        }
+    }
+```
+
 For more information, take a look at [this discussion](https://github.com/ardalis/ApiEndpoints/issues/42) and [this issue](https://github.com/ardalis/ApiEndpoints/pull/50). Thank you to @garywoodfine and @matt-lethargic.
 
 ## Roadmap
