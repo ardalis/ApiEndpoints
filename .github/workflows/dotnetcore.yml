@@ -13,5 +13,5 @@ jobs:
         dotnet-version: 5.0.202
     - name: Build with dotnet
       run: dotnet build --configuration Release
-    - name: Unit Tests
+    - name: Run Tests
       run: dotnet test
