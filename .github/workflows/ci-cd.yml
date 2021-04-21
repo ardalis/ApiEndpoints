@@ -14,7 +14,7 @@ jobs:
         shell: pwsh
         run: |
           # Get default branch
-          $repo = ${{ github.repository }}
+          $repo = "${{ github.repository }}"
           $defaultBranch = Invoke-RestMethod -Method GET -Uri https://api.github.com/repos/$repo | Select-Object -ExpandProperty default_branch
           Write-Output "::set-output name=default_branch::$(echo $defaultBranch)"
 
