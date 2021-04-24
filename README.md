@@ -14,7 +14,27 @@ If you like or are using this project to learn or start your solution, please gi
 
 For version 3.0 we implemented a new way to define the base classes using "fluent generics". You can [watch a video of what you need to know to apply them to your site here](https://www.youtube.com/watch?v=hKiuj0huEI4&ab_channel=Ardalis).
 
-## Motivation
+## Table of Contents
+
+[1. Motivation](#1-motivation)
+
+[2. Introducing ASP.NET Core API Endpoints](#2-introducing-asp.net-core-api-endpoints)
+
+[3. Getting Started](#3-getting-started)
+
+[4. Animated Screenshots](#4-animated-screenshots)
+
+[5. Open Questions](#5-open-questions)
+
+[6. Roadmap](#6-roadmap)
+
+[7. Related Articles](#7-related-articles)
+
+[8. Related / Similar Projects](#8-related-/-similar-projects)
+
+[9. Projects Using ApiEndpoints](#9-projects-using-endpoints)
+
+## 1. Motivation
 
 MVC Controllers are essentially an antipattern. They're dinosaurs. They are collections of methods that never call one another and rarely operate on the same state. They're not cohesive. They tend to become bloated and to grow out of control. Their private methods, if any, are usually only called by a single public method. Most developers recognize that controllers should be as small as possible ([unscientific poll](https://twitter.com/ardalis/status/1223312390391058432)), but they're the only solution offered out of the box, so that's the tool 99% of ASP.NET Core developers use.
 
@@ -28,7 +48,7 @@ The .NET team already did *this exact thing* with razor pages. They recognized t
 
 Razor Pages group each page's razor markup, its related action(s), and its model into two linked files. It uses the same MVC features as the rest of the platform, so you still get routing, model binding, model validation, filters, the works. You literally give up nothing. But now when you need to add or modify a page you need to look at exactly 2 files, which are linked in the IDE so you don't need to scroll around the file system looking for them.
 
-## Introducing ASP.NET Core API Endpoints
+## 2. Introducing ASP.NET Core API Endpoints
 
 **ASP.NET Core API Endpoints are essentially Razor Pages for APIs.** They break apart bloated controllers and group the API models used by individual endpoints with the endpoint logic itself. They provide a simple way to have a single file for the logic and linked files for the model types.
 
@@ -38,7 +58,7 @@ Most REST APIs have groups of endpoints for a given resource. In Controller-base
 
 **Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Response(REPR). The REPR (reaper) pattern is much simpler and groups everything that has to do with a particular API endpoint together.** It follows SOLID principles, in particular SRP and OCP. It also has all the benefits of feature folders and better follows the Common Closure Principle by grouping together things that change together.
 
-## Getting Started
+## 3. Getting Started
 
 I'll look to add detailed documentation in the future but for now here's all you need to get started (you can also check the sample project):
 
@@ -131,13 +151,13 @@ public class List : BaseAsyncEndpoint
 
 Examples of the configuration can be found in the sample API project
 
-## Animated Screenshots
+## 4. Animated Screenshots
 
 ### Working with Endpoints, Requests, and Results in Visual Studio
 
 ![api-endpoints-2](https://user-images.githubusercontent.com/782127/107803375-7e509480-6d30-11eb-97bc-45da8396e8e8.gif)
 
-## Open Questions
+## 5. Open Questions
 
 Below are what I expect will be some common questions:
 
@@ -194,7 +214,7 @@ public class Post : BaseAsyncEndpoint
 
 For more information, take a look at [this discussion](https://github.com/ardalis/ApiEndpoints/issues/42) and [this issue](https://github.com/ardalis/ApiEndpoints/pull/50). Thank you to @garywoodfine and @matt-lethargic.
 
-## Roadmap
+## 6. Roadmap
 
 The following are some things I'd like to add to the project/package.
 
@@ -206,20 +226,20 @@ Visual Studio and/or CLI item templates would make it much easier to create Endp
 
 One thing that Controllers do have is built-in support in the framework to use their name in routes (e.g. "/[controller]/{id?}"). Currently in the sample app routes are hard-coded strings. It would be nice if there were an easy way to use a convention based on foldername or namespace or something (using foldername would align with how Razor Pages routing works).
 
-## Related Articles
+## 7. Related Articles
 
 - [Moving from Controllers and Actions to Endpoints](https://ardalis.com/moving-from-controllers-and-actions-to-endpoints-with-mediatr)
 - [Decoupling Controllers with ApiEndpoints](https://betweentwobrackets.dev/posts/2020/09/decoupling-controllers-with-apiendpoints/)
 - [Fluent Generics](https://tyrrrz.me/blog/fluent-generics)
 
-## Related / Similar Projects
+## 8. Related / Similar Projects
 
 - [SimpleEndpoints](https://github.com/dasiths/SimpleEndpoints)
 - [FunctionMonkey](https://github.com/JamesRandall/FunctionMonkey) A similar approach for Azure Functions.
 - [https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints](https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints) A similar approach using MediatR and middleware.
 - [Voyager](https://github.com/smithgeek/voyager) A similar approach using MediatR that works for ASP.NET core and Azure Functions.
 
-## Projects Using ApiEndpoints
+## 9. Projects Using ApiEndpoints
 
 If you're using them or find one not in this list, feel free to add it here via a pull request!
 
