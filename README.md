@@ -18,7 +18,7 @@ For version 3.0 we implemented a new way to define the base classes using "fluen
 
 [1. Motivation](#1-motivation)
 
-[2. Introducing ASP.NET Core API Endpoints](#2-introducing-asp.net-core-api-endpoints)
+[2. Introducing ASP.NET Core API Endpoints](#2-introducing-aspnet-core-api-endpoints)
 
 [3. Getting Started](#3-getting-started)
 
@@ -30,9 +30,9 @@ For version 3.0 we implemented a new way to define the base classes using "fluen
 
 [7. Related Articles](#7-related-articles)
 
-[8. Related / Similar Projects](#8-related-/-similar-projects)
+[8. Related / Similar Projects](#8-related--similar-projects)
 
-[9. Projects Using ApiEndpoints](#9-projects-using-endpoints)
+[9. Projects Using ApiEndpoints](#9-projects-using-apiendpoints)
 
 ## 1. Motivation
 
