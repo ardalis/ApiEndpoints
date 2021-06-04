@@ -22,7 +22,7 @@ namespace SampleEndpointApp.Authors
             _mapper = mapper;
         }
 
-        [HttpPost("/authors")]
+        [HttpPost(CreateAuthorCommand.ROUTE)]
         [SwaggerOperation(
             Summary = "Creates a new Author",
             Description = "Creates a new Author",

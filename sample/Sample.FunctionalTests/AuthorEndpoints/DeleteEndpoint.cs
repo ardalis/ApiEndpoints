@@ -25,8 +25,10 @@ namespace Sample.FunctionalTests.AuthorEndpoints
 
         [Fact]
         public async Task DeleteAnExistingAuthor()
-        {            
-            var response = await _client.DeleteAsync($"/authors/2");
+        {
+            int existingAuthorId = 2;
+            string route = DeleteAuthorRequest.ROUTE.Replace("{id}", existingAuthorId.ToString());
+            var response = await _client.DeleteAsync(route);
             response.EnsureSuccessStatusCode();
             
             var listResponse = await _client.GetAsync($"/authors");
@@ -38,16 +40,18 @@ namespace Sample.FunctionalTests.AuthorEndpoints
         }
 
         [Fact]
-        public async Task GivenLongRunningDeleteRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
+        public Task GivenLongRunningDeleteRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
         {
             // Arrange, generate a token source that times out instantly
             var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
 
             // Act
-            var request = _client.DeleteAsync("/authors/2", tokenSource.Token);
+            int existingAuthorId = 2;
+            string route = DeleteAuthorRequest.ROUTE.Replace("{id}", existingAuthorId.ToString());
+            var request = _client.DeleteAsync(route, tokenSource.Token);
 
             // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
+            return Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
         }
     }
 }
