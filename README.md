@@ -216,6 +216,10 @@ public class Post : BaseAsyncEndpoint
 
 For more information, take a look at [this discussion](https://github.com/ardalis/ApiEndpoints/issues/42) and [this issue](https://github.com/ardalis/ApiEndpoints/pull/50). Thank you to @garywoodfine and @matt-lethargic.
 
+### How can I return a File result from an ApiEndpoint?
+
+There's an example in the [sample app](https://github.com/ardalis/ApiEndpoints/blob/main/sample/SampleEndpointApp/AuthorEndpoints/ListJsonFile.cs) that shows how to set this up and return a File actionresult. For the base type, just use the `WithoutResponse` option and in the endpoint handler return `File()`.
+
 ## 6. Roadmap
 
 The following are some things I'd like to add to the project/package.
