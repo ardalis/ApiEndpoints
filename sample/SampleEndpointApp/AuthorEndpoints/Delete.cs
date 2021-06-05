@@ -7,6 +7,8 @@ using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
+    [Route("/authors")]
+    public abstract class BaseAsyncAuthorEndpoint { }
     public class Delete : BaseAsyncEndpoint
         .WithRequest<DeleteAuthorRequest>
         .WithoutResponse
@@ -18,7 +20,7 @@ namespace SampleEndpointApp.Authors
             _repository = repository;
         }
 
-        [HttpDelete("/authors/{id}")]
+        [HttpDelete(DeleteAuthorRequest.ROUTE)]
 		[SwaggerOperation(
 			Summary = "Deletes an Author",
 			Description = "Deletes an Author",

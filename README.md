@@ -163,7 +163,9 @@ Below are what I expect will be some common questions:
 
 ### How do I use shared routing conventions?
 
-If you want to create a common route template for all or some subset of your Endpoints, simply create a BaseEndpoint of your own that inherits from `Ardalis.Api.Endpoints.BaseEndpoint` and add a `[Route]` attribute to it.
+~~If you want to create a common route template for all or some subset of your Endpoints, simply create a BaseEndpoint of your own that inherits from `Ardalis.Api.Endpoints.BaseEndpoint` and add a `[Route]` attribute to it.~~
+
+After refactoring to use the fluent generics pattern, there is no longer a way to use a base class for a default route. Instead, you should define your routes as constants which you can store in a central file or in each Request DTO (the sample shows this approach).
 
 ### Can I add more than one public routable method to an Endpoint class?
 
@@ -213,6 +215,14 @@ public class Post : BaseAsyncEndpoint
 ```
 
 For more information, take a look at [this discussion](https://github.com/ardalis/ApiEndpoints/issues/42) and [this issue](https://github.com/ardalis/ApiEndpoints/pull/50). Thank you to @garywoodfine and @matt-lethargic.
+
+### How can I return a File result from an ApiEndpoint?
+
+There's an example in the [sample app](https://github.com/ardalis/ApiEndpoints/blob/main/sample/SampleEndpointApp/AuthorEndpoints/ListJsonFile.cs) that shows how to set this up and return a File actionresult. For the base type, just use the `WithoutResponse` option and in the endpoint handler return `File()`.
+
+### How can I use model binding to pull values from multiple places, like `[FromRoute]`, `[FromBody]`, etc.?
+
+The base endpoints only expose a single model type which is used on the Handle method, so you can't easily add additional parameters to the Handle method. However, you can put as many properties on the associated Request DTO as you want, and model binding allows you to set the same attributes per property as you would have set per parameter on the action method. See [Model Binding Docs](https://docs.microsoft.com/en-us/aspnet/core/mvc/models/model-binding) and [discussion here in issue 42](https://github.com/ardalis/ApiEndpoints/issues/42)
 
 ## 6. Roadmap
 

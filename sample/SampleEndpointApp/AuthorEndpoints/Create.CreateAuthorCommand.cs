@@ -4,6 +4,8 @@ namespace SampleEndpointApp.Authors
 {
     public class CreateAuthorCommand
     {
+        public const string ROUTE = "/authors";
+
         [Required]
         public string Name { get; set; }
         [Required]
