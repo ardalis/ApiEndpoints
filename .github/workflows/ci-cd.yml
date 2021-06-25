@@ -58,13 +58,20 @@ jobs:
         id: build_solution
         shell: pwsh
         run: |
-          dotnet build .\Ardalis.ApiEndpoints.sln -c Release
+          dotnet build .\Ardalis.ApiEndpoints.sln --configuration Release --output Artifacts
 
       - name: Run unit tests
         id: run_unit_tests
         shell: pwsh
         run: |
-          dotnet test .\Ardalis.ApiEndpoints.sln
+          dotnet test .\Ardalis.ApiEndpoints.sln --configuration Release
+
+      - name: Upload artifacts
+        id: upload_artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artifacts
+          path: Artifacts/
 
   cd:
     if: needs.ci.outputs.is_push_to_default_branch == 'true'
