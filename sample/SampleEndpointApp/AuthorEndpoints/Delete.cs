@@ -9,9 +9,7 @@ namespace SampleEndpointApp.Authors
 {
     [Route("/authors")]
     public abstract class BaseAsyncAuthorEndpoint { }
-    public class Delete : BaseAsyncEndpoint
-        .WithRequest<DeleteAuthorRequest>
-        .WithoutResponse
+    public class Delete : BaseEndpoint
     {
         private readonly IAsyncRepository<Author> _repository;
 
@@ -27,7 +25,7 @@ namespace SampleEndpointApp.Authors
 			OperationId = "Author.Delete",
 			Tags = new[] { "AuthorEndpoint" })
 		]
-        public override async Task<ActionResult> HandleAsync([FromRoute] DeleteAuthorRequest request, CancellationToken cancellationToken)
+        public async Task<ActionResult> HandleAsync([FromRoute] DeleteAuthorRequest request, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
 

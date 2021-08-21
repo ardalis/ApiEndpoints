@@ -8,9 +8,7 @@ using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Update : BaseAsyncEndpoint
-        .WithRequest<UpdateAuthorCommand>
-        .WithResponse<UpdatedAuthorResult>
+    public class Update : BaseEndpoint
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -29,14 +27,15 @@ namespace SampleEndpointApp.Authors
 			OperationId = "Author.Update",
 			Tags = new[] { "AuthorEndpoint" })
 		]
-        public override async Task<ActionResult<UpdatedAuthorResult>> HandleAsync([FromBody]UpdateAuthorCommand request, CancellationToken cancellationToken)
+
+        public async Task<UpdatedAuthorResult> HandleAsync([FromBody] UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
             _mapper.Map(request, author);
             await _repository.UpdateAsync(author, cancellationToken);
 
             var result = _mapper.Map<UpdatedAuthorResult>(author);
-            return Ok(result);
+            return result;
         }
     }
 }
