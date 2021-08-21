@@ -13,7 +13,7 @@ namespace SampleEndpointApp.Authors
 {
     public class List : BaseAsyncEndpoint
         .WithRequest<AuthorListRequest>
-        .WithResponse<IList<AuthorListResult>>
+        .WithOkResponse<IList<AuthorListResult>>
     {
         private readonly IAsyncRepository<Author> repository;
         private readonly IMapper mapper;
@@ -32,7 +32,7 @@ namespace SampleEndpointApp.Authors
             OperationId = "Author.List",
             Tags = new[] { "AuthorEndpoint" })
         ]
-        public override async Task<ActionResult<IList<AuthorListResult>>> HandleAsync(
+        public override async Task<IList<AuthorListResult>> HandleAsync(
 
             [FromQuery] AuthorListRequest request,
             CancellationToken cancellationToken = default)
@@ -46,9 +46,10 @@ namespace SampleEndpointApp.Authors
                 request.Page = 1;
             }
             var result = (await repository.ListAllAsync(request.PerPage, request.Page, cancellationToken))
-                .Select(i => mapper.Map<AuthorListResult>(i));
+                .Select(i => mapper.Map<AuthorListResult>(i))
+                .ToList();
 
-            return Ok(result);
+            return result;
         }
     }
 }

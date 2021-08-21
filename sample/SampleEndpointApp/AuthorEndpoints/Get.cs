@@ -10,7 +10,7 @@ namespace SampleEndpointApp.Authors
 {
     public class Get : BaseAsyncEndpoint
         .WithRequest<int>
-        .WithResponse<AuthorResult>
+        .WithOkResponse<AuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -29,13 +29,13 @@ namespace SampleEndpointApp.Authors
 			OperationId = "Author.Get",
 			Tags = new[] { "AuthorEndpoint" })
 		]
-        public override async Task<ActionResult<AuthorResult>> HandleAsync(int id, CancellationToken cancellationToken)
+        public override async Task<AuthorResult> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);
 
             var result = _mapper.Map<AuthorResult>(author);
 
-            return Ok(result);
+            return result;
         }
     }
 }

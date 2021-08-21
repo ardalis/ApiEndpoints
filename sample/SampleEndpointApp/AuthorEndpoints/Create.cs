@@ -10,7 +10,7 @@ namespace SampleEndpointApp.Authors
 {
     public class Create : BaseAsyncEndpoint
         .WithRequest<CreateAuthorCommand>
-        .WithResponse<CreateAuthorResult>
+        .WithOkResponse<CreateAuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -29,14 +29,14 @@ namespace SampleEndpointApp.Authors
             OperationId = "Author.Create",
             Tags = new[] { "AuthorEndpoint" })
         ]
-        public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request, CancellationToken cancellationToken)
+        public override async Task<CreateAuthorResult> HandleAsync([FromBody]CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author();
             _mapper.Map(request, author);
             await _repository.AddAsync(author, cancellationToken);
 
             var result = _mapper.Map<CreateAuthorResult>(author);
-            return Ok(result);
+            return result;
         }
     }
 }
