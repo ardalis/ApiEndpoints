@@ -9,7 +9,7 @@ namespace SampleEndpointApp.Authors
 {
     [Route("/authors")]
     public abstract class BaseAsyncAuthorEndpoint { }
-    public class Delete : BaseEndpoint
+    public partial class Delete : BaseEndpoint
     {
         private readonly IAsyncRepository<Author> _repository;
 
@@ -18,7 +18,7 @@ namespace SampleEndpointApp.Authors
             _repository = repository;
         }
 
-        [HttpDelete(DeleteAuthorRequest.ROUTE)]
+        [HttpDelete]
 		[SwaggerOperation(
 			Summary = "Deletes an Author",
 			Description = "Deletes an Author",

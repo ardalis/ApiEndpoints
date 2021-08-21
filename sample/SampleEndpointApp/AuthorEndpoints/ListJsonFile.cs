@@ -13,7 +13,7 @@ namespace SampleEndpointApp.Authors
     /// <summary>
     /// Provides a list of authors in a JSON file format
     /// </summary>
-    public class ListJsonFile : BaseEndpoint
+    public partial class ListJsonFile : BaseEndpoint
     {
         private readonly IAsyncRepository<Author> repository;
         private readonly IMapper mapper;

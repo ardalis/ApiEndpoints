@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Update : BaseEndpoint
+    public partial class Update : BaseEndpoint
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace SampleEndpointApp.Authors
             _mapper = mapper;
         }
 
-        [HttpPut("/authors")]
+        [HttpPut]
 		[SwaggerOperation(
 			Summary = "Updates an existing Author",
 			Description = "Updates an existing Author",

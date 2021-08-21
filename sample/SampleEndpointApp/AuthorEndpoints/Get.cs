@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Get : BaseEndpoint
+    public partial class Get : BaseEndpoint
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace SampleEndpointApp.Authors
             _mapper = mapper;
         }
 
-        [HttpGet("/authors/{id}")]
+        [HttpGet("{id}")]
 		[SwaggerOperation(
 			Summary = "Get a specific Author",
 			Description = "Get a specific Author",

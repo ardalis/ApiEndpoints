@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace SampleEndpointApp.Authors
 {
-    public class List : BaseEndpoint
+    public partial class List : BaseEndpoint
     {
         private readonly IAsyncRepository<Author> repository;
         private readonly IMapper mapper;
@@ -23,7 +23,7 @@ namespace SampleEndpointApp.Authors
             this.repository = repository;
             this.mapper = mapper;
         }
-        [HttpGet("/authors")]
+        [HttpGet]
         [SwaggerOperation(
             Summary = "List all Authors",
             Description = "List all Authors",

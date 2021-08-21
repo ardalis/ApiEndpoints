@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Create : BaseEndpoint
+    public partial class Create : BaseEndpoint
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -20,7 +20,7 @@ namespace SampleEndpointApp.Authors
             _mapper = mapper;
         }
 
-        [HttpPost(CreateAuthorCommand.ROUTE)]
+        [HttpPost]
         [SwaggerOperation(
             Summary = "Creates a new Author",
             Description = "Creates a new Author",
