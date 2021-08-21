@@ -21,6 +21,14 @@ namespace Ardalis.ApiEndpoints
                 );
             }
 
+            public abstract class WithOkResponse<TResponse> : BaseEndpointAsync
+            {
+                public abstract Task<TResponse> HandleAsync(
+                    TRequest request,
+                    CancellationToken cancellationToken = default
+                );
+            }
+
             public abstract class WithoutResponse : BaseEndpointAsync
             {
                 public abstract Task<ActionResult> HandleAsync(
@@ -35,6 +43,13 @@ namespace Ardalis.ApiEndpoints
             public abstract class WithResponse<TResponse> : BaseEndpointAsync
             {
                 public abstract Task<ActionResult<TResponse>> HandleAsync(
+                    CancellationToken cancellationToken = default
+                );
+            }
+
+            public abstract class WithOkResponse<TResponse> : BaseEndpointAsync
+            {
+                public abstract Task<TResponse> HandleAsync(
                     CancellationToken cancellationToken = default
                 );
             }

@@ -16,6 +16,11 @@ namespace Ardalis.ApiEndpoints
                 public abstract ActionResult<TResponse> Handle(TRequest request);
             }
 
+            public abstract class WithOkResponse<TResponse> : BaseEndpointSync
+            {
+                public abstract TResponse Handle(TRequest request);
+            }
+
             public abstract class WithoutResponse : BaseEndpointSync
             {
                 public abstract ActionResult Handle(TRequest request);
@@ -27,6 +32,11 @@ namespace Ardalis.ApiEndpoints
             public abstract class WithResponse<TResponse> : BaseEndpointSync
             {
                 public abstract ActionResult<TResponse> Handle();
+            }
+
+            public abstract class WithOkResponse<TResponse> : BaseEndpointSync
+            {
+                public abstract TResponse Handle();
             }
 
             public abstract class WithoutResponse : BaseEndpointSync
