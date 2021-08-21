@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Diagnostics;
@@ -16,13 +16,10 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(EndpointHasExtraPublicMethodCodeFixProvider)), Shared]
     public class EndpointHasExtraPublicMethodCodeFixProvider : CodeFixProvider
     {
-        private const string MakeInternalTitle = "Make additonal method internal.";
-        private const string MakePrivateTitle = "Make additonal method private.";
+        private const string MakeInternalTitle = "Make additional method internal.";
+        private const string MakePrivateTitle = "Make additional method private.";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get { return ImmutableArray.Create(EndpointHasExtraPublicMethodAnalyzer.DiagnosticId); }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(EndpointHasExtraPublicMethodAnalyzer.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider()
         {
