@@ -23,6 +23,7 @@ namespace Ardalis.ApiEndpoints.CodeGenerators
                 .Select(c => context.Compilation.GetSemanticModel(c.SyntaxTree).GetDeclaredSymbol(c))
                 .OfType<ITypeSymbol>()
                 .Where(s => s.GetBaseTypesAndThis().Any(t => t.ToString() == "Ardalis.ApiEndpoints.EndpointBase"))
+                .Where(s => s.GetBaseTypesAndThis().All(t => !t.GetAttributes().Any(a => a.AttributeClass?.ToString() == "Microsoft.AspNetCore.Mvc.RouteAttribute")))
                 .ToList();
 
             foreach (ITypeSymbol targetType in baseEndpointChildren)
