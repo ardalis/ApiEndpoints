@@ -1,14 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace Ardalis.ApiEndpoints.Extensions
+namespace Microsoft.Extensions.DependencyInjection
 {
-    public class SwaggerGenOptionsExtensions
+    public static class SwaggerGenOptionsExtensions
     {
-        public static IList<string> EndpointNamespace(ApiDescription api)
+        public static void TagEndpointsByNamespace(this SwaggerGenOptions options)
+        {
+            options.TagActionsBy(EndpointNamespaceOrDefault);
+        }
+
+        private static IList<string> EndpointNamespaceOrDefault(ApiDescription api)
         {
             if (api.ActionDescriptor is not ControllerActionDescriptor actionDescriptor)
             {

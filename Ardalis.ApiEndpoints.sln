@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.CodeGe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.NSwag", "src\ApiEndpoints.NSwag\Ardalis.ApiEndpoints.NSwag.csproj", "{535176BF-7266-4922-9971-5D7F7E0D8922}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ardalis.ApiEndpoints.Swashbuckle", "src\Ardalis.ApiEndpoints.Swashbuckle\Ardalis.ApiEndpoints.Swashbuckle.csproj", "{22DE6F68-498A-40D4-8722-EA3676306F22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{535176BF-7266-4922-9971-5D7F7E0D8922}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{535176BF-7266-4922-9971-5D7F7E0D8922}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{535176BF-7266-4922-9971-5D7F7E0D8922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22DE6F68-498A-40D4-8722-EA3676306F22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22DE6F68-498A-40D4-8722-EA3676306F22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22DE6F68-498A-40D4-8722-EA3676306F22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22DE6F68-498A-40D4-8722-EA3676306F22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{7D8E74B0-4620-492A-940A-FCEEF9CF92F9} = {CE4A1E99-D876-4D8F-B56E-9BF453456BAB}
 		{30A30AD7-702D-4B43-AACD-4AF0228781B5} = {CE4A1E99-D876-4D8F-B56E-9BF453456BAB}
 		{535176BF-7266-4922-9971-5D7F7E0D8922} = {CE4A1E99-D876-4D8F-B56E-9BF453456BAB}
+		{22DE6F68-498A-40D4-8722-EA3676306F22} = {CE4A1E99-D876-4D8F-B56E-9BF453456BAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {932AEB26-7B36-4EFB-B4D1-41F13EDAE5D2}
