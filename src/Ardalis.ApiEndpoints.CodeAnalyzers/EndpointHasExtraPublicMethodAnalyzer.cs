@@ -48,8 +48,8 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                 }
 
                 var isApiEndpoint = methodSymbol.ContainingType
-                    .GetAllBaseTypes()
-                    .Any(x => x.Name == "BaseEndpoint");
+                    .GetBaseTypesAndThis()
+                    .Any(t => t.ToString() == "Ardalis.ApiEndpoints.EndpointBase");
 
                 // not a type inheriting BaseEndpoint
                 if (!isApiEndpoint)
@@ -90,24 +90,6 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
 
                 if (Debugger.IsAttached) throw;
             }
-        }
-    }
-
-    public static class SymbolExtensions
-    {
-        public static List<INamedTypeSymbol> GetAllBaseTypes(this INamedTypeSymbol namedTypeSymbol)
-        {
-            var baseTypes = new List<INamedTypeSymbol>();
-
-            for (var visitor = namedTypeSymbol.BaseType; visitor != null; visitor = visitor.BaseType)
-            {
-                if (!baseTypes.Contains(visitor))
-                {
-                    baseTypes.Add(visitor);
-                }
-            }
-
-            return baseTypes;
         }
     }
 }

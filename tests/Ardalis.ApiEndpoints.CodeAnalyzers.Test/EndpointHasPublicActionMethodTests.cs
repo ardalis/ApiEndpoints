@@ -13,6 +13,14 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
     [TestClass]
     public class EndpointHasPublicActionMethodTests : CodeFixVerifier
     {
+        private const string EndpointBase = @"
+            namespace Ardalis.ApiEndpoints
+            {
+                public abstract class EndpointBase
+                {
+                }
+            }";
+
         private const string ValidEndpoint = @"
             using System;
             using System.Threading.Tasks;
@@ -21,14 +29,14 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                public class TestEndpoint : BaseEndpoint
+                public class TestEndpoint : EndpointBase
                 {
                     public async Task<ActionResult<object>> HandleAsync([FromBody] object request)
                     {
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         private const string ValidEndpointWithExtraStaticMethod = @"
             using System;
@@ -38,7 +46,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                public class TestEndpoint : BaseEndpoint
+                public class TestEndpoint : EndpointBase
                 {
                     public async Task<ActionResult<object>> HandleAsync([FromBody] object request)
                     {
@@ -47,7 +55,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
                     public static void ExtraMethod(){}
                 }
-            }";
+            }" + EndpointBase;
 
         private const string ValidEndpointWithPublicConstructor = @"
             using System;
@@ -57,7 +65,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                public class TestEndpoint : BaseEndpoint
+                public class TestEndpoint : EndpointBase
                 {
                     public TestEndpoint(object o){}
 
@@ -66,7 +74,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
          private const string ValidEndpointUsingCustomBaseClass = @"
             using System;
@@ -76,7 +84,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                public abstract class CustomBase : BaseEndpoint
+                public abstract class CustomBase : EndpointBase
                 {
                 }
 
@@ -87,25 +95,25 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         return base.FooBar();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
-         private const string ValidEndpointWithCustomBaseEndpointDefined = @"
+         private const string ValidEndpointWithCustomEndpointBaseDefined = @"
             using System;
             using System.Threading.Tasks;
             using Microsoft.AspNetCore.Mvc;
             
             namespace ApiEndpointsAnalyzersTest
             {
-                public abstract class BaseEndpoint { }
+                public abstract class EndpointBase { }
 
-                public class TestEndpoint : BaseEndpoint
+                public class TestEndpoint : EndpointBase
                 {
                     public async Task<ActionResult<object>> HandleAsync([FromBody] object request)
                     {
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         private const string ValidEndpointWithExtraNonPublicMethods = @"
             using System;            
@@ -123,7 +131,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         Console.WriteLine(i);
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         private const string InvalidEndpointWithExtraPublicMethod = @"
             using System;
@@ -133,7 +141,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                public class TestEndpoint : BaseEndpoint
+                public class TestEndpoint : EndpointBase
                 {
                     public ActionResult<object> Handle([FromBody] object request)
                     {
@@ -145,7 +153,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         private const string InvalidEndpointWithExtraPublicMethod_Fixed = @"
             using System;
@@ -155,7 +163,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                public class TestEndpoint : BaseEndpoint
+                public class TestEndpoint : EndpointBase
                 {
                     public ActionResult<object> Handle([FromBody] object request)
                     {
@@ -167,7 +175,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         private const string InvalidEndpointWithCustomBaseClass = @"
             using System;
@@ -177,7 +185,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                public abstract class CustomBaseClass : BaseEndpoint
+                public abstract class CustomBaseClass : EndpointBase
                 {
                 }
 
@@ -193,7 +201,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         private const string InvalidEndpointWithCustomBaseClass_Fixed = @"
             using System;
@@ -203,7 +211,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                public abstract class CustomBaseClass : BaseEndpoint
+                public abstract class CustomBaseClass : EndpointBase
                 {
                 }
 
@@ -219,14 +227,14 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
-        private const string InvalidEndpointWithBaseEndpointAliased = @"
+        private const string InvalidEndpointWithEndpointBaseAliased = @"
             using System;
             using System.Threading.Tasks;
             using Microsoft.AspNetCore.Mvc;
             using Ardalis.ApiEndpoints;
-            using AliasBaseClass = Ardalis.ApiEndpoints.BaseEndpoint;
+            using AliasBaseClass = Ardalis.ApiEndpoints.EndpointBase;
 
             namespace ApiEndpointsAnalyzersTest
             {
@@ -242,14 +250,14 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
-        private const string InvalidEndpointWithBaseEndpointAliased_Fixed = @"
+        private const string InvalidEndpointWithEndpointBaseAliased_Fixed = @"
             using System;
             using System.Threading.Tasks;
             using Microsoft.AspNetCore.Mvc;
             using Ardalis.ApiEndpoints;
-            using AliasBaseClass = Ardalis.ApiEndpoints.BaseEndpoint;
+            using AliasBaseClass = Ardalis.ApiEndpoints.EndpointBase;
 
             namespace ApiEndpointsAnalyzersTest
             {
@@ -265,7 +273,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         private const string InvalidEndpointIsNonPublic = @"
             using System;
@@ -275,7 +283,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                internal class TestEndpoint : BaseEndpoint
+                internal class TestEndpoint : EndpointBase
                 {
                     public ActionResult<object> Handle([FromBody] object request)
                     {
@@ -287,7 +295,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         private const string InvalidEndpointIsNonPublic_Fixed = @"
             using System;
@@ -297,7 +305,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
 
             namespace ApiEndpointsAnalyzersTest
             {
-                internal class TestEndpoint : BaseEndpoint
+                internal class TestEndpoint : EndpointBase
                 {
                     public ActionResult<object> Handle([FromBody] object request)
                     {
@@ -309,7 +317,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                         throw new Exception();
                     }
                 }
-            }";
+            }" + EndpointBase;
 
         [DataTestMethod]
         [DataRow(""),
@@ -318,7 +326,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
          DataRow(ValidEndpointWithExtraNonPublicMethods),
          DataRow(ValidEndpointWithPublicConstructor),
          DataRow(ValidEndpointUsingCustomBaseClass),
-         DataRow(ValidEndpointWithCustomBaseEndpointDefined)]
+         DataRow(ValidEndpointWithCustomEndpointBaseDefined)]
         public void WhenTestCodeIsValidNoDiagnosticIsTriggered(string testCode)
         {
             VerifyCSharpDiagnostic(testCode);
@@ -337,8 +345,8 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
              "Endpoint TestEndpoint has additional public method ExtraPublicMethod. Endpoints must have only one public method.",
              20, 33),
         DataRow(
-             InvalidEndpointWithBaseEndpointAliased,
-             InvalidEndpointWithBaseEndpointAliased_Fixed,
+             InvalidEndpointWithEndpointBaseAliased,
+             InvalidEndpointWithEndpointBaseAliased_Fixed,
              "Endpoint TestEndpoint has additional public method ExtraPublicMethod. Endpoints must have only one public method.",
              17, 33),
         DataRow(

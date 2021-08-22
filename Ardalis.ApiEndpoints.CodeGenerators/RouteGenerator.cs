@@ -22,7 +22,7 @@ namespace Ardalis.ApiEndpoints.CodeGenerators
             List<ITypeSymbol> baseEndpointChildren = baseEndpointReceiver.Candidates
                 .Select(c => context.Compilation.GetSemanticModel(c.SyntaxTree).GetDeclaredSymbol(c))
                 .OfType<ITypeSymbol>()
-                .Where(s => s.GetBaseTypesAndThis().Any(t => t.ToString() == "Ardalis.ApiEndpoints.BaseEndpoint"))
+                .Where(s => s.GetBaseTypesAndThis().Any(t => t.ToString() == "Ardalis.ApiEndpoints.EndpointBase"))
                 .ToList();
 
             foreach (ITypeSymbol targetType in baseEndpointChildren)

@@ -3,10 +3,10 @@
 namespace Ardalis.ApiEndpoints
 {
     /// <summary>
-    /// A base class for all endpoints.
+    /// A base class for an API controller with single action (endpoint).
     /// </summary>
 	[ApiController]
-    public abstract class BaseEndpoint : ControllerBase
+    public abstract class EndpointBase : ControllerBase
     {
     }
 }
