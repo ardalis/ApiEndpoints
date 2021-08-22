@@ -1,6 +1,6 @@
-﻿namespace SampleEndpointApp.Authors
+﻿namespace SampleEndpointApp.Endpoints.Authors
 {
-    public class UpdatedAuthorResult
+    public class AuthorResult
     {
         public string Id { get; set; }
         public string Name { get; set; }

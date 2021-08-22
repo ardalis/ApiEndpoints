@@ -1,17 +1,16 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using System.Linq;
-using System.Threading.Tasks;
-
 using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
-using System.Collections.Generic;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
-    public partial class List : BaseEndpoint
+    public partial class List : EndpointBase
     {
         private readonly IAsyncRepository<Author> repository;
         private readonly IMapper mapper;

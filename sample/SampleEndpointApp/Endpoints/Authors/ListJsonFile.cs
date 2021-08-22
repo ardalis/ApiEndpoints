@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
@@ -8,24 +7,23 @@ using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
     /// <summary>
     /// Provides a list of authors in a JSON file format
     /// </summary>
-    public partial class ListJsonFile : BaseEndpoint
+    public partial class ListJsonFile : EndpointBase
     {
         private readonly IAsyncRepository<Author> repository;
-        private readonly IMapper mapper;
 
         public ListJsonFile(
             IAsyncRepository<Author> repository,
             IMapper mapper)
         {
             this.repository = repository;
-            this.mapper = mapper;
         }
-        [HttpGet("/authorsJson")]
+
+        [HttpGet("Json")]
         [SwaggerOperation(
             Summary = "List all Authors as a JSON file",
             Description = "List all Authors as a JSON file",
@@ -34,7 +32,7 @@ namespace SampleEndpointApp.Authors
         ]
         public async Task<ActionResult> HandleAsync(CancellationToken cancellationToken)
         {
-            var result = (await repository.ListAllAsync(cancellationToken)).ToList();
+            var result = await repository.ListAllAsync(cancellationToken);
 
              var streamData = JsonSerializer.SerializeToUtf8Bytes(result);
             return File(streamData, "text/json", "authors.json");

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Swashbuckle.AspNetCore.Annotations;
 using System.Threading;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
-    public partial class Get : BaseEndpoint
+    public partial class Get : EndpointBase
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
