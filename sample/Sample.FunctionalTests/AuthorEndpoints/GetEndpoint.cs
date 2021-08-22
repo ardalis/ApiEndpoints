@@ -1,4 +1,5 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using Sample.FunctionalTests.Models;
 using SampleEndpointApp;
 using SampleEndpointApp.DataAccess;
 using SampleEndpointApp.DomainModel;
@@ -25,7 +26,7 @@ namespace Sample.FunctionalTests.AuthorEndpoints
         {
             var firstAuthor = SeedData.Authors().First();
 
-            var response = await _client.GetAsync($"/authors/{firstAuthor.Id}");
+            var response = await _client.GetAsync(Routes.Authors.Get(firstAuthor.Id));
             response.EnsureSuccessStatusCode();
             var stringResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<Author>(stringResponse);
@@ -41,11 +42,11 @@ namespace Sample.FunctionalTests.AuthorEndpoints
         public async Task GivenLongRunningGetRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
         {
             // Arrange, generate a token source that times out instantly
-            var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
+            var tokenSource = new CancellationTokenSource(TimeSpan.Zero);
             var firstAuthor = SeedData.Authors().First();
 
             // Act
-            var request = _client.GetAsync($"/authors/{firstAuthor}", tokenSource.Token);
+            var request = _client.GetAsync(Routes.Authors.Get(firstAuthor.Id), tokenSource.Token);
 
             // Assert
             await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
