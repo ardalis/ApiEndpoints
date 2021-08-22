@@ -27,13 +27,12 @@ namespace SampleEndpointApp.Endpoints.Authors
 			OperationId = "Author.Get",
 			Tags = new[] { "AuthorEndpoint" })
 		]
-        public async Task<ActionResult<AuthorResult>> HandleAsync(int id, CancellationToken cancellationToken)
+        public async Task<AuthorResult> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);
 
             var result = _mapper.Map<AuthorResult>(author);
-
-            return Ok(result);
+            return result;
         }
     }
 }

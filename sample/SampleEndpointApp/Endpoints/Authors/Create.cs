@@ -27,14 +27,14 @@ namespace SampleEndpointApp.Endpoints.Authors
             OperationId = "Author.Create",
             Tags = new[] { "AuthorEndpoint" })
         ]
-        public async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request, CancellationToken cancellationToken)
+        public async Task<CreateAuthorResult> HandleAsync([FromBody]CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author();
             _mapper.Map(request, author);
             await _repository.AddAsync(author, cancellationToken);
 
             var result = _mapper.Map<CreateAuthorResult>(author);
-            return Ok(result);
+            return result;
         }
     }
 }

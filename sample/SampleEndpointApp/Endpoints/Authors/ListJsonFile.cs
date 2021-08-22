@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 using Swashbuckle.AspNetCore.Annotations;
@@ -16,9 +15,7 @@ namespace SampleEndpointApp.Endpoints.Authors
     {
         private readonly IAsyncRepository<Author> repository;
 
-        public ListJsonFile(
-            IAsyncRepository<Author> repository,
-            IMapper mapper)
+        public ListJsonFile(IAsyncRepository<Author> repository)
         {
             this.repository = repository;
         }
@@ -30,7 +27,7 @@ namespace SampleEndpointApp.Endpoints.Authors
             OperationId = "Author.List",
             Tags = new[] { "AuthorEndpoint" })
         ]
-        public async Task<ActionResult> HandleAsync(CancellationToken cancellationToken)
+        public async Task<FileContentResult> HandleAsync(CancellationToken cancellationToken)
         {
             var result = await repository.ListAllAsync(cancellationToken);
 
