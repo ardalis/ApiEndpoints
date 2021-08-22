@@ -1,7 +1,7 @@
-using AutoMapper;
+﻿using System;
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SampleEndpointApp.DataAccess;
 using SampleEndpointApp.DomainModel;
+using static Ardalis.ApiEndpoints.Extensions.SwaggerGenOptionsExtensions;
 
 namespace SampleEndpointApp
 {
@@ -29,8 +30,9 @@ namespace SampleEndpointApp
             services.AddControllers();
 
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-                c.EnableAnnotations();
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SampleEndpointApp", Version = "v1" });
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "SampleEndpointApp.xml"));
+                c.TagActionsBy(EndpointNamespace);
             });
 
             services.AddAutoMapper(typeof(Startup));

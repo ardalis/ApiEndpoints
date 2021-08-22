@@ -1,9 +1,8 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using System.Threading.Tasks;
-using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
 
 namespace SampleEndpointApp.Endpoints.Authors
 {
@@ -16,13 +15,10 @@ namespace SampleEndpointApp.Endpoints.Authors
             _repository = repository;
         }
 
+        /// <summary>
+        /// Deletes an Author
+        /// </summary>
         [HttpDelete("{id}")]
-		[SwaggerOperation(
-			Summary = "Deletes an Author",
-			Description = "Deletes an Author",
-			OperationId = "Author.Delete",
-			Tags = new[] { "AuthorEndpoint" })
-		]
         public async Task<ActionResult> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);

@@ -1,10 +1,9 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using System.Threading.Tasks;
-using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
 
 namespace SampleEndpointApp.Endpoints.Authors
 {
@@ -20,13 +19,10 @@ namespace SampleEndpointApp.Endpoints.Authors
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get a specific Author
+        /// </summary>
         [HttpGet("{id}")]
-		[SwaggerOperation(
-			Summary = "Get a specific Author",
-			Description = "Get a specific Author",
-			OperationId = "Author.Get",
-			Tags = new[] { "AuthorEndpoint" })
-		]
         public async Task<AuthorResult> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);
