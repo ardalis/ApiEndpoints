@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Ardalis.ApiEndpoints.CodeGenerators\Ardalis.ApiEndpoints.CodeGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints.CodeGenerators\Ardalis.ApiEndpoints.CodeGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj" />
   </ItemGroup>
 
