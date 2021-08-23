@@ -3,8 +3,24 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+    
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
-
+  
+  <PropertyGroup>
+    <PackageId>Ardalis.ApiEndpoints.NSwag</PackageId>
+    <Version>4.0.0</Version>
+    <Authors>Steve Smith (@ardalis), Philip Pittle (@ppittle)</Authors>
+    <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
+    <Company>Ardalis.com</Company>
+    <PackageProjectUrl>https://github.com/ardalis/ApiEndpoints</PackageProjectUrl>
+    <Description>Code Generators supporting using Api Endpoints</Description>
+    <Summary>Code Analyzers increasing productivity of developers using the Api Endpoints framework.</Summary>
+    <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <PackageTags>api endpoints openapi nswag</PackageTags>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="NSwag.Generation.AspNetCore" Version="13.0.0" />
   </ItemGroup>

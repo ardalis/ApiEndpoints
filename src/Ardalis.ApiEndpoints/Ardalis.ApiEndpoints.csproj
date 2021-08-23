@@ -3,6 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints</PackageId>
     <Title>Ardalis.ApiEndpoints</Title>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -14,7 +17,7 @@
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <PackageTags>aspnet asp.net aspnetcore asp.net core api web api rest endpoint controller</PackageTags>
     <PackageReleaseNotes>Updated package dependencies to latest; updated sample app and test projects to .NET 5</PackageReleaseNotes>
-    <Version>3.1.0</Version>
+    <Version>4.0.0</Version>
     <AssemblyName>Ardalis.ApiEndpoints</AssemblyName>
     <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -24,9 +27,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="4.0.0" />
+    <PackageReference Include="Ardalis.ApiEndpoints.CodeGenerators" Version="4.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
+  
 </Project>
