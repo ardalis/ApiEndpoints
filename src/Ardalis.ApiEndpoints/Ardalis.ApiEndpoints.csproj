@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   
@@ -16,7 +15,7 @@
     <Summary>Controllers promote creating bloated classes that lack cohesion. This project provides a simpler alternative that follows SOLID principles. An alternative to Controllers for ASP.NET Core API Endpoints.</Summary>
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <PackageTags>aspnet asp.net aspnetcore asp.net core api web api rest endpoint controller</PackageTags>
-    <PackageReleaseNotes>Updated package dependencies to latest; updated sample app and test projects to .NET 5</PackageReleaseNotes>
+    <PackageReleaseNotes>TODO</PackageReleaseNotes>
     <Version>4.0.0-pre1</Version>
     <AssemblyName>Ardalis.ApiEndpoints</AssemblyName>
     <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
@@ -31,9 +30,9 @@
     <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="4.0.0-pre1" />
     <PackageReference Include="Ardalis.ApiEndpoints.CodeGenerators" Version="4.0.0-pre1" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
-  
+
 </Project>

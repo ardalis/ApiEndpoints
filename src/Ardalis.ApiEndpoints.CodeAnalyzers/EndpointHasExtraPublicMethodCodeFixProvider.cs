@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -35,14 +35,14 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             // Find the method declaration identified by the diagnostic.
-            var declaration = 
+            var declaration =
                 root
                     .FindToken(diagnosticSpan.Start)
                     .Parent
                     .AncestorsAndSelf()
                     .OfType<MethodDeclarationSyntax>()
                     .First();
-            
+
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
@@ -72,9 +72,9 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                     // goal is to preserve order
                     method
                         .Modifiers
-                        .Select(x => 
-                            x.Kind() is SyntaxKind.PublicKeyword 
-                                ? SyntaxFactory.Token(targetKind) 
+                        .Select(x =>
+                            x.Kind() is SyntaxKind.PublicKeyword
+                                ? SyntaxFactory.Token(targetKind)
                                 : x)
                         .ToList();
 

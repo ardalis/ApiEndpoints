@@ -1,4 +1,4 @@
-﻿using ApiEndpoints.NSwag;
+﻿using Ardalis.ApiEndpoints.NSwag;
 using NSwag.Generation.AspNetCore;
 
 namespace Microsoft.Extensions.DependencyInjection

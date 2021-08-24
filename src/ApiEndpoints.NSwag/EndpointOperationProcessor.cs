@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Ardalis.ApiEndpoints;
 using NSwag.Generation.Processors;
 using NSwag.Generation.Processors.Contexts;
 
-namespace ApiEndpoints.NSwag
+namespace Ardalis.ApiEndpoints.NSwag
 {
     internal class EndpointOperationProcessor : IOperationProcessor
     {

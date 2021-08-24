@@ -1,6 +1,7 @@
 ﻿// https://raw.githubusercontent.com/dotnet/samples/master/csharp/roslyn-sdk/Tutorials/MakeConst/MakeConst.Test/Verifiers/DiagnosticVerifier.cs
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Ardalis.ApiEndpoints.CodeAnalyzers.Test.Helpers;

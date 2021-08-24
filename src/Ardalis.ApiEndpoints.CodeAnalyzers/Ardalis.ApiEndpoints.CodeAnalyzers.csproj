@@ -1,9 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
@@ -20,7 +17,7 @@
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageTags>api endpoints code analyzers roslyn</PackageTags>
-    <PackageReleaseNotes>Fixes bug affecting constructors and static methods.</PackageReleaseNotes>
+    <PackageReleaseNotes>TODO</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

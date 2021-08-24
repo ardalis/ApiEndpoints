@@ -23,7 +23,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// Creates a new Author
         /// </summary>
         [HttpPost]
-        public async Task<CreateAuthorResult> HandleAsync([FromBody]CreateAuthorCommand request, CancellationToken cancellationToken)
+        public async Task<CreateAuthorResult> HandleAsync([FromBody] CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author();
             _mapper.Map(request, author);

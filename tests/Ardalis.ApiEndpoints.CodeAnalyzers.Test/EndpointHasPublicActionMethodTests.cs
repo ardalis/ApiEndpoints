@@ -38,6 +38,23 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                 }
             }" + EndpointBase;
 
+        private const string ValidEndpointCustomMethodName = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : EndpointBase
+                {
+                    public async Task<ActionResult<object>> HandleTest([FromBody] object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }" + EndpointBase;
+
         private const string ValidEndpointWithExtraStaticMethod = @"
             using System;
             using System.Threading.Tasks;
@@ -76,7 +93,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                 }
             }" + EndpointBase;
 
-         private const string ValidEndpointUsingCustomBaseClass = @"
+        private const string ValidEndpointUsingCustomBaseClass = @"
             using System;
             using System.Threading.Tasks;
             using Microsoft.AspNetCore.Mvc;
@@ -97,7 +114,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                 }
             }" + EndpointBase;
 
-         private const string ValidEndpointWithCustomEndpointBaseDefined = @"
+        private const string ValidEndpointWithCustomEndpointBaseDefined = @"
             using System;
             using System.Threading.Tasks;
             using Microsoft.AspNetCore.Mvc;
@@ -166,6 +183,94 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
                 public class TestEndpoint : EndpointBase
                 {
                     public ActionResult<object> Handle([FromBody] object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    internal void ExtraPublicMethod()
+                    {
+                        throw new Exception();
+                    }
+                }
+            }" + EndpointBase;
+
+        private const string InvalidEndpointWithExtraPublicMethodFirst = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : EndpointBase
+                {
+                    public void ExtraPublicMethod()
+                    {
+                        throw new Exception();
+                    }
+
+                    public ActionResult<object> Handle([FromBody] object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }" + EndpointBase;
+
+        private const string InvalidEndpointWithExtraPublicMethodFirst_Fixed = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : EndpointBase
+                {
+                    internal void ExtraPublicMethod()
+                    {
+                        throw new Exception();
+                    }
+
+                    public ActionResult<object> Handle([FromBody] object request)
+                    {
+                        throw new Exception();
+                    }
+                }
+            }" + EndpointBase;
+
+        private const string InvalidEndpointWithExtraPublicMethodAndCustomMethodName = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : EndpointBase
+                {
+                    public ActionResult<object> HandleTest([FromBody] object request)
+                    {
+                        throw new Exception();
+                    }
+
+                    public void ExtraPublicMethod()
+                    {
+                        throw new Exception();
+                    }
+                }
+            }" + EndpointBase;
+
+        private const string InvalidEndpointWithExtraPublicMethodAndCustomMethodName_Fixed = @"
+            using System;
+            using System.Threading.Tasks;
+            using Microsoft.AspNetCore.Mvc;
+            using Ardalis.ApiEndpoints;
+
+            namespace ApiEndpointsAnalyzersTest
+            {
+                public class TestEndpoint : EndpointBase
+                {
+                    public ActionResult<object> HandleTest([FromBody] object request)
                     {
                         throw new Exception();
                     }
@@ -322,6 +427,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
         [DataTestMethod]
         [DataRow(""),
          DataRow(ValidEndpoint),
+         DataRow(ValidEndpointCustomMethodName),
          DataRow(ValidEndpointWithExtraStaticMethod),
          DataRow(ValidEndpointWithExtraNonPublicMethods),
          DataRow(ValidEndpointWithPublicConstructor),
@@ -335,8 +441,18 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test
         [DataTestMethod]
         [
         DataRow(
-            InvalidEndpointWithExtraPublicMethod, 
+            InvalidEndpointWithExtraPublicMethod,
             InvalidEndpointWithExtraPublicMethod_Fixed,
+            "Endpoint TestEndpoint has additional public method ExtraPublicMethod. Endpoints must have only one public method.",
+            16, 33),
+        DataRow(
+            InvalidEndpointWithExtraPublicMethodFirst,
+            InvalidEndpointWithExtraPublicMethodFirst_Fixed,
+            "Endpoint TestEndpoint has additional public method ExtraPublicMethod. Endpoints must have only one public method.",
+            11, 33),
+        DataRow(
+            InvalidEndpointWithExtraPublicMethodAndCustomMethodName,
+            InvalidEndpointWithExtraPublicMethodAndCustomMethodName_Fixed,
             "Endpoint TestEndpoint has additional public method ExtraPublicMethod. Endpoints must have only one public method.",
             16, 33),
          DataRow(
