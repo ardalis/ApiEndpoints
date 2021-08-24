@@ -1,22 +1,19 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Linq;
+using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using System.Linq;
-using System.Threading.Tasks;
-
 using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
-using System.Collections.Generic;
-using System;
-using System.Text.Json;
 
 namespace SampleEndpointApp.Authors
 {
     /// <summary>
     /// Provides a list of authors in a JSON file format
     /// </summary>
-    public class ListJsonFile : BaseAsyncEndpoint
+    public class ListJsonFile : EndpointBaseAsync
         .WithoutRequest
         .WithoutResponse // TODO: Maybe have a custom file response?
     {

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Diagnostics;
@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -16,13 +16,10 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(EndpointHasExtraPublicMethodCodeFixProvider)), Shared]
     public class EndpointHasExtraPublicMethodCodeFixProvider : CodeFixProvider
     {
-        private const string MakeInternalTitle = "Make additonal method internal.";
-        private const string MakePrivateTitle = "Make additonal method private.";
+        private const string MakeInternalTitle = "Make additional method internal.";
+        private const string MakePrivateTitle = "Make additional method private.";
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-        {
-            get { return ImmutableArray.Create(EndpointHasExtraPublicMethodAnalyzer.DiagnosticId); }
-        }
+        public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } = ImmutableArray.Create(EndpointHasExtraPublicMethodAnalyzer.DiagnosticId);
 
         public sealed override FixAllProvider GetFixAllProvider()
         {
@@ -38,14 +35,14 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             // Find the method declaration identified by the diagnostic.
-            var declaration = 
+            var declaration =
                 root
                     .FindToken(diagnosticSpan.Start)
                     .Parent
                     .AncestorsAndSelf()
                     .OfType<MethodDeclarationSyntax>()
                     .First();
-            
+
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
@@ -75,9 +72,9 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                     // goal is to preserve order
                     method
                         .Modifiers
-                        .Select(x => 
-                            x.Kind() is SyntaxKind.PublicKeyword 
-                                ? SyntaxFactory.Token(targetKind) 
+                        .Select(x =>
+                            x.Kind() is SyntaxKind.PublicKeyword
+                                ? SyntaxFactory.Token(targetKind)
                                 : x)
                         .ToList();
 

@@ -1,15 +1,13 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using System.Threading.Tasks;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
 
 namespace SampleEndpointApp.Authors
 {
-    [Route("/authors")]
-    public abstract class BaseAsyncAuthorEndpoint { }
-    public class Delete : BaseAsyncEndpoint
+    public class Delete : EndpointBaseAsync
         .WithRequest<DeleteAuthorRequest>
         .WithoutResponse
     {
