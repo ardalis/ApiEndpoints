@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SampleEndpointApp.Authors;
 using SampleEndpointApp.DomainModel;
+using SampleEndpointApp.Endpoints.Authors;
 
 namespace SampleEndpointApp
 {

@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
     public class Get : EndpointBaseAsync
         .WithRequest<int>

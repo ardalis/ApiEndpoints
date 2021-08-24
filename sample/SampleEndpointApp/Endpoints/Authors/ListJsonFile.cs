@@ -6,7 +6,7 @@ using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
     public class ListJsonFile : EndpointBaseAsync
         .WithoutRequest

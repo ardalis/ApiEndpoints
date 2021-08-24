@@ -5,7 +5,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
     public class Update : EndpointBaseAsync
         .WithRequest<UpdateAuthorCommand>
