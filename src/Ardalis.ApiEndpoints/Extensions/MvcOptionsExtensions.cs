@@ -15,16 +15,16 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             options.Conventions.Add(new CustomRouteToken(
                 "namespace",
-                c => c.ControllerType.Namespace?.Split('.').Last() ?? string.Empty)
-            );
+                c => c.ControllerType.Namespace?.Split('.').Last()
+            ));
         }
 
         private class CustomRouteToken : IApplicationModelConvention
         {
             private readonly string _tokenName;
-            private readonly Func<ControllerModel, string> _valueGenerator;
+            private readonly Func<ControllerModel, string?> _valueGenerator;
 
-            public CustomRouteToken(string tokenName, Func<ControllerModel, string> valueGenerator)
+            public CustomRouteToken(string tokenName, Func<ControllerModel, string?> valueGenerator)
             {
                 _tokenName = $"[{tokenName}]";
                 _valueGenerator = valueGenerator;
@@ -34,13 +34,13 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 foreach (var controller in application.Controllers)
                 {
-                    string tokenValue = _valueGenerator(controller);
+                    string? tokenValue = _valueGenerator(controller);
                     UpdateSelectors(controller.Selectors, tokenValue);
                     UpdateSelectors(controller.Actions.SelectMany(a => a.Selectors), tokenValue);
                 }
             }
 
-            private void UpdateSelectors(IEnumerable<SelectorModel> selectors, string tokenValue)
+            private void UpdateSelectors(IEnumerable<SelectorModel> selectors, string? tokenValue)
             {
                 foreach (var selector in selectors.Where(s => s.AttributeRouteModel != null))
                 {

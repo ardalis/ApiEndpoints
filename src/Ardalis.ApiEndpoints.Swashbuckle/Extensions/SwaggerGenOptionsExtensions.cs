@@ -15,7 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
             options.TagActionsBy(EndpointNamespaceOrDefault);
         }
 
-        private static IList<string> EndpointNamespaceOrDefault(ApiDescription api)
+        private static IList<string?> EndpointNamespaceOrDefault(ApiDescription api)
         {
             if (api.ActionDescriptor is not ControllerActionDescriptor actionDescriptor)
             {
@@ -24,7 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (actionDescriptor.ControllerTypeInfo.GetBaseTypesAndThis().Any(t => t == typeof(EndpointBase)))
             {
-                return new[] { actionDescriptor.ControllerTypeInfo.Namespace.Split('.').Last() };
+                return new[] { actionDescriptor.ControllerTypeInfo.Namespace?.Split('.').Last() };
             }
 
             return new[] { actionDescriptor.ControllerName };

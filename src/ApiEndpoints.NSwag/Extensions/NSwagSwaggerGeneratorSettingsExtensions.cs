@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 if (context.ControllerType.GetBaseTypesAndThis().Any(t => t == typeof(EndpointBase)))
                 {
-                    context.OperationDescription.Operation.Tags = new List<string> { context.ControllerType.Namespace.Split('.').Last() };
+                    context.OperationDescription.Operation.Tags = new List<string?> { context.ControllerType.Namespace?.Split('.').Last() };
                 }
 
                 return true;
