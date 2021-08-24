@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -15,18 +15,19 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
 
         internal static readonly LocalizableString Title = "Endpoint has more than one public method";
         internal static readonly LocalizableString MessageFormat = "Endpoint {0} has additional public method {1}. Endpoints must have only one public method.";
-        private static readonly LocalizableString Description = "MVC will interpret additional public methods on an Endpoint as Actions.  Limit Endpoints to a single Action";
+        private static readonly LocalizableString Description = "MVC will interpret additional public methods on an Endpoint as Actions.  Limit Endpoints to a single Action.";
         private const string Category = "Naming";
 
-        private static readonly DiagnosticDescriptor Rule = 
-            new DiagnosticDescriptor(
-                DiagnosticId, 
-                Title, 
-                MessageFormat, 
-                Category, 
-                DiagnosticSeverity.Warning, 
-                isEnabledByDefault: true, 
-                description: Description);
+        private static readonly DiagnosticDescriptor Rule = new(
+#pragma warning disable RS2008 // Enable analyzer release tracking
+            DiagnosticId,
+#pragma warning restore RS2008 // Enable analyzer release tracking
+            Title, 
+            MessageFormat, 
+            Category, 
+            DiagnosticSeverity.Warning, 
+            isEnabledByDefault: true, 
+            description: Description);
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
 
