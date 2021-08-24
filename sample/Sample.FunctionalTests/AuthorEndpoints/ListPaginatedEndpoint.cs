@@ -1,13 +1,12 @@
-﻿using Newtonsoft.Json;
-using SampleEndpointApp;
-using SampleEndpointApp.DataAccess;
-using SampleEndpointApp.DomainModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Sample.FunctionalTests.Models;
+using SampleEndpointApp;
+using SampleEndpointApp.DomainModel;
 using Xunit;
 
 namespace Sample.FunctionalTests.AuthorEndpoints
@@ -24,7 +23,7 @@ namespace Sample.FunctionalTests.AuthorEndpoints
         [Fact]
         public async Task Page1PerPage1_ShouldReturnFirstAuthor()
         {
-            var response = await _client.GetAsync($"/authors?perPage=1&page=1");
+            var response = await _client.GetAsync(Routes.Authors.List(1, 1));
             response.EnsureSuccessStatusCode();
             var stringResponse = await response.Content.ReadAsStringAsync();
             var result = JsonConvert.DeserializeObject<IEnumerable<Author>>(stringResponse);
@@ -40,7 +39,7 @@ namespace Sample.FunctionalTests.AuthorEndpoints
             var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
 
             // Act
-            var request = _client.GetAsync("/authors?perPage=1&page=1", tokenSource.Token);
+            var request = _client.GetAsync(Routes.Authors.List(1, 1), tokenSource.Token);
 
             // Assert
             var response = await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);

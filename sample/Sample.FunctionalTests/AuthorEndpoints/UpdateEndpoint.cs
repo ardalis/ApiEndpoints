@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Sample.FunctionalTests.Models;
 using SampleEndpointApp;
 using SampleEndpointApp.DataAccess;
 using SampleEndpointApp.Endpoints.Authors;
@@ -29,10 +30,10 @@ namespace Sample.FunctionalTests.AuthorEndpoints
                 Id = 2,
                 Name = "James Eastham",
             };
-            
+
             var authorPreUpdate = SeedData.Authors().First(p => p.Id == 2);
 
-            var response = await _client.PutAsync($"/authors", new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"));
+            var response = await _client.PutAsync(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"));
 
             response.EnsureSuccessStatusCode();
             var stringResponse = await response.Content.ReadAsStringAsync();
@@ -59,7 +60,7 @@ namespace Sample.FunctionalTests.AuthorEndpoints
             };
 
             // Act
-            var request = _client.PutAsync("/authors", new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
+            var request = _client.PutAsync(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
 
             // Assert
             await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
