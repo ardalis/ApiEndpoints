@@ -9,7 +9,7 @@ namespace SampleEndpointApp.Endpoints.Authors
 {
     public class Get : EndpointBaseAsync
         .WithRequest<int>
-        .WithActionResult<AuthorResult>
+        .WithResult<AuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -25,13 +25,13 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// Get a specific Author
         /// </summary>
         [HttpGet("/authors/{id}")]
-        public override async Task<ActionResult<AuthorResult>> HandleAsync(int id, CancellationToken cancellationToken)
+        public override async Task<AuthorResult> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);
 
             var result = _mapper.Map<AuthorResult>(author);
 
-            return Ok(result);
+            return result;
         }
     }
 }
