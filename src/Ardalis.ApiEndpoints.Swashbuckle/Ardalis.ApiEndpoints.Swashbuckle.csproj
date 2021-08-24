@@ -7,7 +7,7 @@
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints.Swashbuckle</PackageId>
     <Version>4.0.0-pre1</Version>
-    <Authors>Steve Smith (@ardalis), Philip Pittle (@ppittle), Maksym Koshovyi</Authors>
+    <Authors>Steve Smith (@ardalis), Maksym Koshovyi</Authors>
     <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
     <Company>Ardalis.com</Company>
     <PackageProjectUrl>https://github.com/ardalis/ApiEndpoints</PackageProjectUrl>
