@@ -1,14 +1,14 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Create : BaseAsyncEndpoint
+    public class Create : EndpointBaseAsync
         .WithRequest<CreateAuthorCommand>
         .WithResponse<CreateAuthorResult>
     {
