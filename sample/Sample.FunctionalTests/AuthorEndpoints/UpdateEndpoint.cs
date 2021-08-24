@@ -30,7 +30,7 @@ namespace Sample.FunctionalTests.AuthorEndpoints
                 Name = "James Eastham",
             };
             
-            var authorPreUpdate = SeedData.Authors().FirstOrDefault(p => p.Id == 2);
+            var authorPreUpdate = SeedData.Authors().First(p => p.Id == 2);
 
             var response = await _client.PutAsync($"/authors", new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"));
 

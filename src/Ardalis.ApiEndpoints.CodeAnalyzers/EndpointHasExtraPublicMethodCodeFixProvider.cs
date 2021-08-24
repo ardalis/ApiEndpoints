@@ -30,18 +30,21 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
             var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
+            if (root == null)
+            {
+                return;
+            }
 
             var diagnostic = context.Diagnostics.First();
             var diagnosticSpan = diagnostic.Location.SourceSpan;
 
             // Find the method declaration identified by the diagnostic.
-            var declaration =
-                root
-                    .FindToken(diagnosticSpan.Start)
-                    .Parent
-                    .AncestorsAndSelf()
-                    .OfType<MethodDeclarationSyntax>()
-                    .First();
+            var declaration = root
+                .FindToken(diagnosticSpan.Start)
+                .Parent!
+                .AncestorsAndSelf()
+                .OfType<MethodDeclarationSyntax>()
+                .First();
 
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
@@ -82,7 +85,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                 var newMethod = method.WithModifiers(new SyntaxTokenList(modifierList));
 
                 var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-                var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await tree!.GetRootAsync(cancellationToken).ConfigureAwait(false);
 
                 var newRoot = root.ReplaceNode(method, newMethod);
 

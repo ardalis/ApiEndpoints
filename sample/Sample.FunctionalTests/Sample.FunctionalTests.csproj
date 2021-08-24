@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Nullable>disable</Nullable>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>

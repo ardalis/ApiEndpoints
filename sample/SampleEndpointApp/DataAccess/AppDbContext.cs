@@ -10,7 +10,7 @@ namespace SampleEndpointApp.DataAccess
         {
         }
 
-        public DbSet<Author> Authors { get; set; }
+        public DbSet<Author> Authors { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -6,7 +6,7 @@ namespace Microsoft.CodeAnalysis
     {
         public static IEnumerable<ITypeSymbol> GetBaseTypesAndThis(this ITypeSymbol type)
         {
-            ITypeSymbol current = type;
+            ITypeSymbol? current = type;
             while (current != null)
             {
                 yield return current;
