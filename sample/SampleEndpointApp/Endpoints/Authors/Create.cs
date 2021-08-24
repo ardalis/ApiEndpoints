@@ -9,7 +9,7 @@ namespace SampleEndpointApp.Authors
 {
     public class Create : EndpointBaseAsync
         .WithRequest<CreateAuthorCommand>
-        .WithResponse<CreateAuthorResult>
+        .WithActionResult<CreateAuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;

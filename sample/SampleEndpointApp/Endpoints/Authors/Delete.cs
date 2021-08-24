@@ -8,7 +8,7 @@ namespace SampleEndpointApp.Authors
 {
     public class Delete : EndpointBaseAsync
         .WithRequest<DeleteAuthorRequest>
-        .WithoutResponse
+        .WithActionResult
     {
         private readonly IAsyncRepository<Author> _repository;
 

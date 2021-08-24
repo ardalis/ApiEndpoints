@@ -9,12 +9,12 @@ namespace Ardalis.ApiEndpoints
     {
         public static class WithRequest<TRequest>
         {
-            public abstract class WithResponse<TResponse> : EndpointBase
+            public abstract class WithActionResult<TResponse> : EndpointBase
             {
                 public abstract ActionResult<TResponse> Handle(TRequest request);
             }
 
-            public abstract class WithoutResponse : EndpointBase
+            public abstract class WithActionResult : EndpointBase
             {
                 public abstract ActionResult Handle(TRequest request);
             }
@@ -22,12 +22,12 @@ namespace Ardalis.ApiEndpoints
 
         public static class WithoutRequest
         {
-            public abstract class WithResponse<TResponse> : EndpointBase
+            public abstract class WithActionResult<TResponse> : EndpointBase
             {
                 public abstract ActionResult<TResponse> Handle();
             }
 
-            public abstract class WithoutResponse : EndpointBase
+            public abstract class WithActionResult : EndpointBase
             {
                 public abstract ActionResult Handle();
             }

@@ -10,7 +10,7 @@ namespace SampleEndpointApp.Authors
 {
     public class ListJsonFile : EndpointBaseAsync
         .WithoutRequest
-        .WithoutResponse // TODO: Maybe have a custom file response?
+        .WithActionResult // TODO: Maybe have a custom file response?
     {
         private readonly IAsyncRepository<Author> repository;
 

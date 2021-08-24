@@ -9,7 +9,7 @@ namespace SampleEndpointApp.Authors
 {
     public class Get : EndpointBaseAsync
         .WithRequest<int>
-        .WithResponse<AuthorResult>
+        .WithActionResult<AuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;

@@ -11,7 +11,7 @@ namespace SampleEndpointApp.Authors
 {
     public class List : EndpointBaseAsync
         .WithRequest<AuthorListRequest>
-        .WithResponse<IList<AuthorListResult>>
+        .WithActionResult<IList<AuthorListResult>>
     {
         private readonly IAsyncRepository<Author> repository;
         private readonly IMapper mapper;
