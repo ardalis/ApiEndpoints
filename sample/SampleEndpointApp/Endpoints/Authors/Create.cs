@@ -32,7 +32,7 @@ namespace SampleEndpointApp.Endpoints.Authors
             await _repository.AddAsync(author, cancellationToken);
 
             var result = _mapper.Map<CreateAuthorResult>(author);
-            return CreatedAtRoute("Authors.Get", new { id = result.Id }, result);
+            return CreatedAtRoute("Authors_Get", new { id = result.Id }, result);
         }
     }
 }
