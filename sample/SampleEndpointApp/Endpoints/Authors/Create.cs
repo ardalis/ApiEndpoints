@@ -5,11 +5,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
     public class Create : EndpointBaseAsync
         .WithRequest<CreateAuthorCommand>
-        .WithResponse<CreateAuthorResult>
+        .WithActionResult
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -25,14 +25,14 @@ namespace SampleEndpointApp.Authors
         /// Creates a new Author
         /// </summary>
         [HttpPost(CreateAuthorCommand.ROUTE)]
-        public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request, CancellationToken cancellationToken)
+        public override async Task<ActionResult> HandleAsync([FromBody] CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author();
             _mapper.Map(request, author);
             await _repository.AddAsync(author, cancellationToken);
 
             var result = _mapper.Map<CreateAuthorResult>(author);
-            return Ok(result);
+            return CreatedAtRoute("Authors.Get", new { id = result.Id }, result);
         }
     }
 }

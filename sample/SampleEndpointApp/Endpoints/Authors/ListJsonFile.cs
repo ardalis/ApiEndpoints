@@ -6,11 +6,11 @@ using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
     public class ListJsonFile : EndpointBaseAsync
         .WithoutRequest
-        .WithoutResponse // TODO: Maybe have a custom file response?
+        .WithActionResult
     {
         private readonly IAsyncRepository<Author> repository;
 
@@ -28,7 +28,7 @@ namespace SampleEndpointApp.Authors
         {
             var result = (await repository.ListAllAsync(cancellationToken)).ToList();
 
-             var streamData = JsonSerializer.SerializeToUtf8Bytes(result);
+            var streamData = JsonSerializer.SerializeToUtf8Bytes(result);
             return File(streamData, "text/json", "authors.json");
         }
     }

@@ -7,11 +7,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
     public class List : EndpointBaseAsync
         .WithRequest<AuthorListRequest>
-        .WithResponse<IList<AuthorListResult>>
+        .WithResult<IEnumerable<AuthorListResult>>
     {
         private readonly IAsyncRepository<Author> repository;
         private readonly IMapper mapper;
@@ -28,8 +28,7 @@ namespace SampleEndpointApp.Authors
         /// List all Authors
         /// </summary>
         [HttpGet("/authors")]
-        public override async Task<ActionResult<IList<AuthorListResult>>> HandleAsync(
-
+        public override async Task<IEnumerable<AuthorListResult>> HandleAsync(
             [FromQuery] AuthorListRequest request,
             CancellationToken cancellationToken = default)
         {
@@ -44,7 +43,7 @@ namespace SampleEndpointApp.Authors
             var result = (await repository.ListAllAsync(request.PerPage, request.Page, cancellationToken))
                 .Select(i => mapper.Map<AuthorListResult>(i));
 
-            return Ok(result);
+            return result;
         }
     }
 }

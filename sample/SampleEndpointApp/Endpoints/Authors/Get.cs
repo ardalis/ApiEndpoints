@@ -5,11 +5,11 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
     public class Get : EndpointBaseAsync
         .WithRequest<int>
-        .WithResponse<AuthorResult>
+        .WithResult<AuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -24,14 +24,14 @@ namespace SampleEndpointApp.Authors
         /// <summary>
         /// Get a specific Author
         /// </summary>
-        [HttpGet("/authors/{id}")]
-        public override async Task<ActionResult<AuthorResult>> HandleAsync(int id, CancellationToken cancellationToken)
+        [HttpGet("/authors/{id}", Name = "Authors.Get")]
+        public override async Task<AuthorResult> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);
 
             var result = _mapper.Map<AuthorResult>(author);
 
-            return Ok(result);
+            return result;
         }
     }
 }
