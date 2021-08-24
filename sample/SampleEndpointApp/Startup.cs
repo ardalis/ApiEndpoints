@@ -26,7 +26,7 @@ namespace SampleEndpointApp
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlite("Data Source=database.sqlite")); // will be created in web project root
 
-            services.AddControllers();
+            services.AddControllers(options => options.UseNamespaceRouteToken());
 
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SampleEndpointApp", Version = "v1" });

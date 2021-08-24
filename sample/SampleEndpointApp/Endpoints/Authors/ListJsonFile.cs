@@ -8,6 +8,7 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Endpoints.Authors
 {
+    [Route("api/[namespace]")]
     public class ListJsonFile : EndpointBaseAsync
         .WithoutRequest
         .WithActionResult
@@ -22,7 +23,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// List all Authors as a JSON file
         /// </summary>
-        [HttpGet("/authorsJson")]
+        [HttpGet("Json")]
         public override async Task<ActionResult> HandleAsync(
             CancellationToken cancellationToken = default)
         {

@@ -7,6 +7,7 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Endpoints.Authors
 {
+    [Route("api/[namespace]")]
     public class Create : EndpointBaseAsync
         .WithRequest<CreateAuthorCommand>
         .WithActionResult
@@ -24,7 +25,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// Creates a new Author
         /// </summary>
-        [HttpPost(CreateAuthorCommand.ROUTE)]
+        [HttpPost]
         public override async Task<ActionResult> HandleAsync([FromBody] CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author();
