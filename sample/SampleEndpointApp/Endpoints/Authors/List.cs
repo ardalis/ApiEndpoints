@@ -9,7 +9,6 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Endpoints.Authors
 {
-    [Route("api/[namespace]")]
     public class List : EndpointBaseAsync
         .WithRequest<AuthorListRequest>
         .WithResult<IEnumerable<AuthorListResult>>
@@ -28,7 +27,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// List all Authors
         /// </summary>
-        [HttpGet]
+        [HttpGet("api/[namespace]")]
         public override async Task<IEnumerable<AuthorListResult>> HandleAsync(
             [FromQuery] AuthorListRequest request,
             CancellationToken cancellationToken = default)

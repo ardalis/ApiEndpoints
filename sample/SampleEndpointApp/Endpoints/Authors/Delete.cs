@@ -6,7 +6,6 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Endpoints.Authors
 {
-    [Route("api/[namespace]")]
     public class Delete : EndpointBaseAsync
         .WithRequest<DeleteAuthorRequest>
         .WithActionResult
@@ -21,7 +20,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// Deletes an Author
         /// </summary>
-        [HttpDelete("{id}")]
+        [HttpDelete("api/[namespace]/{id}")]
         public override async Task<ActionResult> HandleAsync([FromRoute] DeleteAuthorRequest request, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(request.Id, cancellationToken);

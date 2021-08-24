@@ -7,7 +7,6 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Endpoints.Authors
 {
-    [Route("api/[namespace]")]
     public class Get : EndpointBaseAsync
         .WithRequest<int>
         .WithResult<AuthorResult>
@@ -25,7 +24,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// Get a specific Author
         /// </summary>
-        [HttpGet("{id}", Name = "Authors.Get")]
+        [HttpGet("api/[namespace]/{id}", Name = "Authors.Get")]
         public override async Task<AuthorResult> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);

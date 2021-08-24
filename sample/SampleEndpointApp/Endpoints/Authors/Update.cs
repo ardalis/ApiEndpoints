@@ -7,7 +7,6 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Endpoints.Authors
 {
-    [Route("api/[namespace]")]
     public class Update : EndpointBaseAsync
         .WithRequest<UpdateAuthorCommand>
         .WithResult<UpdatedAuthorResult>
@@ -25,7 +24,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// Updates an existing Author
         /// </summary>
-        [HttpPut]
+        [HttpPut("api/[namespace]")]
         public override async Task<UpdatedAuthorResult> HandleAsync([FromBody] UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
