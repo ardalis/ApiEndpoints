@@ -4,7 +4,6 @@ using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace SampleEndpointApp.Authors
 {
@@ -22,13 +21,10 @@ namespace SampleEndpointApp.Authors
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Updates an existing Author
+        /// </summary>
         [HttpPut("/authors")]
-		[SwaggerOperation(
-			Summary = "Updates an existing Author",
-			Description = "Updates an existing Author",
-			OperationId = "Author.Update",
-			Tags = new[] { "AuthorEndpoint" })
-		]
         public override async Task<ActionResult<UpdatedAuthorResult>> HandleAsync([FromBody]UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
