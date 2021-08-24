@@ -24,7 +24,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// Get a specific Author
         /// </summary>
-        [HttpGet("/authors/{id}")]
+        [HttpGet("/authors/{id}", Name = "Authors.Get")]
         public override async Task<AuthorResult> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);

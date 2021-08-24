@@ -25,7 +25,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// Updates an existing Author
         /// </summary>
         [HttpPut("/authors")]
-        public override async Task<UpdatedAuthorResult> HandleAsync([FromBody]UpdateAuthorCommand request, CancellationToken cancellationToken)
+        public override async Task<UpdatedAuthorResult> HandleAsync([FromBody] UpdateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
             _mapper.Map(request, author);
