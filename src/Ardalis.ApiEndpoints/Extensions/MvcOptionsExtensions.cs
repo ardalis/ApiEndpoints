@@ -8,6 +8,9 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class MvcOptionsExtensions
     {
+        /// <summary>
+        /// Allows to use "[namespace]" as part of a route.
+        /// </summary>
         public static void UseNamespaceRouteToken(this MvcOptions options)
         {
             options.Conventions.Add(new CustomRouteToken(
