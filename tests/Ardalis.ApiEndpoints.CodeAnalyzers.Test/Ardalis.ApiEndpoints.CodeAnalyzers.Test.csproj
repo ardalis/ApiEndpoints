@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
 
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
-    <LangVersion>8</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints.CodeAnalyzers\Ardalis.ApiEndpoints.CodeAnalyzers.csproj" />
-    <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj" />
   </ItemGroup>
 
 </Project>

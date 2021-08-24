@@ -10,7 +10,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="1.1.1" />
+    <PackageReference Include="Ardalis.ApiEndpoints" Version="4.0.0-pre1" />
+    <PackageReference Include="Ardalis.ApiEndpoints.Swashbuckle" Version="4.0.0-pre1" />
     <PackageReference Include="Ardalis.EFCore.Extensions" Version="1.1.0" />
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -19,13 +20,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.9" />
     <PackageReference Include="SQLite" Version="3.13.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.5" />
-    <PackageReference Include="NETStandard.Library" Version="2.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints.CodeGenerators\Ardalis.ApiEndpoints.CodeGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-    <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints.Swashbuckle\Ardalis.ApiEndpoints.Swashbuckle.csproj" />
-    <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj" />
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@
 
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints.CodeGenerators</PackageId>
-    <Version>4.0.0</Version>
+    <Version>4.0.0-pre1</Version>
     <Authors>Steve Smith (@ardalis), Philip Pittle (@ppittle)</Authors>
     <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
     <Company>Ardalis.com</Company>
