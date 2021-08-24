@@ -9,7 +9,7 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Authors
 {
-    public class List : BaseAsyncEndpoint
+    public class List : EndpointBaseAsync
         .WithRequest<AuthorListRequest>
         .WithResponse<IList<AuthorListResult>>
     {

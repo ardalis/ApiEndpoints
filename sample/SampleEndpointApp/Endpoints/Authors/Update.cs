@@ -7,7 +7,7 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Authors
 {
-    public class Update : BaseAsyncEndpoint
+    public class Update : EndpointBaseAsync
         .WithRequest<UpdateAuthorCommand>
         .WithResponse<UpdatedAuthorResult>
     {

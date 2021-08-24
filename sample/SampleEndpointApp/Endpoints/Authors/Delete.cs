@@ -6,9 +6,7 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Authors
 {
-    [Route("/authors")]
-    public abstract class BaseAsyncAuthorEndpoint { }
-    public class Delete : BaseAsyncEndpoint
+    public class Delete : EndpointBaseAsync
         .WithRequest<DeleteAuthorRequest>
         .WithoutResponse
     {

@@ -8,7 +8,7 @@ using SampleEndpointApp.DomainModel;
 
 namespace SampleEndpointApp.Authors
 {
-    public class ListJsonFile : BaseAsyncEndpoint
+    public class ListJsonFile : EndpointBaseAsync
         .WithoutRequest
         .WithoutResponse // TODO: Maybe have a custom file response?
     {
