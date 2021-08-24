@@ -30,7 +30,7 @@ namespace Ardalis.ApiEndpoints.CodeGenerators
             foreach (ITypeSymbol targetType in baseEndpointChildren)
             {
                 string sourceCode = GenerateRoute(targetType);
-                context.AddSource($"{targetType.Name}.Route.cs", sourceCode);
+                context.AddSource($"{targetType.ContainingNamespace.Name}.{targetType.Name}.Route.cs", sourceCode);
             }
         }
 
