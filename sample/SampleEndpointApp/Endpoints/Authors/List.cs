@@ -1,13 +1,11 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
-using System.Collections.Generic;
 
 namespace SampleEndpointApp.Authors
 {
@@ -25,13 +23,11 @@ namespace SampleEndpointApp.Authors
             this.repository = repository;
             this.mapper = mapper;
         }
+
+        /// <summary>
+        /// List all Authors
+        /// </summary>
         [HttpGet("/authors")]
-        [SwaggerOperation(
-            Summary = "List all Authors",
-            Description = "List all Authors",
-            OperationId = "Author.List",
-            Tags = new[] { "AuthorEndpoint" })
-        ]
         public override async Task<ActionResult<IList<AuthorListResult>>> HandleAsync(
 
             [FromQuery] AuthorListRequest request,

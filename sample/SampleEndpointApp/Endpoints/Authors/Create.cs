@@ -1,10 +1,9 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace SampleEndpointApp.Authors
 {
@@ -22,13 +21,10 @@ namespace SampleEndpointApp.Authors
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Creates a new Author
+        /// </summary>
         [HttpPost(CreateAuthorCommand.ROUTE)]
-        [SwaggerOperation(
-            Summary = "Creates a new Author",
-            Description = "Creates a new Author",
-            OperationId = "Author.Create",
-            Tags = new[] { "AuthorEndpoint" })
-        ]
         public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request, CancellationToken cancellationToken)
         {
             var author = new Author();

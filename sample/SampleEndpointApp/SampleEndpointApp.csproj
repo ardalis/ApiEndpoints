@@ -3,7 +3,12 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
-  
+
+  <PropertyGroup>
+    <DocumentationFile>.\SampleEndpointApp.xml</DocumentationFile>
+    <NoWarn>CS1591</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="1.1.1" />
     <PackageReference Include="Ardalis.EFCore.Extensions" Version="1.1.0" />
@@ -20,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints.Swashbuckle\Ardalis.ApiEndpoints.Swashbuckle.csproj" />
     <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj" />
   </ItemGroup>
 
