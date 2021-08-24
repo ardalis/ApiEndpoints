@@ -58,7 +58,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers
                     return;
                 }
 
-                // gather all public methods
+                // gather all public methods ordered by "most correct" name and line number
                 var allApiActions = methodSymbol.ContainingType
                     .GetMembers()
                     .OfType<IMethodSymbol>()
