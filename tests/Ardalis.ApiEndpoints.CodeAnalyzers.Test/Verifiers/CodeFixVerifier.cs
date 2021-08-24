@@ -1,6 +1,5 @@
 ﻿// https://raw.githubusercontent.com/dotnet/samples/master/csharp/roslyn-sdk/Tutorials/MakeConst/MakeConst.Test/Verifiers/CodeFixVerifier.cs
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -10,7 +9,6 @@ using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.Extensions.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test.Verifiers

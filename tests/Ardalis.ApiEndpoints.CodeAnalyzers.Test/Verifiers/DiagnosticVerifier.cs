@@ -1,6 +1,7 @@
 ﻿// https://raw.githubusercontent.com/dotnet/samples/master/csharp/roslyn-sdk/Tutorials/MakeConst/MakeConst.Test/Verifiers/DiagnosticVerifier.cs
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using Ardalis.ApiEndpoints.CodeAnalyzers.Test.Helpers;
@@ -105,7 +106,7 @@ namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test.Verifiers
         /// <param name="expectedResults">Diagnostic Results that should have appeared in the code</param>
         private static void VerifyDiagnosticResults(IEnumerable<Diagnostic> actualResults, DiagnosticAnalyzer analyzer, params DiagnosticResult[] expectedResults)
         {
-            int expectedCount = expectedResults.Count();
+            int expectedCount = expectedResults.Length;
             int actualCount = actualResults.Count();
 
             if (expectedCount != actualCount)
