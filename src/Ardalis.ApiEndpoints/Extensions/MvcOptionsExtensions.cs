@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
 
@@ -21,12 +22,12 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private class CustomRouteToken : IApplicationModelConvention
         {
-            private readonly string _tokenName;
+            private readonly string _tokenRegex;
             private readonly Func<ControllerModel, string?> _valueGenerator;
 
             public CustomRouteToken(string tokenName, Func<ControllerModel, string?> valueGenerator)
             {
-                _tokenName = $"[{tokenName}]";
+                _tokenRegex = $@"(?<!\[)\[{tokenName}]|\[{tokenName}](?!])";
                 _valueGenerator = valueGenerator;
             }
 
@@ -51,7 +52,12 @@ namespace Microsoft.Extensions.DependencyInjection
 
             private string? InsertTokenValue(string? template, string? tokenValue)
             {
-                return template?.Replace(_tokenName, tokenValue);
+                if (template is null)
+                {
+                    return template;
+                }
+
+                return Regex.Replace(template, _tokenRegex, tokenValue);
             }
         }
     }
