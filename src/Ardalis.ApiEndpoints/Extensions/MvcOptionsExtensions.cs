@@ -44,9 +44,14 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 foreach (var selector in selectors.Where(s => s.AttributeRouteModel != null))
                 {
-                    selector.AttributeRouteModel.Template = selector.AttributeRouteModel.Template
-                        .Replace(_tokenName, tokenValue);
+                    selector.AttributeRouteModel.Template = InsertTokenValue(selector.AttributeRouteModel.Template, tokenValue);
+                    selector.AttributeRouteModel.Name = InsertTokenValue(selector.AttributeRouteModel.Name, tokenValue);
                 }
+            }
+
+            private string? InsertTokenValue(string? template, string? tokenValue)
+            {
+                return template?.Replace(_tokenName, tokenValue);
             }
         }
     }
