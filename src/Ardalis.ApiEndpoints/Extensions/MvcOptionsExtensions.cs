@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             public CustomRouteToken(string tokenName, Func<ControllerModel, string?> valueGenerator)
             {
-                _tokenRegex = $@"(?<!\[)\[{tokenName}]|\[{tokenName}](?!])";
+                _tokenRegex = $@"(\[{tokenName}])(?<!\[\1(?=]))";
                 _valueGenerator = valueGenerator;
             }
 
