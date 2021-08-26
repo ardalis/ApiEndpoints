@@ -10,7 +10,12 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class SwaggerGenOptionsExtensions
     {
-        public static void TagEndpointsByNamespace(this SwaggerGenOptions options)
+        /// <summary>
+        /// Updates Swagger document to support ApiEndpoints.<br/><br/>
+        /// For controllers inherited from <see cref="EndpointBase"/>:<br/>
+        /// - Replaces action Tag with <c>[namespace]</c><br/>
+        /// </summary>
+        public static void UseApiEndpoints(this SwaggerGenOptions options)
         {
             options.TagActionsBy(EndpointNamespaceOrDefault);
         }

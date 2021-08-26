@@ -10,18 +10,27 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class NSwagSwaggerGeneratorSettingsExtensions
     {
-        public static void TagEndpointsByNamespace(this AspNetCoreOpenApiDocumentGeneratorSettings settings)
+        /// <summary>
+        /// Updates Swagger document to support ApiEndpoints.<br/><br/>
+        /// For controllers inherited from <see cref="EndpointBase"/>:<br/>
+        /// - Replaces action Tag with <c>[namespace]</c><br/>
+        /// - Replaces action OperationId with <c>[namespace]_[controller]</c>
+        /// </summary>
+        public static void UseApiEndpoints(this AspNetCoreOpenApiDocumentGeneratorSettings settings)
         {
-            settings.OperationProcessors.Add(new EndpointOperationProcessor());
+            settings.OperationProcessors.Add(new EndpointsOperationProcessor());
         }
 
-        private class EndpointOperationProcessor : IOperationProcessor
+        private class EndpointsOperationProcessor : IOperationProcessor
         {
             public bool Process(OperationProcessorContext context)
             {
                 if (context.ControllerType.GetBaseTypesAndThis().Any(t => t == typeof(EndpointBase)))
                 {
-                    context.OperationDescription.Operation.Tags = new List<string?> { context.ControllerType.Namespace?.Split('.').Last() };
+                    var namespaceValue = context.ControllerType.Namespace?.Split('.').Last();
+
+                    context.OperationDescription.Operation.Tags = new List<string?> { namespaceValue };
+                    context.OperationDescription.Operation.OperationId = $"{namespaceValue}_{context.ControllerType.Name}";
                 }
 
                 return true;

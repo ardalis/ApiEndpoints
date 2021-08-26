@@ -31,7 +31,7 @@ namespace SampleEndpointApp
             services.AddSwaggerGen(c => {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SampleEndpointApp", Version = "v1" });
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "SampleEndpointApp.xml"));
-                c.TagEndpointsByNamespace();
+                c.UseApiEndpoints();
             });
 
             services.AddAutoMapper(typeof(Startup));
