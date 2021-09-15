@@ -12,12 +12,14 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// Allows to use "[namespace]" as part of a route.
         /// </summary>
-        public static void UseNamespaceRouteToken(this MvcOptions options)
+        public static MvcOptions UseNamespaceRouteToken(this MvcOptions options)
         {
             options.Conventions.Add(new CustomRouteToken(
                 "namespace",
                 c => c.ControllerType.Namespace?.Split('.').Last()
             ));
+
+            return options;
         }
 
         private class CustomRouteToken : IApplicationModelConvention
