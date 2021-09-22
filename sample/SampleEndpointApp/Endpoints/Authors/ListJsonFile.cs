@@ -22,7 +22,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// List all Authors as a JSON file
         /// </summary>
-        [HttpGet("/authorsJson")]
+        [HttpGet("api/[namespace]/Json")]
         public override async Task<ActionResult> HandleAsync(
             CancellationToken cancellationToken = default)
         {

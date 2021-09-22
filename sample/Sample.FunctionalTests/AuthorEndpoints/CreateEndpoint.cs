@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using Sample.FunctionalTests.Models;
 using SampleEndpointApp;
 using SampleEndpointApp.DataAccess;
 using SampleEndpointApp.Endpoints.Authors;
@@ -30,10 +31,10 @@ namespace Sample.FunctionalTests.AuthorEndpoints
                 PluralsightUrl = "https://app.pluralsight.com",
                 TwitterAlias = "jeasthamdev",
             };
-            
+
             var lastAuthor = SeedData.Authors().Last();
 
-            var response = await _client.PostAsync(CreateAuthorCommand.ROUTE, new StringContent(JsonConvert.SerializeObject(newAuthor), Encoding.UTF8, "application/json"));
+            var response = await _client.PostAsync(Routes.Authors.Create, new StringContent(JsonConvert.SerializeObject(newAuthor), Encoding.UTF8, "application/json"));
 
             response.EnsureSuccessStatusCode();
             var stringResponse = await response.Content.ReadAsStringAsync();
@@ -60,7 +61,7 @@ namespace Sample.FunctionalTests.AuthorEndpoints
             };
 
             // Act
-            var request = _client.PostAsync(CreateAuthorCommand.ROUTE, new StringContent(JsonConvert.SerializeObject(newAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
+            var request = _client.PostAsync(Routes.Authors.Create, new StringContent(JsonConvert.SerializeObject(newAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
 
             // Assert
             await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);

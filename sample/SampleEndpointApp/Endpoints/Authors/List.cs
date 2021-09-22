@@ -27,7 +27,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// List all Authors
         /// </summary>
-        [HttpGet("/authors")]
+        [HttpGet("api/[namespace]")]
         public override async Task<IEnumerable<AuthorListResult>> HandleAsync(
             [FromQuery] AuthorListRequest request,
             CancellationToken cancellationToken = default)

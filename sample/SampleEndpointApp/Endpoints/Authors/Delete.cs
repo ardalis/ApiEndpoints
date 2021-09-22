@@ -20,7 +20,7 @@ namespace SampleEndpointApp.Endpoints.Authors
         /// <summary>
         /// Deletes an Author
         /// </summary>
-        [HttpDelete(DeleteAuthorRequest.ROUTE)]
+        [HttpDelete("api/[namespace]/{id}")]
         public override async Task<ActionResult> HandleAsync([FromRoute] DeleteAuthorRequest request, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
