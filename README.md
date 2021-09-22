@@ -34,6 +34,8 @@ For version 3.0 we implemented a new way to define the base classes using "fluen
 
 [9. Projects Using ApiEndpoints](#9-projects-using-apiendpoints)
 
+[10. Success Stories and Testimonials](#10-success-stories-and-testimonials)
+
 ## 1. Motivation
 
 MVC Controllers are essentially an antipattern. They're dinosaurs. They are collections of methods that never call one another and rarely operate on the same state. They're not cohesive. They tend to become bloated and to grow out of control. Their private methods, if any, are usually only called by a single public method. Most developers recognize that controllers should be as small as possible ([unscientific poll](https://twitter.com/ardalis/status/1223312390391058432)), but they're the only solution offered out of the box, so that's the tool 99% of ASP.NET Core developers use.
@@ -257,3 +259,8 @@ If you're using them or find one not in this list, feel free to add it here via 
 - [PayrollProcessor](https://github.com/KyleMcMaster/payroll-processor): A smorgasbord of modern .NET tech written with functional and asynchronous patterns.
 - [eShopOnWeb](https://github.com/dotnet-architecture/eShopOnWeb): Sample ASP.NET Core reference application, powered by Microsoft
 
+## 10. Success Stories and Testimonials
+
+> "I have implemented in my team your API endpoint solution and I must tell you that was a pretty good investment! in particular how maintainable and testable the solution became!"
+
+[Nuno Santos](https://www.linkedin.com/in/nuno-santos-sd/)
