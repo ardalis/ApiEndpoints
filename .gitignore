@@ -352,3 +352,4 @@ MigrationBackup/
 .ionide/
 sample/SampleEndpointApp/database.sqlite
 sample/SampleEndpointApp/database.sqlite
+.vscode/settings.json
