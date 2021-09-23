@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netcoreapp3.1</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints</PackageId>
     <Title>Ardalis.ApiEndpoints</Title>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -23,7 +27,8 @@
 
   <ItemGroup>
     <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="4.0.0-pre1" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
+    <FrameworkReference Include="Microsoft.AspNetCore.App" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
   </ItemGroup>
 
   <ItemGroup>

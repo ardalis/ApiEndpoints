@@ -6,7 +6,7 @@ namespace System
   {
     public static IEnumerable<Type> GetBaseTypesAndThis(this Type type)
     {
-      Type current = type;
+      Type? current = type;
       while (current != null)
       {
         yield return current;
