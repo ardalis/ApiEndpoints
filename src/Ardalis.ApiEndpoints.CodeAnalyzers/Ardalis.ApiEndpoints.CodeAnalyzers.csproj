@@ -16,8 +16,8 @@
     <Summary>Code Analyzers increasing productivity of developers using the Api Endpoints framework.</Summary>
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <PackageTags>api endpoints code analyzers roslyn</PackageTags>
-    <PackageReleaseNotes>TODO</PackageReleaseNotes>
+    <PackageTags>api endpoints code analyzers roslyn aspnetcore</PackageTags>
+    <PackageReleaseNotes>Updating version to 4.x and including with main package.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
