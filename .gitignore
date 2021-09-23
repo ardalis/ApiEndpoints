@@ -351,3 +351,4 @@ MigrationBackup/
 sample/SampleEndpointApp/database.sqlite
 sample/SampleEndpointApp/database.sqlite
 sample/SampleEndpointApp/SampleEndpointApp.xml
+.vscode/settings.json
