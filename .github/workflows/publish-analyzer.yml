@@ -1,5 +1,6 @@
 name: publish analyzer to nuget
 on:
+  workflow_dispatch:
   push:
     branches:
       - main # Your default release branch
