@@ -1,4 +1,4 @@
-name: publish analyzer to nuget
+name: publish NSwag package to nuget
 on:
   workflow_dispatch:
   push:
