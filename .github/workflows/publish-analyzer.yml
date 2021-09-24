@@ -1,8 +1,10 @@
 name: publish analyzer to nuget
 on:
+  workflow_dispatch:
   push:
     branches:
       - main # Your default release branch
+      - v4   # vNext
     paths:
       - 'src/Ardalis.ApiEndpoints.CodeAnalyzers/**'
 jobs:
