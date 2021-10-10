@@ -9,7 +9,7 @@ namespace SampleEndpointApp.Endpoints.Authors
 {
   public class Update : EndpointBaseAsync
       .WithRequest<UpdateAuthorCommand>
-      .WithResult<UpdatedAuthorResult>
+      .WithActionResult<UpdatedAuthorResult>
   {
     private readonly IAsyncRepository<Author> _repository;
     private readonly IMapper _mapper;
@@ -25,7 +25,7 @@ namespace SampleEndpointApp.Endpoints.Authors
     /// Updates an existing Author
     /// </summary>
     [HttpPut("api/[namespace]")]
-    public override async Task<UpdatedAuthorResult> HandleAsync([FromBody] UpdateAuthorCommand request, CancellationToken cancellationToken)
+    public override async Task<ActionResult<UpdatedAuthorResult>> HandleAsync([FromBody] UpdateAuthorCommand request, CancellationToken cancellationToken)
     {
       var author = await _repository.GetByIdAsync(request.Id, cancellationToken);
 
