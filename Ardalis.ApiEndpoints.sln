@@ -13,12 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.FunctionalTests", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleEndpointApp", "sample\SampleEndpointApp\SampleEndpointApp.csproj", "{B7EB2D30-B907-4B61-96F6-091F90590438}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solutionItems", "_solutionItems", "{E3EB0DE2-4C7D-4E47-93FA-06EDF00F1E10}"
-	ProjectSection(SolutionItems) = preProject
-		.editorconfig = .editorconfig
-		LICENSE.txt = LICENSE.txt
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1241985D-5277-49C6-9570-6E1FA1851CBA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.CodeAnalyzers.Test", "tests\Ardalis.ApiEndpoints.CodeAnalyzers.Test\Ardalis.ApiEndpoints.CodeAnalyzers.Test.csproj", "{EF801BF2-AA72-4FCF-AA67-09B5E3ED4283}"
@@ -28,7 +22,17 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{256C2CE7-00B3-47FF-BC7E-1BAF20A86E08}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+		LICENSE.txt = LICENSE.txt
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalyzers", "CodeAnalyzers", "{EF881EEC-9B50-4AE5-AA21-A42B9253122A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenApi", "OpenApi", "{7BBDA78D-3207-479B-9D80-9CADD46C31F1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.NSwag", "src\ApiEndpoints.NSwag\Ardalis.ApiEndpoints.NSwag.csproj", "{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.Swashbuckle", "src\Ardalis.ApiEndpoints.Swashbuckle\Ardalis.ApiEndpoints.Swashbuckle.csproj", "{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +60,14 @@ Global
 		{7D8E74B0-4620-492A-940A-FCEEF9CF92F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D8E74B0-4620-492A-940A-FCEEF9CF92F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D8E74B0-4620-492A-940A-FCEEF9CF92F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -65,7 +77,11 @@ Global
 		{851683FE-B589-43DB-93B5-F38C7AAEBEE2} = {38434103-76E0-4820-B4AF-F5EA5D08A7BD}
 		{B7EB2D30-B907-4B61-96F6-091F90590438} = {38434103-76E0-4820-B4AF-F5EA5D08A7BD}
 		{EF801BF2-AA72-4FCF-AA67-09B5E3ED4283} = {1241985D-5277-49C6-9570-6E1FA1851CBA}
-		{7D8E74B0-4620-492A-940A-FCEEF9CF92F9} = {CE4A1E99-D876-4D8F-B56E-9BF453456BAB}
+		{7D8E74B0-4620-492A-940A-FCEEF9CF92F9} = {EF881EEC-9B50-4AE5-AA21-A42B9253122A}
+		{EF881EEC-9B50-4AE5-AA21-A42B9253122A} = {CE4A1E99-D876-4D8F-B56E-9BF453456BAB}
+		{7BBDA78D-3207-479B-9D80-9CADD46C31F1} = {CE4A1E99-D876-4D8F-B56E-9BF453456BAB}
+		{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6} = {7BBDA78D-3207-479B-9D80-9CADD46C31F1}
+		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0} = {7BBDA78D-3207-479B-9D80-9CADD46C31F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {932AEB26-7B36-4EFB-B4D1-41F13EDAE5D2}

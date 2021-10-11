@@ -1,15 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints.CodeAnalyzers</PackageId>
-    <Version>1.1.1</Version>
+    <Version>4.0.0-pre1</Version>
     <Authors>Steve Smith (@ardalis), Philip Pittle (@ppittle)</Authors>
     <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
     <Company>Ardalis.com</Company>
@@ -18,16 +16,13 @@
     <Summary>Code Analyzers increasing productivity of developers using the Api Endpoints framework.</Summary>
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <NoPackageAnalysis>true</NoPackageAnalysis>
-    <PackageTags>api endpoints code analyzers roslyn</PackageTags>
-    <PackageReleaseNotes>Fixes bug affecting constructors and static methods.</PackageReleaseNotes>
+    <PackageTags>api endpoints code analyzers roslyn aspnetcore</PackageTags>
+    <PackageReleaseNotes>Updating version to 4.x and including with main package.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.11.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.11.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

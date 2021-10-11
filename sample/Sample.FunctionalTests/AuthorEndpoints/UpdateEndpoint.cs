@@ -1,14 +1,15 @@
-using Newtonsoft.Json;
-using SampleEndpointApp;
-using SampleEndpointApp.Authors;
-using SampleEndpointApp.DataAccess;
-using SampleEndpointApp.DomainModel;
-using System;
+﻿using System;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Ardalis.HttpClientTestExtensions;
+using Newtonsoft.Json;
+using Sample.FunctionalTests.Models;
+using SampleEndpointApp;
+using SampleEndpointApp.DataAccess;
+using SampleEndpointApp.Endpoints.Authors;
 using Xunit;
 
 namespace Sample.FunctionalTests.AuthorEndpoints
@@ -22,32 +23,44 @@ namespace Sample.FunctionalTests.AuthorEndpoints
             _client = factory.CreateClient();
         }
 
-        [Fact]
-        public async Task UpdateAnExistingAuthor()
-        {
-            var updatedAuthor = new UpdateAuthorCommand()
-            {
-                Id = 2,
-                Name = "James Eastham",
-            };
-            
-            var authorPreUpdate = SeedData.Authors().FirstOrDefault(p => p.Id == 2);
+    [Fact]
+    public async Task UpdatesAnExistingAuthor()
+    {
+      var updatedAuthor = new UpdateAuthorCommand()
+      {
+        Id = 2,
+        Name = "James Eastham",
+      };
 
-            var response = await _client.PutAsync($"/authors", new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"));
+      var authorPreUpdate = SeedData.Authors().First(p => p.Id == 2);
 
-            response.EnsureSuccessStatusCode();
-            var stringResponse = await response.Content.ReadAsStringAsync();
-            var result = JsonConvert.DeserializeObject<UpdatedAuthorResult>(stringResponse);
+      var response = await _client.PutAsync(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"));
 
-            Assert.NotNull(result);
-            Assert.Equal(result.Id, updatedAuthor.Id.ToString());
-            Assert.NotEqual(result.Name, authorPreUpdate.Name);
-            Assert.Equal("James Eastham", result.Name);
-            Assert.Equal(result.PluralsightUrl, authorPreUpdate.PluralsightUrl);
-            Assert.Equal(result.TwitterAlias, authorPreUpdate.TwitterAlias);
-        }
+      response.EnsureSuccessStatusCode();
+      var stringResponse = await response.Content.ReadAsStringAsync();
+      var result = JsonConvert.DeserializeObject<UpdatedAuthorResult>(stringResponse);
 
-        [Fact]
+      Assert.NotNull(result);
+      Assert.Equal(result.Id, updatedAuthor.Id.ToString());
+      Assert.NotEqual(result.Name, authorPreUpdate.Name);
+      Assert.Equal("James Eastham", result.Name);
+      Assert.Equal(result.PluralsightUrl, authorPreUpdate.PluralsightUrl);
+      Assert.Equal(result.TwitterAlias, authorPreUpdate.TwitterAlias);
+    }
+
+    [Fact]
+    public async Task ReturnsNotFoundGivenNonexistingAuthor()
+    {
+      var updatedAuthor = new UpdateAuthorCommand()
+      {
+        Id = 2222, // invalid author
+        Name = "Doesn't Matter",
+      };
+
+      await _client.PutAndEnsureNotFound(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"));
+    }
+
+    [Fact]
         public async Task GivenLongRunningUpdateRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
         {
             // Arrange, generate a token source that times out instantly
@@ -60,7 +73,7 @@ namespace Sample.FunctionalTests.AuthorEndpoints
             };
 
             // Act
-            var request = _client.PutAsync("/authors", new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
+            var request = _client.PutAsync(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
 
             // Assert
             await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
