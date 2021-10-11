@@ -56,7 +56,8 @@ namespace Sample.FunctionalTests.AuthorEndpoints
         Id = 2222, // invalid author
         Name = "Doesn't Matter",
       };
-      await _client.PutAndEnsureNotFound(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8));
+
+      await _client.PutAndEnsureNotFound(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"));
     }
 
     [Fact]

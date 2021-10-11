@@ -33,7 +33,7 @@ namespace SampleEndpointApp.Endpoints.Authors
 
             var result = _mapper.Map<AuthorResult>(author);
 
-            return Ok(result);
+            return result;
         }
     }
 }
