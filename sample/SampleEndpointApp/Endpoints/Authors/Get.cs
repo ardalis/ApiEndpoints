@@ -1,16 +1,15 @@
-﻿using Ardalis.ApiEndpoints;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Ardalis.ApiEndpoints;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
-using System.Threading.Tasks;
-using Swashbuckle.AspNetCore.Annotations;
-using System.Threading;
 
-namespace SampleEndpointApp.Authors
+namespace SampleEndpointApp.Endpoints.Authors
 {
-    public class Get : BaseAsyncEndpoint
+    public class Get : EndpointBaseAsync
         .WithRequest<int>
-        .WithResponse<AuthorResult>
+        .WithActionResult<AuthorResult>
     {
         private readonly IAsyncRepository<Author> _repository;
         private readonly IMapper _mapper;
@@ -22,20 +21,19 @@ namespace SampleEndpointApp.Authors
             _mapper = mapper;
         }
 
-        [HttpGet("/authors/{id}")]
-		[SwaggerOperation(
-			Summary = "Get a specific Author",
-			Description = "Get a specific Author",
-			OperationId = "Author.Get",
-			Tags = new[] { "AuthorEndpoint" })
-		]
+        /// <summary>
+        /// Get a specific Author
+        /// </summary>
+        [HttpGet("api/[namespace]/{id}", Name = "[namespace]_[controller]")]
         public override async Task<ActionResult<AuthorResult>> HandleAsync(int id, CancellationToken cancellationToken)
         {
             var author = await _repository.GetByIdAsync(id, cancellationToken);
 
+            if (author is null) return NotFound();
+
             var result = _mapper.Map<AuthorResult>(author);
 
-            return Ok(result);
+            return result;
         }
     }
 }

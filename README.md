@@ -10,6 +10,10 @@ A project for supporting API Endpoints in ASP.NET Core web applications.
 
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
 
+## Upgrade to 4.x Notes
+
+TBD
+
 ## Upgrade to 3.x Notes
 
 For version 3.0 we implemented a new way to define the base classes using "fluent generics". You can [watch a video of what you need to know to apply them to your site here](https://www.youtube.com/watch?v=hKiuj0huEI4&ab_channel=Ardalis).
