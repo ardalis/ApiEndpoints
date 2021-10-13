@@ -28,7 +28,7 @@
   <ItemGroup>
     <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="4.0.0-pre1" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
   </ItemGroup>
 
   <ItemGroup>
