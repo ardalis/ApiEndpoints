@@ -30,7 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CodeAnalyzers", "CodeAnalyz
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenApi", "OpenApi", "{7BBDA78D-3207-479B-9D80-9CADD46C31F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.NSwag", "src\ApiEndpoints.NSwag\Ardalis.ApiEndpoints.NSwag.csproj", "{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.NSwag", "src\Ardalis.ApiEndpoints.NSwag\Ardalis.ApiEndpoints.NSwag.csproj", "{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.Swashbuckle", "src\Ardalis.ApiEndpoints.Swashbuckle\Ardalis.ApiEndpoints.Swashbuckle.csproj", "{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}"
 EndProject

@@ -15,6 +15,6 @@ jobs:
       - name: publish on version change
         uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: src/ApiEndpoints.NSwag/Ardalis.ApiEndpoints.NSwag.csproj # Relative to repository root
+          PROJECT_FILE_PATH: src/Ardalis.ApiEndpoints.NSwag/Ardalis.ApiEndpoints.NSwag.csproj # Relative to repository root
           TAG_FORMAT: NSwag_v* # Format of the git tag, [*] gets replaced with version
           NUGET_KEY: ${{secrets.NUGET_API_KEY}} # nuget.org API key
