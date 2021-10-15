@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <IncludeBuildOutput>false</IncludeBuildOutput>
+    <IncludeSymbols>false</IncludeSymbols>
   </PropertyGroup>
 
   <PropertyGroup>
