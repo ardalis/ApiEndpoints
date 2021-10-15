@@ -1,4 +1,4 @@
-name: publish NSwag package to nuget
+name: publish Swashbuckle package to nuget
 on:
   workflow_dispatch:
   push:
