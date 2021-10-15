@@ -3,7 +3,7 @@
   <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
 
   <PropertyGroup>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>Ardalis.com</Company>
     <PackageProjectUrl>https://github.com/ardalis/ApiEndpoints</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
