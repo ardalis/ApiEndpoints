@@ -5,7 +5,7 @@ on:
     branches:
       - main # Your default release branch
     paths:
-      - 'src/ApiEndpoints.Swashbuckle/**'
+      - 'src/Ardalis.ApiEndpoints.Swashbuckle/**'
 jobs:
   publish:
     name: list on nuget
@@ -15,7 +15,7 @@ jobs:
       - name: publish on version change
         uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: src/ApiEndpoints.Swashbuckle/Ardalis.ApiEndpoints.Swashbuckle.csproj # Relative to repository root
+          PROJECT_FILE_PATH: src/Ardalis.ApiEndpoints.Swashbuckle/Ardalis.ApiEndpoints.Swashbuckle.csproj # Relative to repository root
           TAG_FORMAT: Swashbuckle_v* # Format of the git tag, [*] gets replaced with version
           INCLUDE_SYMBOLS: true # Pushing symbols along with nuget package to the server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}} # nuget.org API key
