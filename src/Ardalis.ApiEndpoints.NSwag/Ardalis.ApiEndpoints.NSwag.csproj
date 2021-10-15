@@ -10,7 +10,7 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="NSwag.Generation.AspNetCore" Version="13.13.2" />
+    <PackageReference Include="NSwag.Generation.AspNetCore" Version="13.0.0" />
   </ItemGroup>
 
   <ItemGroup>
