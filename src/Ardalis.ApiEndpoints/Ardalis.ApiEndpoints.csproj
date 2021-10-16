@@ -7,21 +7,13 @@
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints</PackageId>
     <Title>Ardalis.ApiEndpoints</Title>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>Steve Smith (@ardalis)</Authors>
-    <Company>Ardalis.com</Company>
-    <PackageProjectUrl>https://github.com/ardalis/ApiEndpoints</PackageProjectUrl>
     <Description>An alternative to Controllers for ASP.NET Core API Endpoints.</Description>
     <Summary>Controllers promote creating bloated classes that lack cohesion. This project provides a simpler alternative that follows SOLID principles. An alternative to Controllers for ASP.NET Core API Endpoints.</Summary>
-    <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <PackageTags>aspnet asp.net aspnetcore asp.net core api web api rest endpoint controller</PackageTags>
     <PackageReleaseNotes>TODO</PackageReleaseNotes>
     <Version>4.0.0-pre1</Version>
     <AssemblyName>Ardalis.ApiEndpoints</AssemblyName>
-    <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
