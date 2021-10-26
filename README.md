@@ -112,7 +112,7 @@ public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBo
 ```
 Option to use service dependency injection instead of constructor
 ``` csharp
-// File: sample/SampleEndpointApp/AuthorEndpoints/List.cs
+// File: sample/SampleEndpointApp/Endpoints/Authors/List.cs
 public class List : BaseAsyncEndpoint
     .WithRequest<AuthorListRequest>
     .WithResponse<IList<AuthorListResult>>
@@ -224,7 +224,7 @@ For more information, take a look at [this discussion](https://github.com/ardali
 
 ### How can I return a File result from an ApiEndpoint?
 
-There's an example in the [sample app](https://github.com/ardalis/ApiEndpoints/blob/main/sample/SampleEndpointApp/AuthorEndpoints/ListJsonFile.cs) that shows how to set this up and return a File actionresult. For the base type, just use the `WithoutResponse` option and in the endpoint handler return `File()`.
+There's an example in the [sample app](https://github.com/ardalis/ApiEndpoints/blob/main/sample/SampleEndpointApp/Endpoints/Authors/ListJsonFile.cs) that shows how to set this up and return a File actionresult. For the base type, just use the `WithoutResponse` option and in the endpoint handler return `File()`.
 
 ### How can I use model binding to pull values from multiple places, like `[FromRoute]`, `[FromBody]`, etc.?
 
