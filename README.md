@@ -2,6 +2,12 @@
 [![Nuget](https://img.shields.io/nuget/v/Ardalis.ApiEndpoints)](https://www.nuget.org/packages/Ardalis.ApiEndpoints/)
 [![Nuget](https://img.shields.io/nuget/dt/Ardalis.ApiEndpoints)](https://www.nuget.org/packages/Ardalis.ApiEndpoints/)
 
+<a href="https://twitter.com/intent/follow?screen_name=ardalis">
+    <img src="https://img.shields.io/twitter/follow/ardalis.svg?label=Follow%20@ardalis" alt="Follow @ardalis" />
+</a> &nbsp; <a href="https://twitter.com/intent/follow?screen_name=nimblepros">
+    <img src="https://img.shields.io/twitter/follow/nimblepros.svg?label=Follow%20@nimblepros" alt="Follow @nimblepros" />
+</a>
+
 # ASP.NET Core API Endpoints
 
 A project for supporting API Endpoints in ASP.NET Core web applications.
