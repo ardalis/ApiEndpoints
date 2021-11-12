@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SampleEndpointApp.Endpoints.Authors
+namespace SampleEndpointApp.Endpoints.Authors;
+
+public class UpdateAuthorCommand
 {
-  public class UpdateAuthorCommand
-  {
-    [Required]
-    public int Id { get; set; }
-    [Required]
-    public string Name { get; set; } = null!;
-  }
+  [Required]
+  public int Id { get; set; }
+  [Required]
+  public string Name { get; set; } = null!;
 }

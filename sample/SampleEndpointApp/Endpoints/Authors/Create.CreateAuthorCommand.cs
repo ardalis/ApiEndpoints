@@ -1,13 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SampleEndpointApp.Endpoints.Authors
+namespace SampleEndpointApp.Endpoints.Authors;
+
+public class CreateAuthorCommand
 {
-  public class CreateAuthorCommand
-  {
-    [Required]
-    public string Name { get; set; } = null!;
-    [Required]
-    public string PluralsightUrl { get; set; } = null!;
-    public string? TwitterAlias { get; set; }
-  }
+  [Required]
+  public string Name { get; set; } = null!;
+  [Required]
+  public string PluralsightUrl { get; set; } = null!;
+  public string? TwitterAlias { get; set; }
 }
