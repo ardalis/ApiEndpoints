@@ -22,7 +22,7 @@ public class ListEndpoint : IClassFixture<CustomWebApplicationFactory<Startup>>
     var result = await _client.GetAndDeserialize<IEnumerable<Author>>(Routes.Authors.List());
 
     Assert.NotNull(result);
-    Assert.Equal(SeedData.Authors().Count(), result.Count());
+    Assert.Equal(SeedData.Authors().Count, result.Count());
   }
 
   [Fact]

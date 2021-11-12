@@ -42,10 +42,9 @@ public struct DiagnosticResult
   {
     get
     {
-      this.locations ??= new DiagnosticResultLocation[] { };
+      this.locations ??= Array.Empty<DiagnosticResultLocation>();
       return this.locations;
     }
-
     set
     {
       this.locations = value;
