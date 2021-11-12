@@ -1,5 +1,4 @@
 ﻿using SampleEndpointApp.DomainModel;
-using System.Collections.Generic;
 
 namespace SampleEndpointApp.DataAccess
 {

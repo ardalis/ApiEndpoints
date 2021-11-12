@@ -1,13 +1,10 @@
 ﻿// https://raw.githubusercontent.com/dotnet/samples/master/csharp/roslyn-sdk/Tutorials/MakeConst/MakeConst.Test/Helpers/DiagnosticVerifier.Helper.cs
 
+using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
 
 namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test.Verifiers
 {

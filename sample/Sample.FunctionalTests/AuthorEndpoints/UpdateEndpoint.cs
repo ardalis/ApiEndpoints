@@ -1,9 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Text;
 using Ardalis.HttpClientTestExtensions;
 using Newtonsoft.Json;
 using Sample.FunctionalTests.Models;
@@ -14,14 +9,14 @@ using Xunit;
 
 namespace Sample.FunctionalTests.AuthorEndpoints
 {
-    public class UpdateEndpoint : IClassFixture<CustomWebApplicationFactory<Startup>>
-    {
-        private readonly HttpClient _client;
+  public class UpdateEndpoint : IClassFixture<CustomWebApplicationFactory<Startup>>
+  {
+    private readonly HttpClient _client;
 
-        public UpdateEndpoint(CustomWebApplicationFactory<Startup> factory)
-        {
-            _client = factory.CreateClient();
-        }
+    public UpdateEndpoint(CustomWebApplicationFactory<Startup> factory)
+    {
+      _client = factory.CreateClient();
+    }
 
     [Fact]
     public async Task UpdatesAnExistingAuthor()
@@ -61,22 +56,22 @@ namespace Sample.FunctionalTests.AuthorEndpoints
     }
 
     [Fact]
-        public async Task GivenLongRunningUpdateRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
-        {
-            // Arrange, generate a token source that times out instantly
-            var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
-            var authorPreUpdate = SeedData.Authors().FirstOrDefault(p => p.Id == 2);
-            var updatedAuthor = new UpdateAuthorCommand()
-            {
-                Id = 2,
-                Name = "James Eastham",
-            };
+    public async Task GivenLongRunningUpdateRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
+    {
+      // Arrange, generate a token source that times out instantly
+      var tokenSource = new CancellationTokenSource(TimeSpan.FromMilliseconds(0));
+      var authorPreUpdate = SeedData.Authors().FirstOrDefault(p => p.Id == 2);
+      var updatedAuthor = new UpdateAuthorCommand()
+      {
+        Id = 2,
+        Name = "James Eastham",
+      };
 
-            // Act
-            var request = _client.PutAsync(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
+      // Act
+      var request = _client.PutAsync(Routes.Authors.Update, new StringContent(JsonConvert.SerializeObject(updatedAuthor), Encoding.UTF8, "application/json"), tokenSource.Token);
 
-            // Assert
-            await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
-        }
+      // Assert
+      await Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
     }
+  }
 }

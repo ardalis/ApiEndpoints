@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Ardalis.HttpClientTestExtensions;
-using Newtonsoft.Json;
+﻿using Ardalis.HttpClientTestExtensions;
 using Sample.FunctionalTests.Models;
 using SampleEndpointApp;
 using SampleEndpointApp.DataAccess;

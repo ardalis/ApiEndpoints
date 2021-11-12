@@ -1,6 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using Ardalis.ApiEndpoints;
+﻿using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;
 

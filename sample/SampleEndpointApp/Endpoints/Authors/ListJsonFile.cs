@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Text.Json;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 using Ardalis.ApiEndpoints;
 using Microsoft.AspNetCore.Mvc;
 using SampleEndpointApp.DomainModel;

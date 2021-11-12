@@ -6,8 +6,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SampleEndpointApp;
 using SampleEndpointApp.DataAccess;
-using System;
-using System.Linq;
 
 namespace Sample.FunctionalTests
 {

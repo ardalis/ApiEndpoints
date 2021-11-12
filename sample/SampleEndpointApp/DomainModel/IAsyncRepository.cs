@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace SampleEndpointApp.DomainModel
+﻿namespace SampleEndpointApp.DomainModel
 {
   /// <summary>
   /// Source: My reference app https://github.com/dotnet-architecture/eShopOnWeb

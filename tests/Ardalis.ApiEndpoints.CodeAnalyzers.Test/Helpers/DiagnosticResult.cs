@@ -1,6 +1,5 @@
 ﻿// https://raw.githubusercontent.com/dotnet/samples/master/csharp/roslyn-sdk/Tutorials/MakeConst/MakeConst.Test/Helpers/DiagnosticResult.cs
 
-using System;
 using Microsoft.CodeAnalysis;
 
 namespace Ardalis.ApiEndpoints.CodeAnalyzers.Test.Helpers
