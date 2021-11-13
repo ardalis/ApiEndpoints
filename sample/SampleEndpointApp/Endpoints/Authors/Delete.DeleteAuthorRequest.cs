@@ -1,7 +1,6 @@
-﻿namespace SampleEndpointApp.Endpoints.Authors
+﻿namespace SampleEndpointApp.Endpoints.Authors;
+
+public class DeleteAuthorRequest
 {
-  public class DeleteAuthorRequest
-  {
-    public int Id { get; set; }
-  }
+  public int Id { get; set; }
 }
