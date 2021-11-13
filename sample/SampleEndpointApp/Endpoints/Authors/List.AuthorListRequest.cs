@@ -1,8 +1,7 @@
-﻿namespace SampleEndpointApp.Endpoints.Authors
+﻿namespace SampleEndpointApp.Endpoints.Authors;
+
+public class AuthorListRequest
 {
-  public class AuthorListRequest
-  {
-    public int Page { get; set; }
-    public int PerPage { get; set; }
-  }
+  public int Page { get; set; }
+  public int PerPage { get; set; }
 }
