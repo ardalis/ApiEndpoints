@@ -18,7 +18,20 @@ If you like or are using this project to learn or start your solution, please gi
 
 ## Upgrade to 4.x Notes
 
-TBD
+The fluent generics and base types involved in ApiEndpoints were updated in version 4.x, resulting in breaking changes. The updates required should be pretty straightforward, and have a few additional features that weren't supported in previous versions.
+
+An endpoint that previously inherited from `BaseEndpoint` should now inherit from `EndpointBaseSync`. Additionally, the `WithResponse` option now has optional non-generic versions, but if you were intending to return an `ActionResult<T>` you could now use `WithActionResult<T>` in your class definition, like so:
+
+```diff
+- public class ForecastEndpoint : BaseEndpoint
+-     .WithRequest<ForecastRequestDto>
+-     .WithResponse<IEnumerable<WeatherForecast>>
++ public class ForecastEndpoint : EndpointBaseSync
++     .WithRequest<ForecastRequestDto>
++     .WithActionResult<IEnumerable<WeatherForecast>>
+```
+
+The above change typically would not require any change to the `Handle` method.
 
 ## Upgrade to 3.x Notes
 
