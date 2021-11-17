@@ -18,7 +18,27 @@ If you like or are using this project to learn or start your solution, please gi
 
 ## Upgrade to 4.x Notes
 
-TBD
+The fluent generics and base types involved in ApiEndpoints were updated in version 4.x, resulting in breaking changes. The updates required should be pretty straightforward, and have a few additional features that weren't supported in previous versions.
+
+The two main changes introduced in v4 are:
+
+- Base classes should now use `EndpointBaseSync` or `EndpointBaseAsync`
+- `WithResponse` has been modified to `WithResult` or `WithActionResult`
+
+The *result* of an endpoint corresponds to the return type from the `Handle` method. Since ASP.NET Core MVC refers to these as some variation of Action*Result*, that's the term we are using in this package now as well. The *Response* your endpoint may return refers to any data/DTO that is being sent to the client as part of the *Result*. If you wish to preserve your existing v3 functionality that specified `WithResponse<T>` you should be able to replace all such occurrences with `WithActionResult<T>`. However, if you need to specify a different kind of Result, such as a `FileResult`, you can now use something like `WithResult<FileResult>` to achieve this.
+
+An endpoint that previously inherited from the synchronous `BaseEndpoint` should now inherit from `EndpointBaseSync`. Additionally, the `WithResponse` option now has optional non-generic versions, but if you were intending to return an `ActionResult<T>` you would now use `WithActionResult<T>` in your class definition, like so:
+
+```diff
+- public class ForecastEndpoint : BaseEndpoint
+-     .WithRequest<ForecastRequestDto>
+-     .WithResponse<IEnumerable<WeatherForecast>>
++ public class ForecastEndpoint : EndpointBaseSync
++     .WithRequest<ForecastRequestDto>
++     .WithActionResult<IEnumerable<WeatherForecast>>
+```
+
+The above change typically would not require any change to the `Handle` method. Endpoints that inherited from `BaseAsyncEndpoint` would now use `EndpointBaseAsync`.
 
 ## Upgrade to 3.x Notes
 
