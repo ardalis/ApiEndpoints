@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints.NSwag</PackageId>
-    <Version>4.0.0-pre1</Version>
+    <Version>4.0.0</Version>
     <Authors>Steve Smith (@ardalis), Maksym Koshovyi</Authors>
-    <Description>TODO</Description>
-    <Summary>TODO</Summary>
+    <Description>NSwag OpenAPI Support for API Endpoints</Description>
+    <Summary>NSwag OpenAPI Support for API Endpoints</Summary>
     <PackageTags>api endpoints openapi nswag</PackageTags>
   </PropertyGroup>
   
