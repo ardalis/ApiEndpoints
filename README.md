@@ -278,6 +278,7 @@ One thing that Controllers do have is built-in support in the framework to use t
 
 ## 8 Videos and Podcasts
 
+- [The .NET Docs Show - Controllers are Dinosaurs and the Case for API Endpoints](https://www.youtube.com/watch?v=9oroj2TmxBs&ab_channel=dotNET)
 - [.NET Rocks ASP.NET Core API Endpoints with Steve Smith](https://www.dotnetrocks.com/default.aspx?ShowNum=1695)
 
 ## 9. Related / Similar Projects
