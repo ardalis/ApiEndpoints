@@ -38,7 +38,7 @@ An endpoint that previously inherited from the synchronous `BaseEndpoint` should
 +     .WithActionResult<IEnumerable<WeatherForecast>>
 ```
 
-The above change typically would not require any change to the `Handle` method. Endpoints that inherited from `BaseAsyncEndpoint` would now use `EndpointBaseAsync`.
+The above change typically would not require any change to the `Handle` method. Endpoints that inherited from `BaseAsyncEndpoint` would now use `EndpointBaseAsync`. You can also just inherit from `EndpointBaseAsync` directly (without the `.With*` additions) which will provide you with a controller with a single Handle method, if you need more flexibility than the fluent generic interface provides.
 
 ## Upgrade to 3.x Notes
 
