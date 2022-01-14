@@ -22,6 +22,7 @@ jobs:
         uses: rohith/publish-nuget@v2
         with:
           PROJECT_FILE_PATH: src/Ardalis.ApiEndpoints/Ardalis.ApiEndpoints.csproj # Relative to repository root
+          VERSION_REGEX: <Version>(.*)<\/Version> # Regex pattern to extract version info in a capturing group
+          TAG_COMMIT: true # Flag to enable / disable git tagging
           TAG_FORMAT: v* # Format of the git tag, [*] gets replaced with version
-          INCLUDE_SYMBOLS: true # Pushing symbols along with nuget package to the server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}} # nuget.org API key
