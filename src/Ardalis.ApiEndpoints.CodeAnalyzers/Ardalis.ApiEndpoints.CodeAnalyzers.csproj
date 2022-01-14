@@ -2,19 +2,15 @@
 
   <PropertyGroup>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSymbols>false</IncludeSymbols>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints.CodeAnalyzers</PackageId>
     <Version>4.0.0-pre1</Version>
     <Authors>Steve Smith (@ardalis), Philip Pittle (@ppittle)</Authors>
-    <PackageIconUrl>https://user-images.githubusercontent.com/782127/33497760-facf6550-d69c-11e7-94e4-b3856da259a9.png</PackageIconUrl>
-    <Company>Ardalis.com</Company>
-    <PackageProjectUrl>https://github.com/ardalis/ApiEndpoints</PackageProjectUrl>
     <Description>Code Analyzers supporting using Api Endpoints</Description>
     <Summary>Code Analyzers increasing productivity of developers using the Api Endpoints framework.</Summary>
-    <RepositoryUrl>https://github.com/ardalis/ApiEndpoints</RepositoryUrl>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <PackageTags>api endpoints code analyzers roslyn aspnetcore</PackageTags>
     <PackageReleaseNotes>Updating version to 4.x and including with main package.</PackageReleaseNotes>

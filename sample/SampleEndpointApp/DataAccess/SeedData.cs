@@ -1,15 +1,14 @@
 ﻿using SampleEndpointApp.DomainModel;
-using System.Collections.Generic;
 
-namespace SampleEndpointApp.DataAccess
+namespace SampleEndpointApp.DataAccess;
+
+public static class SeedData
 {
-  public static class SeedData
+  public static List<Author> Authors()
   {
-    public static List<Author> Authors()
-    {
-      int id = 1;
+    int id = 1;
 
-      var authors = new List<Author>()
+    var authors = new List<Author>()
             {
                 new Author
                 {
@@ -27,14 +26,13 @@ namespace SampleEndpointApp.DataAccess
                 }
             };
 
-      return authors;
-    }
+    return authors;
+  }
 
-    public static void PopulateTestData(AppDbContext dbContext)
-    {
-      dbContext.Authors.AddRange(Authors());
+  public static void PopulateTestData(AppDbContext dbContext)
+  {
+    dbContext.Authors.AddRange(Authors());
 
-      dbContext.SaveChanges();
-    }
+    dbContext.SaveChanges();
   }
 }

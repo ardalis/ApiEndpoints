@@ -1,66 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Ardalis.HttpClientTestExtensions;
+﻿using Ardalis.HttpClientTestExtensions;
 using Newtonsoft.Json;
 using Sample.FunctionalTests.Models;
 using SampleEndpointApp;
 using SampleEndpointApp.DomainModel;
 using Xunit;
 
-namespace Sample.FunctionalTests.AuthorEndpoints
+namespace Sample.FunctionalTests.AuthorEndpoints;
+
+public class DeleteEndpoint : IClassFixture<CustomWebApplicationFactory<Startup>>
 {
-  public class DeleteEndpoint : IClassFixture<CustomWebApplicationFactory<Startup>>
+  private readonly HttpClient _client;
+
+  public DeleteEndpoint(CustomWebApplicationFactory<Startup> factory)
   {
-    private readonly HttpClient _client;
+    _client = factory.CreateClient();
+  }
 
-    public DeleteEndpoint(CustomWebApplicationFactory<Startup> factory)
-    {
-      _client = factory.CreateClient();
-    }
+  [Fact]
+  public async Task DeleteAnExistingAuthor()
+  {
+    int existingAuthorId = 2;
+    string route = Routes.Authors.Delete(existingAuthorId);
 
-    [Fact]
-    public async Task DeleteAnExistingAuthor()
-    {
-      int existingAuthorId = 2;
-      string route = Routes.Authors.Delete(existingAuthorId);
+    var response = await _client.DeleteAsync(route);
+    response.EnsureSuccessStatusCode();
 
-      var response = await _client.DeleteAsync(route);
-      response.EnsureSuccessStatusCode();
+    var listResponse = await _client.GetAsync(Routes.Authors.List());
+    listResponse.EnsureSuccessStatusCode();
+    var stringListResponse = await listResponse.Content.ReadAsStringAsync();
+    var listResult = JsonConvert.DeserializeObject<IEnumerable<Author>>(stringListResponse);
 
-      var listResponse = await _client.GetAsync(Routes.Authors.List());
-      listResponse.EnsureSuccessStatusCode();
-      var stringListResponse = await listResponse.Content.ReadAsStringAsync();
-      var listResult = JsonConvert.DeserializeObject<IEnumerable<Author>>(stringListResponse);
+    Assert.True(listResult.Count() <= 2);
+  }
 
-      Assert.True(listResult.Count() <= 2);
-    }
+  [Fact]
+  public async Task ReturnsNotFoundGivenNonexistingAuthor()
+  {
+    int nonexistingAuthorId = 2222;
+    string route = Routes.Authors.Delete(nonexistingAuthorId);
 
-    [Fact]
-    public async Task ReturnsNotFoundGivenNonexistingAuthor()
-    {
-      int nonexistingAuthorId = 2222;
-      string route = Routes.Authors.Delete(nonexistingAuthorId);
+    await _client.DeleteAndEnsureNotFound(route);
+  }
 
-      await _client.DeleteAndEnsureNotFound(route);
-    }
+  [Fact]
+  public Task GivenLongRunningDeleteRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
+  {
+    // Arrange, generate a token source that times out instantly
+    var tokenSource = new CancellationTokenSource(TimeSpan.Zero);
 
-    [Fact]
-    public Task GivenLongRunningDeleteRequest_WhenTokenSourceCallsForCancellation_RequestIsTerminated()
-    {
-      // Arrange, generate a token source that times out instantly
-      var tokenSource = new CancellationTokenSource(TimeSpan.Zero);
+    // Act
+    int existingAuthorId = 2;
+    string route = Routes.Authors.Delete(existingAuthorId);
+    var request = _client.DeleteAsync(route, tokenSource.Token);
 
-      // Act
-      int existingAuthorId = 2;
-      string route = Routes.Authors.Delete(existingAuthorId);
-      var request = _client.DeleteAsync(route, tokenSource.Token);
-
-      // Assert
-      return Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
-    }
+    // Assert
+    return Assert.ThrowsAsync<OperationCanceledException>(async () => await request);
   }
 }

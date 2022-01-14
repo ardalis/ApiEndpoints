@@ -1,12 +1,11 @@
-name: publish NSwag package to nuget
+name: publish Swashbuckle package to nuget
 on:
   workflow_dispatch:
   push:
     branches:
       - main # Your default release branch
-      - v4 # vNext
     paths:
-      - 'src/ApiEndpoints.NSwag/**'
+      - 'src/Ardalis.ApiEndpoints.Swashbuckle/**'
 jobs:
   publish:
     name: list on nuget
@@ -19,7 +18,7 @@ jobs:
       - name: publish on version change
         uses: rohith/publish-nuget@v2
         with:
-          PROJECT_FILE_PATH: src/Ardalis.ApiEndpoints.NSwag/Ardalis.ApiEndpoints.NSwag.csproj # Relative to repository root
-          TAG_FORMAT: NSwag_v* # Format of the git tag, [*] gets replaced with version
+          PROJECT_FILE_PATH: src/Ardalis.ApiEndpoints.Swashbuckle/Ardalis.ApiEndpoints.Swashbuckle.csproj # Relative to repository root
+          TAG_FORMAT: Swashbuckle_v* # Format of the git tag, [*] gets replaced with version
           INCLUDE_SYMBOLS: true # Pushing symbols along with nuget package to the server
           NUGET_KEY: ${{secrets.NUGET_API_KEY}} # nuget.org API key

@@ -2,6 +2,12 @@
 [![Nuget](https://img.shields.io/nuget/v/Ardalis.ApiEndpoints)](https://www.nuget.org/packages/Ardalis.ApiEndpoints/)
 [![Nuget](https://img.shields.io/nuget/dt/Ardalis.ApiEndpoints)](https://www.nuget.org/packages/Ardalis.ApiEndpoints/)
 
+<a href="https://twitter.com/intent/follow?screen_name=ardalis">
+    <img src="https://img.shields.io/twitter/follow/ardalis.svg?label=Follow%20@ardalis" alt="Follow @ardalis" />
+</a> &nbsp; <a href="https://twitter.com/intent/follow?screen_name=nimblepros">
+    <img src="https://img.shields.io/twitter/follow/nimblepros.svg?label=Follow%20@nimblepros" alt="Follow @nimblepros" />
+</a>
+
 # ASP.NET Core API Endpoints
 
 A project for supporting API Endpoints in ASP.NET Core web applications.
@@ -9,6 +15,30 @@ A project for supporting API Endpoints in ASP.NET Core web applications.
 ## Give a Star! :star:
 
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
+
+## Upgrade to 4.x Notes
+
+The fluent generics and base types involved in ApiEndpoints were updated in version 4.x, resulting in breaking changes. The updates required should be pretty straightforward, and have a few additional features that weren't supported in previous versions.
+
+The two main changes introduced in v4 are:
+
+- Base classes should now use `EndpointBaseSync` or `EndpointBaseAsync`
+- `WithResponse` has been modified to `WithResult` or `WithActionResult`
+
+The *result* of an endpoint corresponds to the return type from the `Handle` method. Since ASP.NET Core MVC refers to these as some variation of Action*Result*, that's the term we are using in this package now as well. The *Response* your endpoint may return refers to any data/DTO that is being sent to the client as part of the *Result*. If you wish to preserve your existing v3 functionality that specified `WithResponse<T>` you should be able to replace all such occurrences with `WithActionResult<T>`. However, if you need to specify a different kind of Result, such as a `FileResult`, you can now use something like `WithResult<FileResult>` to achieve this.
+
+An endpoint that previously inherited from the synchronous `BaseEndpoint` should now inherit from `EndpointBaseSync`. Additionally, the `WithResponse` option now has optional non-generic versions, but if you were intending to return an `ActionResult<T>` you would now use `WithActionResult<T>` in your class definition, like so:
+
+```diff
+- public class ForecastEndpoint : BaseEndpoint
+-     .WithRequest<ForecastRequestDto>
+-     .WithResponse<IEnumerable<WeatherForecast>>
++ public class ForecastEndpoint : EndpointBaseSync
++     .WithRequest<ForecastRequestDto>
++     .WithActionResult<IEnumerable<WeatherForecast>>
+```
+
+The above change typically would not require any change to the `Handle` method. Endpoints that inherited from `BaseAsyncEndpoint` would now use `EndpointBaseAsync`.
 
 ## Upgrade to 3.x Notes
 
@@ -30,11 +60,13 @@ For version 3.0 we implemented a new way to define the base classes using "fluen
 
 [7. Related Articles](#7-related-articles)
 
-[8. Related / Similar Projects](#8-related--similar-projects)
+[8. Videos and Podcasts](#8-videos-podcasts)
 
-[9. Projects Using ApiEndpoints](#9-projects-using-apiendpoints)
+[9. Related / Similar Projects](#8-related--similar-projects)
 
-[10. Success Stories and Testimonials](#10-success-stories-and-testimonials)
+[10. Projects Using ApiEndpoints](#9-projects-using-apiendpoints)
+
+[11. Success Stories and Testimonials](#10-success-stories-and-testimonials)
 
 ## 1. Motivation
 
@@ -108,7 +140,7 @@ public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBo
 ```
 Option to use service dependency injection instead of constructor
 ``` csharp
-// File: sample/SampleEndpointApp/AuthorEndpoints/List.cs
+// File: sample/SampleEndpointApp/Endpoints/Authors/List.cs
 public class List : BaseAsyncEndpoint
     .WithRequest<AuthorListRequest>
     .WithResponse<IList<AuthorListResult>>
@@ -220,7 +252,7 @@ For more information, take a look at [this discussion](https://github.com/ardali
 
 ### How can I return a File result from an ApiEndpoint?
 
-There's an example in the [sample app](https://github.com/ardalis/ApiEndpoints/blob/main/sample/SampleEndpointApp/AuthorEndpoints/ListJsonFile.cs) that shows how to set this up and return a File actionresult. For the base type, just use the `WithoutResponse` option and in the endpoint handler return `File()`.
+There's an example in the [sample app](https://github.com/ardalis/ApiEndpoints/blob/main/sample/SampleEndpointApp/Endpoints/Authors/ListJsonFile.cs) that shows how to set this up and return a File actionresult. For the base type, just use the `WithoutResponse` option and in the endpoint handler return `File()`.
 
 ### How can I use model binding to pull values from multiple places, like `[FromRoute]`, `[FromBody]`, etc.?
 
@@ -244,14 +276,19 @@ One thing that Controllers do have is built-in support in the framework to use t
 - [Decoupling Controllers with ApiEndpoints](https://betweentwobrackets.dev/posts/2020/09/decoupling-controllers-with-apiendpoints/)
 - [Fluent Generics](https://tyrrrz.me/blog/fluent-generics)
 
-## 8. Related / Similar Projects
+## 8 Videos and Podcasts
+
+- [The .NET Docs Show - Controllers are Dinosaurs and the Case for API Endpoints](https://www.youtube.com/watch?v=9oroj2TmxBs&ab_channel=dotNET)
+- [.NET Rocks ASP.NET Core API Endpoints with Steve Smith](https://www.dotnetrocks.com/default.aspx?ShowNum=1695)
+
+## 9. Related / Similar Projects
 
 - [SimpleEndpoints](https://github.com/dasiths/SimpleEndpoints)
 - [FunctionMonkey](https://github.com/JamesRandall/FunctionMonkey) A similar approach for Azure Functions.
 - [https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints](https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints) A similar approach using MediatR and middleware.
 - [Voyager](https://github.com/smithgeek/voyager) A similar approach using MediatR that works for ASP.NET core and Azure Functions.
 
-## 9. Projects Using ApiEndpoints
+## 10. Projects Using ApiEndpoints
 
 If you're using them or find one not in this list, feel free to add it here via a pull request!
 
@@ -259,7 +296,7 @@ If you're using them or find one not in this list, feel free to add it here via 
 - [PayrollProcessor](https://github.com/KyleMcMaster/payroll-processor): A smorgasbord of modern .NET tech written with functional and asynchronous patterns.
 - [eShopOnWeb](https://github.com/dotnet-architecture/eShopOnWeb): Sample ASP.NET Core reference application, powered by Microsoft
 
-## 10. Success Stories and Testimonials
+## 11. Success Stories and Testimonials
 
 > "I have implemented in my team your API endpoint solution and I must tell you that was a pretty good investment! in particular how maintainable and testable the solution became!"
 
