@@ -11,14 +11,16 @@
     <Description>An alternative to Controllers for ASP.NET Core API Endpoints.</Description>
     <Summary>Controllers promote creating bloated classes that lack cohesion. This project provides a simpler alternative that follows SOLID principles. An alternative to Controllers for ASP.NET Core API Endpoints.</Summary>
     <PackageTags>aspnet asp.net aspnetcore asp.net core api web api rest endpoint controller</PackageTags>
-    <PackageReleaseNotes>See README for breaking changes and migration guide.</PackageReleaseNotes>
-    <Version>4.0.0</Version>
+    <PackageReleaseNotes>See README for breaking changes and migration guide.
+    
+    4.0.1 Updates reference to Ardalis.ApiEndpoints.CodeAnalyzers to non-prerelease.</PackageReleaseNotes>
+    <Version>4.0.1</Version>
     <AssemblyName>Ardalis.ApiEndpoints</AssemblyName>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="4.0.0-pre1" />
+    <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="4.0.0" />
     <FrameworkReference Include="Microsoft.AspNetCore.App" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
   </ItemGroup>
