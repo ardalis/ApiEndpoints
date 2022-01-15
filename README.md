@@ -38,7 +38,7 @@ An endpoint that previously inherited from the synchronous `BaseEndpoint` should
 +     .WithActionResult<IEnumerable<WeatherForecast>>
 ```
 
-The above change typically would not require any change to the `Handle` method. Endpoints that inherited from `BaseAsyncEndpoint` would now use `EndpointBaseAsync`.
+The above change typically would not require any change to the `Handle` method. Endpoints that inherited from `BaseAsyncEndpoint` would now use `EndpointBaseAsync`. You can also just inherit from `EndpointBase` directly (without the `.With*` additions) which will provide you with a controller with a single Handle method without restrictions on parameter amount and type, if you need more flexibility than the fluent generic interface provides.
 
 ## Upgrade to 3.x Notes
 
@@ -60,11 +60,13 @@ For version 3.0 we implemented a new way to define the base classes using "fluen
 
 [7. Related Articles](#7-related-articles)
 
-[8. Related / Similar Projects](#8-related--similar-projects)
+[8. Videos and Podcasts](#8-videos-podcasts)
 
-[9. Projects Using ApiEndpoints](#9-projects-using-apiendpoints)
+[9. Related / Similar Projects](#8-related--similar-projects)
 
-[10. Success Stories and Testimonials](#10-success-stories-and-testimonials)
+[10. Projects Using ApiEndpoints](#9-projects-using-apiendpoints)
+
+[11. Success Stories and Testimonials](#10-success-stories-and-testimonials)
 
 ## 1. Motivation
 
@@ -274,14 +276,19 @@ One thing that Controllers do have is built-in support in the framework to use t
 - [Decoupling Controllers with ApiEndpoints](https://betweentwobrackets.dev/posts/2020/09/decoupling-controllers-with-apiendpoints/)
 - [Fluent Generics](https://tyrrrz.me/blog/fluent-generics)
 
-## 8. Related / Similar Projects
+## 8 Videos and Podcasts
+
+- [The .NET Docs Show - Controllers are Dinosaurs and the Case for API Endpoints](https://www.youtube.com/watch?v=9oroj2TmxBs&ab_channel=dotNET)
+- [.NET Rocks ASP.NET Core API Endpoints with Steve Smith](https://www.dotnetrocks.com/default.aspx?ShowNum=1695)
+
+## 9. Related / Similar Projects
 
 - [SimpleEndpoints](https://github.com/dasiths/SimpleEndpoints)
 - [FunctionMonkey](https://github.com/JamesRandall/FunctionMonkey) A similar approach for Azure Functions.
 - [https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints](https://github.com/Kahbazi/MediatR.AspNetCore.Endpoints) A similar approach using MediatR and middleware.
 - [Voyager](https://github.com/smithgeek/voyager) A similar approach using MediatR that works for ASP.NET core and Azure Functions.
 
-## 9. Projects Using ApiEndpoints
+## 10. Projects Using ApiEndpoints
 
 If you're using them or find one not in this list, feel free to add it here via a pull request!
 
@@ -289,7 +296,7 @@ If you're using them or find one not in this list, feel free to add it here via 
 - [PayrollProcessor](https://github.com/KyleMcMaster/payroll-processor): A smorgasbord of modern .NET tech written with functional and asynchronous patterns.
 - [eShopOnWeb](https://github.com/dotnet-architecture/eShopOnWeb): Sample ASP.NET Core reference application, powered by Microsoft
 
-## 10. Success Stories and Testimonials
+## 11. Success Stories and Testimonials
 
 > "I have implemented in my team your API endpoint solution and I must tell you that was a pretty good investment! in particular how maintainable and testable the solution became!"
 
