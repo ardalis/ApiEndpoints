@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: '6.0.x'
       - uses: brandedoutcast/publish-nuget@v2
-      - with:
+        with:
           PROJECT_FILE_PATH: src/Ardalis.ApiEndpoints.Swashbuckle/Ardalis.ApiEndpoints.Swashbuckle.csproj # Relative to repository root
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           INCLUDE_SYMBOLS: true          
