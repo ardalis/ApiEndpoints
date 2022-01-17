@@ -15,10 +15,10 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '6.0.x'
-      - name: publish on version change
-        uses: rohith/publish-nuget@v2
-        with:
+      - uses: brandedoutcast/publish-nuget@v2
+      - with:
           PROJECT_FILE_PATH: src/Ardalis.ApiEndpoints.Swashbuckle/Ardalis.ApiEndpoints.Swashbuckle.csproj # Relative to repository root
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          INCLUDE_SYMBOLS: true          
           TAG_FORMAT: Swashbuckle_v* # Format of the git tag, [*] gets replaced with version
-          INCLUDE_SYMBOLS: true # Pushing symbols along with nuget package to the server
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}} # nuget.org API key
+          
