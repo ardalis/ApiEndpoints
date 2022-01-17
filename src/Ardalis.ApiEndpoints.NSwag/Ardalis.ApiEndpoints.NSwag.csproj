@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints.NSwag</PackageId>
-    <Version>4.0.0</Version>
+    <Version>4.0.1</Version>
     <Authors>Steve Smith (@ardalis), Maksym Koshovyi</Authors>
     <Description>OpenAPI support for ApiEndpoints using NSwag</Description>
     <Summary>OpenAPI support for ApiEndpoints using NSwag</Summary>
