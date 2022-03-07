@@ -10,9 +10,11 @@ public class AutoMapping : Profile
   {
     CreateMap<CreateAuthorCommand, Author>();
     CreateMap<UpdateAuthorCommand, Author>();
+    CreateMap<UpdateAuthorCommandById, Author>();
 
     CreateMap<Author, CreateAuthorResult>();
     CreateMap<Author, UpdatedAuthorResult>();
+    CreateMap<Author, UpdatedAuthorByIdResult>();
     CreateMap<Author, AuthorListResult>();
     CreateMap<Author, AuthorResult>();
   }
