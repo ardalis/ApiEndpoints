@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SampleEndpointApp.DataAccess;
 using SampleEndpointApp.DomainModel;
@@ -19,7 +20,15 @@ public class Startup
     services.AddDbContext<AppDbContext>(options =>
         options.UseSqlite("Data Source=database.sqlite")); // will be created in web project root
 
-    services.AddControllers(options => options.UseNamespaceRouteToken());
+    services.AddControllers(options =>
+    {
+      options.UseNamespaceRouteToken();
+     });
+
+    services.Configure<ApiBehaviorOptions>(options =>
+    {
+      options.SuppressInferBindingSourcesForParameters = true;
+    });
 
     services.AddSwaggerGen(c =>
     {
