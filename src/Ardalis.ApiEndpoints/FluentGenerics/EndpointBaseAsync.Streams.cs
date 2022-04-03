@@ -13,5 +13,15 @@ public static partial class EndpointBaseAsync
       );
     }
   }
+
+  public static partial class WithoutRequest
+  {
+    public abstract class WithAsyncEnumerableResult<T> : EndpointBase
+    {
+      public abstract IAsyncEnumerable<T> HandleAsync(
+        CancellationToken cancellationToken = default
+      );
+    }
+  }
 }
 #endif
