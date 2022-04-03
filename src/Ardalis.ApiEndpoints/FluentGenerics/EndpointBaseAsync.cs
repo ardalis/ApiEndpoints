@@ -5,9 +5,9 @@ namespace Ardalis.ApiEndpoints;
 /// <summary>
 /// A base class for an endpoint that accepts parameters.
 /// </summary>
-public static class EndpointBaseAsync
+public static partial class EndpointBaseAsync
 {
-  public static class WithRequest<TRequest>
+  public static partial class WithRequest<TRequest>
   {
     public abstract class WithResult<TResponse> : EndpointBase
     {
@@ -42,7 +42,7 @@ public static class EndpointBaseAsync
     }
   }
 
-  public static class WithoutRequest
+  public static partial class WithoutRequest
   {
     public abstract class WithResult<TResponse> : EndpointBase
     {
