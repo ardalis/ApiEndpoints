@@ -25,10 +25,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" Condition="'$(TargetFrameworkIdentifier)' != '.NETCoreApp'" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)' != 'netstandard2.1' ">
-    <Compile Remove="FluentGenerics\EndpointBaseASync.Streams.cs" />
-  </ItemGroup>
-
   <ItemGroup>
     <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
