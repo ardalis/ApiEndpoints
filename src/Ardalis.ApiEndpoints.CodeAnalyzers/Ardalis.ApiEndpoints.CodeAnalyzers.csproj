@@ -8,6 +8,7 @@
   <PropertyGroup>
     <PackageId>Ardalis.ApiEndpoints.CodeAnalyzers</PackageId>
     <Version>4.0.0</Version>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Steve Smith (@ardalis), Philip Pittle (@ppittle)</Authors>
     <Description>Code Analyzers supporting using Api Endpoints</Description>
     <Summary>Code Analyzers increasing productivity of developers using the Api Endpoints framework.</Summary>
@@ -17,8 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="3.11.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.3" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.1.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
