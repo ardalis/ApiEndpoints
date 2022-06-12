@@ -6,6 +6,8 @@ has_children: false
 ---
 # Overview
 
+To do: Change this to cover API Endpoints.
+
 The [Specification pattern](https://deviq.com/design-patterns/specification-pattern) encapsulates query logic in its own class, which helps classes follow the [Single Responsibility Principle](https://deviq.com/principles/single-responsibility-principle) (SRP) and promotes reuse of common queries. Specifications can be independently unit tested. When combined with the [Repository](https://deviq.com/design-patterns/repository-pattern) pattern, it can also help to keep it from growing with too many additional custom query methods. Specification is commonly used on projects that leverage [Domain-Driven Design](https://deviq.com/domain-driven-design/ddd-overview).
 
 Since version 5, this package also supports applying specifications directly to EF Core `DbContext` instances.
