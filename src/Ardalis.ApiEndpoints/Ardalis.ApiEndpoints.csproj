@@ -1,31 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
-  </PropertyGroup>
+    <PropertyGroup>
+        <PackageId>Ardalis.ApiEndpoints</PackageId>
+        <Title>Ardalis.ApiEndpoints</Title>
+        <Authors>Steve Smith (@ardalis)</Authors>
+        <Description>An alternative to Controllers for ASP.NET Core API Endpoints.</Description>
+        <Summary>Controllers promote creating bloated classes that lack cohesion. This project provides a simpler alternative that follows SOLID principles. An alternative to Controllers for ASP.NET Core API Endpoints.</Summary>
+        <PackageTags>aspnet asp.net aspnetcore asp.net core api web api rest endpoint controller</PackageTags>
+        <PackageReleaseNotes>
+            See README for breaking changes and migration guide.
 
-  <PropertyGroup>
-    <PackageId>Ardalis.ApiEndpoints</PackageId>
-    <Title>Ardalis.ApiEndpoints</Title>
-    <Authors>Steve Smith (@ardalis)</Authors>
-    <Description>An alternative to Controllers for ASP.NET Core API Endpoints.</Description>
-    <Summary>Controllers promote creating bloated classes that lack cohesion. This project provides a simpler alternative that follows SOLID principles. An alternative to Controllers for ASP.NET Core API Endpoints.</Summary>
-    <PackageTags>aspnet asp.net aspnetcore asp.net core api web api rest endpoint controller</PackageTags>
-    <PackageReleaseNotes>See README for breaking changes and migration guide.
-    
-    4.0.1 Updates reference to Ardalis.ApiEndpoints.CodeAnalyzers to non-prerelease.</PackageReleaseNotes>
-    <Version>4.0.1</Version>
-    <AssemblyName>Ardalis.ApiEndpoints</AssemblyName>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-  </PropertyGroup>
+        </PackageReleaseNotes>
+        <Version>4.0.1</Version>
+        <AssemblyName>Ardalis.ApiEndpoints</AssemblyName>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="4.0.0" />
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Ardalis.ApiEndpoints.CodeAnalyzers" Version="4.0.0" />
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+    </ItemGroup>
 
 </Project>
