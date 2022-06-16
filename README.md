@@ -299,6 +299,8 @@ If you're using them or find one not in this list, feel free to add it here via 
 
 ## 11. Success Stories and Testimonials
 
+- [Developing APIs using HTTP Endpoints (Gary Woodfine)](https://garywoodfine.com/developing-apis-using-http-endpoints/)
+
 > "I have implemented in my team your API endpoint solution and I must tell you that was a pretty good investment! in particular how maintainable and testable the solution became!"
 
 [Nuno Santos](https://www.linkedin.com/in/nuno-santos-sd/)
