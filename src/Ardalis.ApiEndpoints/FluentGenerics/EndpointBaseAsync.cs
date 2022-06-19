@@ -5,9 +5,9 @@ namespace Ardalis.ApiEndpoints;
 /// <summary>
 /// A base class for an endpoint that accepts parameters.
 /// </summary>
-public static partial class EndpointBaseAsync
+public static class EndpointBaseAsync
 {
-  public static partial class WithRequest<TRequest>
+  public static class WithRequest<TRequest>
   {
     public abstract class WithResult<TResponse> : EndpointBase
     {
@@ -38,11 +38,18 @@ public static partial class EndpointBaseAsync
       public abstract Task<ActionResult> HandleAsync(
           TRequest request,
           CancellationToken cancellationToken = default
+      );
+    }
+    public abstract class WithAsyncEnumerableResult<T> : EndpointBase
+    {
+      public abstract IAsyncEnumerable<T> HandleAsync(
+        TRequest request,
+        CancellationToken cancellationToken = default
       );
     }
   }
 
-  public static partial class WithoutRequest
+  public static class WithoutRequest
   {
     public abstract class WithResult<TResponse> : EndpointBase
     {
@@ -69,6 +76,13 @@ public static partial class EndpointBaseAsync
     {
       public abstract Task<ActionResult> HandleAsync(
           CancellationToken cancellationToken = default
+      );
+    }
+
+    public abstract class WithAsyncEnumerableResult<T> : EndpointBase
+    {
+      public abstract IAsyncEnumerable<T> HandleAsync(
+        CancellationToken cancellationToken = default
       );
     }
   }

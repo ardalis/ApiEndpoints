@@ -1,0 +1,6 @@
+remote_theme: pmarsceill/just-the-docs
+
+# Aux links for the upper right navigation
+aux_links:
+  "Ardalis.Specification on GitHub":
+    - "//github.com/ardalis/specification"
