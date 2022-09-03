@@ -4,7 +4,7 @@
         <Version>4.0.1</Version>
         <PackageId>Ardalis.ApiEndpoints</PackageId>
         <Title>Ardalis.ApiEndpoint</Title>
-        <Authors>Ardalis</Authors>
+        <Authors>Steve Smith @ardalis, Ali zaferany</Authors>
         <Description>A project template for creating an ASP.NET Core application with an example ApiEndpoints for a RESTful HTTP service.</Description>
         <PackageTags>dotnet-new;dotnet;templates;csharp;api;apiendpoints</PackageTags>
         <TargetFramework>netstandard2.0</TargetFramework>

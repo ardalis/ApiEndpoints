@@ -1,6 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/template",
-  "author": "Ardalis",
+  "author": "Steve Smith @ardalis, Ali zaferany",
 
   "name": "Ardalis.ApiEndpoint Template",
   "description": "A project template for creating an ASP.NET Core application with an example ApiEndpoints for a RESTful HTTP service.",
