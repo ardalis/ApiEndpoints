@@ -1,0 +1,48 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Steve Smith @ardalis, Ali zaferany",
+
+  "name": "Ardalis.ApiEndpoint Template",
+  "description": "A project template for creating an ASP.NET Core application with an example ApiEndpoints for a RESTful HTTP service.",
+  "identity": "Ardalis.ApiEndpoints.",
+  "shortName": "apiendpoints",
+  "sourceName": "Sample.WeatherForecast",
+  "defaultName": "WebApplication",
+  "preferNameDirectory": true,
+  "classifications": [
+    "Web",
+    "WebAPI",
+    "C#"
+  ],
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "exclude": [
+        "README.md",
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**/*",
+        ".vs/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "**/.git/**",
+        "*.nuspec",
+        "**/node_modules/**",
+        "riderModule.iml" ,
+        "/_ReSharper.Caches/" ,
+        ".idea/" ,
+        "/.idea/" ,
+        ".git/" ,
+        "/.git/" ,
+        "logs/",
+        ".releaserc",
+        "templatepack.csproj"]
+    }
+  ]
+}

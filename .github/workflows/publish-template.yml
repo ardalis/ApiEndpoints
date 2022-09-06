@@ -1,0 +1,28 @@
+name: publish template package to nuget
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main # Your default release branch
+jobs:
+  build-test-prep-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+        env:
+          DOTNET_INSTALL_DIR: /usr/share/dotnet
+      - name: build and test
+        run: |
+          dotnet restore
+          dotnet build -c Release --no-restore
+          dotnet test -c Release --no-build
+      - name: Create the package
+        run: dotnet pack Sample/Sample.WeatherForecast/templatepack.csproj -c Release --output nupkgs
+      - name: Publish the package to NuGet.org
+        env:
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        run: dotnet nuget push nupkgs/*.nupkg -k $NUGET_KEY

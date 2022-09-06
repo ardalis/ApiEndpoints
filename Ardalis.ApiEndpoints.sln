@@ -37,6 +37,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.NSwag"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ardalis.ApiEndpoints.Swashbuckle", "src\Ardalis.ApiEndpoints.Swashbuckle\Ardalis.ApiEndpoints.Swashbuckle.csproj", "{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.WeatherForecast", "sample\Sample.WeatherForecast\Sample.WeatherForecast.csproj", "{B37C448C-7DCE-48E2-8CA7-0910CB40393C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B37C448C-7DCE-48E2-8CA7-0910CB40393C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B37C448C-7DCE-48E2-8CA7-0910CB40393C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B37C448C-7DCE-48E2-8CA7-0910CB40393C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B37C448C-7DCE-48E2-8CA7-0910CB40393C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{7BBDA78D-3207-479B-9D80-9CADD46C31F1} = {CE4A1E99-D876-4D8F-B56E-9BF453456BAB}
 		{B11A92CB-3AE3-495E-99A2-F06EE62DCDF6} = {7BBDA78D-3207-479B-9D80-9CADD46C31F1}
 		{0A625FF1-6E6E-445F-B40D-50AE6B5FFCA0} = {7BBDA78D-3207-479B-9D80-9CADD46C31F1}
+		{B37C448C-7DCE-48E2-8CA7-0910CB40393C} = {38434103-76E0-4820-B4AF-F5EA5D08A7BD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {932AEB26-7B36-4EFB-B4D1-41F13EDAE5D2}
