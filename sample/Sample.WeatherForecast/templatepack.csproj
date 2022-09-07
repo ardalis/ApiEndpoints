@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <PackageType>Template</PackageType>
+        <Version>4.0.1</Version>
+        <PackageId>Ardalis.ApiEndpoints</PackageId>
+        <Title>Ardalis.ApiEndpoint</Title>
+        <Authors>Steve Smith @ardalis, Ali zaferany</Authors>
+        <Description>A project template for creating an ASP.NET Core application with an example ApiEndpoints for a RESTful HTTP service.</Description>
+        <PackageTags>dotnet-new;dotnet;templates;csharp;api;apiendpoints</PackageTags>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IncludeContentInPack>true</IncludeContentInPack>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <ContentTargetFolders>content</ContentTargetFolders>
+        <NoWarn>$(NoWarn);NU5128</NoWarn>
+        <NoDefaultExcludes>true</NoDefaultExcludes>
+    </PropertyGroup>
+    <ItemGroup>
+        <Content Include=".\**\*" Exclude=".\**\bin\**;.\**\obj\**;.\.git;.\.git\**;.\.idea;.\.idea\**;**\.vscode\**;**\.github\**;README.md;"/>
+        <Compile Remove="**\*"/>
+    </ItemGroup>
+</Project>
