@@ -21,7 +21,7 @@ jobs:
           dotnet build -c Release --no-restore
           dotnet test -c Release --no-build
       - name: Create the package
-        run: dotnet pack Sample/Sample.WeatherForecast/templatepack.csproj -c Release --output nupkgs
+        run: dotnet pack sample/Sample.WeatherForecast/templatepack.csproj -c Release --output nupkgs
       - name: Publish the package to NuGet.org
         env:
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
