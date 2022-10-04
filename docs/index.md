@@ -8,35 +8,25 @@ has_children: false
 
 To do: Change this to cover API Endpoints.
 
-The [Specification pattern](https://deviq.com/design-patterns/specification-pattern) encapsulates query logic in its own class, which helps classes follow the [Single Responsibility Principle](https://deviq.com/principles/single-responsibility-principle) (SRP) and promotes reuse of common queries. Specifications can be independently unit tested. When combined with the [Repository](https://deviq.com/design-patterns/repository-pattern) pattern, it can also help to keep it from growing with too many additional custom query methods. Specification is commonly used on projects that leverage [Domain-Driven Design](https://deviq.com/domain-driven-design/ddd-overview).
+ASP.NET Core API Endpoints are essentially Razor Pages for APIs. They break apart bloated controllers and group the API models used by individual endpoints with the endpoint logic itself. They provide a simple way to have a single file for the logic and linked files for the model types.
 
-Since version 5, this package also supports applying specifications directly to EF Core `DbContext` instances.
+When working with ASP.NET Core API Endpoints your project won't need any Controller classes. You can organize the Endpoints however you want. By feature. In a giant Endpoints folder. It doesn't matter - they'll work regardless of where you put them.
 
-## Benefits
+Most REST APIs have groups of endpoints for a given resource. In Controller-based projects you would have a controller per resource. When using API Endpoints you can simply create a folder per resource, just as you would use folders to group related pages in Razor Pages.
 
-The main benefits offered by the specification pattern in general and this package in particular are:
+Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Response(REPR). The REPR (reaper) pattern is much simpler and groups everything that has to do with a particular API endpoint together. It follows SOLID principles, in particular SRP and OCP. It also has all the benefits of feature folders and better follows the Common Closure Principle by grouping together things that change together.
 
-- Keep data access query logic in one place
-- Keep data access query logic in the domain layer
-- Reuse common queries throughout your application
-- Provide good names to common queries to facilitate reuse and elevate language used to describe the app's behavior
-- Eliminate common pain points of Repository pattern (hiding ORM data shaping features, requiring many custom query methods)
-
-## Installing Ardalis.Specification
+## Installing Ardalis.ApiEndpoints
 
 Install Ardalis.Specification from NuGet. The latest version is available here:
 
-[https://www.nuget.org/packages/Ardalis.Specification/](https://www.nuget.org/packages/Ardalis.Specification/)
+[https://www.nuget.org/packages/Ardalis.ApiEndpoints/](https://www.nuget.org/packages/Ardalis.ApiEndpoints/)
 
 Alternately, add it to a project using this CLI command:
 
 ```powershell
-dotnet add package Ardalis.Specification
+dotnet add package Ardalis.ApiEndpoints
 ```
-
-## Getting Started
-
-Read the [Getting Started section](getting-started/). You can also [review the sample application that is available in the GitHub repository](https://github.com/ardalis/Specification/tree/master/sample).
 
 ## Docs theme notes
 
