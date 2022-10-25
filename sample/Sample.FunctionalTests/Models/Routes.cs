@@ -16,6 +16,8 @@ public static class Routes
 
     public static string List(int perPage, int page) => $"{BaseRoute}?perPage={perPage}&page={page}";
 
+    public static string Stream() => $"{BaseRoute}/stream";
+
     public static string Get(int id) => $"{BaseRoute}/{id}";
 
     public static string Delete(int id) => $"{BaseRoute}/{id}";
