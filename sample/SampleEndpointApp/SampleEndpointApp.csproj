@@ -25,7 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints.CodeAnalyzers\Ardalis.ApiEndpoints.CodeAnalyzers.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints.Swashbuckle\Ardalis.ApiEndpoints.Swashbuckle.csproj" />
-    <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj" />
+      <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj"></ProjectReference>
   </ItemGroup>
 
 

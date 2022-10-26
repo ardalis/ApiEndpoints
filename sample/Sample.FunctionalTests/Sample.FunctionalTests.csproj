@@ -19,7 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SampleEndpointApp\SampleEndpointApp.csproj" />
+      <ProjectReference Include="..\..\src\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj"></ProjectReference>
+      <ProjectReference Include="..\SampleEndpointApp\SampleEndpointApp.csproj" />
   </ItemGroup>
 
 </Project>

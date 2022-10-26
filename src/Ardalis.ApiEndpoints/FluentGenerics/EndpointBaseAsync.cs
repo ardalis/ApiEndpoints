@@ -40,6 +40,13 @@ public static class EndpointBaseAsync
           CancellationToken cancellationToken = default
       );
     }
+    public abstract class WithAsyncEnumerableResult<T> : EndpointBase
+    {
+      public abstract IAsyncEnumerable<T> HandleAsync(
+        TRequest request,
+        CancellationToken cancellationToken = default
+      );
+    }
   }
 
   public static class WithoutRequest
@@ -69,6 +76,13 @@ public static class EndpointBaseAsync
     {
       public abstract Task<ActionResult> HandleAsync(
           CancellationToken cancellationToken = default
+      );
+    }
+
+    public abstract class WithAsyncEnumerableResult<T> : EndpointBase
+    {
+      public abstract IAsyncEnumerable<T> HandleAsync(
+        CancellationToken cancellationToken = default
       );
     }
   }

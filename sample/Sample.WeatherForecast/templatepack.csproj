@@ -2,7 +2,7 @@
     <PropertyGroup>
         <PackageType>Template</PackageType>
         <Version>4.0.1</Version>
-        <PackageId>Ardalis.ApiEndpoints</PackageId>
+        <PackageId>Ardalis.ApiEndpoints.Templates</PackageId>
         <Title>Ardalis.ApiEndpoint</Title>
         <Authors>Steve Smith @ardalis, Ali zaferany</Authors>
         <Description>A project template for creating an ASP.NET Core application with an example ApiEndpoints for a RESTful HTTP service.</Description>
