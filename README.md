@@ -60,13 +60,13 @@ For version 3.0 we implemented a new way to define the base classes using "fluen
 
 [7. Related Articles](#7-related-articles)
 
-[8. Videos and Podcasts](#8-videos-podcasts)
+[8. Videos and Podcasts](#8-videos-and-podcasts)
 
-[9. Related / Similar Projects](#8-related--similar-projects)
+[9. Related / Similar Projects](#9-related--similar-projects)
 
-[10. Projects Using ApiEndpoints](#9-projects-using-apiendpoints)
+[10. Projects Using ApiEndpoints](#10-projects-using-apiendpoints)
 
-[11. Success Stories and Testimonials](#10-success-stories-and-testimonials)
+[11. Success Stories and Testimonials](#11-success-stories-and-testimonials)
 
 ## 1. Motivation
 
@@ -97,7 +97,7 @@ Most REST APIs have groups of endpoints for a given resource. In Controller-base
 I'll look to add detailed documentation in the future but for now here's all you need to get started (you can also check the sample project):
 
 1. Add the [Ardalis.ApiEndpoints NuGet package](https://www.nuget.org/packages/Ardalis.ApiEndpoints/) to your ASP.NET Core web project.
-2. Create Endpoint classes by inheriting from either `BaseEndpoint<TRequest,TResponse>` (for endpoints that accept a model as input) or `BaseEndpoint<TResponse>` (for endpoints that simply return a response). For example, a POST endpoint that creates a resource and then returns the newly created record would use the version that includes both a Request and a Response. A GET endpoint that just returns a list of records and doesn't accept any arguments would use the second version.
+2. Create Endpoint classes by inheriting from either `EndpointBaseSync<TRequest,TResponse>` (for endpoints that accept a model as input) or `EndpointBaseSync<TResponse>` (for endpoints that simply return a response). For example, a POST endpoint that creates a resource and then returns the newly created record would use the version that includes both a Request and a Response. A GET endpoint that just returns a list of records and doesn't accept any arguments would use the second version.
 3. Implement the base class's abstract `Handle()` method.
 4. Make sure to add a `[HttpGet]` or similar attribute to your `Handle()` method, specifying its route.
 5. Define your `TResponse` type in a file in the same folder as its corresponding endpoint (or in the same file if you prefer). 
@@ -197,7 +197,7 @@ Below are what I expect will be some common questions:
 
 ### How do I use shared routing conventions?
 
-~~If you want to create a common route template for all or some subset of your Endpoints, simply create a BaseEndpoint of your own that inherits from `Ardalis.Api.Endpoints.BaseEndpoint` and add a `[Route]` attribute to it.~~
+If you want to create a common route template for all or some subset of your Endpoints, simply create a EndpointBaseSync of your own that inherits from `Ardalis.Api.Endpoints.EndpointBaseSync` and add a `[Route]` attribute to it.
 
 After refactoring to use the fluent generics pattern, there is no longer a way to use a base class for a default route. Instead, you should define your routes as constants which you can store in a central file or in each Request DTO (the sample shows this approach).
 
@@ -268,7 +268,7 @@ Visual Studio and/or CLI item templates would make it much easier to create Endp
 
 ### Route Conventions
 
-One thing that Controllers do have is built-in support in the framework to use their name in routes (e.g. "/[controller]/{id?}"). Currently in the sample app routes are hard-coded strings. It would be nice if there were an easy way to use a convention based on foldername or namespace or something (using foldername would align with how Razor Pages routing works).
+One thing that Controllers do have is built-in support in the framework to use their name in routes (e.g. "`[controller]/{id?}`"). Currently in the sample app routes are hard-coded strings. It would be nice if there were an easy way to use a convention based on foldername or namespace or something (using foldername would align with how Razor Pages routing works).
 
 ## 7. Related Articles
 
@@ -276,7 +276,7 @@ One thing that Controllers do have is built-in support in the framework to use t
 - [Decoupling Controllers with ApiEndpoints](https://betweentwobrackets.dev/posts/2020/09/decoupling-controllers-with-apiendpoints/)
 - [Fluent Generics](https://tyrrrz.me/blog/fluent-generics)
 
-## 8 Videos and Podcasts
+## 8. Videos and Podcasts
 
 - [Clean up your .NET Controllers with API Endpoints by Nick Chapsas](https://www.youtube.com/watch?v=SDu0MA6TmuM&ab_channel=NickChapsas)
 - [The .NET Docs Show - Controllers are Dinosaurs and the Case for API Endpoints](https://www.youtube.com/watch?v=9oroj2TmxBs&ab_channel=dotNET)
