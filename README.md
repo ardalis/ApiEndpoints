@@ -260,6 +260,10 @@ The base endpoints only expose a single model type which is used on the Handle m
 
 ### How can I use streaming from server to client?
 There's an example in the [sample app](https://github.com/ardalis/ApiEndpoints/blob/main/sample/SampleEndpointApp/Endpoints/Authors/Stream.cs) that shows how to set this up and return an `IAsyncEnumerable<T>`. For the base type, just use the `WithAsyncEnumerableResult<T>` option and in the endpoint handler yeld return after awaiting your async code.
+
+> Note: streaming with IAsyncEnumerable does not work within Swagger Ui. Use curl to test this functionality
+> ``` bash
+> curl -X "GET" "https://localhost:44338/api/Authors/stream" -H "accept: text/plain" 
 ## 6. Roadmap
 
 The following are some things I'd like to add to the project/package.
