@@ -14,7 +14,7 @@ When working with ASP.NET Core API Endpoints your project won't need any Control
 
 Most REST APIs have groups of endpoints for a given resource. In Controller-based projects you would have a controller per resource. When using API Endpoints you can simply create a folder per resource, just as you would use folders to group related pages in Razor Pages.
 
-Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Response(REPR). The REPR (reaper) pattern is much simpler and groups everything that has to do with a particular API endpoint together. It follows SOLID principles, in particular SRP and OCP. It also has all the benefits of feature folders and better follows the Common Closure Principle by grouping together things that change together.
+Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Response(REPR). The REPR (reaper) pattern is much simpler and groups everything that has to do with a particular API endpoint together. It follows SOLID principles, in particular [SRP](https://en.wikipedia.org/wiki/Single-responsibility_principle) and [OCP](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle). It also has all the benefits of feature folders and better follows the Common Closure Principle by grouping together things that change together.
 
 ## Installing Ardalis.ApiEndpoints
 
