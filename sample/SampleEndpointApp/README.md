@@ -24,4 +24,4 @@ dotnet ef database update
 
 ## Duplicate Code in Endpoints
 
-If the duplicate dependency code in the endpoints bothers you, you can avoid it easily by creating your own `BaseAppEndpoint` classes that inherit from `BaseEndpoint`. These can expose as properties any common dependencies like loggers, mappers, or generic repositories, and then use an IOC container's property injection feature to ensure they're always populated when the endpoint is created.
+If the duplicate dependency code in the endpoints bothers you, you can avoid it easily by creating your own `AppEndpointBaseSync` classes that inherit from `EndpointBaseSync`. These can expose as properties any common dependencies like loggers, mappers, or generic repositories, and then use an IOC container's property injection feature to ensure they're always populated when the endpoint is created.
