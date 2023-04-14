@@ -23,7 +23,7 @@ public class Get : EndpointBaseSync
   [HttpGet("/WeatherForecast")]
   [SwaggerOperation(
     Summary = "Get weather forecast",
-    OperationId = "WeatherForecast.Get",
+    OperationId = "WeatherForecast_Get",
     Tags = new[] { "WeatherForecast" })
   ]
   public override ActionResult<IEnumerable<WeatherForecast>> Handle()
