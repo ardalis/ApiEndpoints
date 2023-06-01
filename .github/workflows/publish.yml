@@ -20,7 +20,7 @@ jobs:
       - name: Run Tests
         run: dotnet test
       - name: publish on version change
-      - uses: brandedoutcast/publish-nuget@v2
+        uses: brandedoutcast/publish-nuget@v2
         with:
           PROJECT_FILE_PATH: src/Ardalis.ApiEndpoints/Ardalis.ApiEndpoints.csproj # Relative to repository root
           VERSION_REGEX: <Version>(.*)<\/Version> # Regex pattern to extract version info in a capturing group
