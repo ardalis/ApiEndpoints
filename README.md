@@ -125,7 +125,7 @@ services.AddSwaggerGen(c => {
 [SwaggerOperation(
     Summary = "Creates a new Author",
     Description = "Creates a new Author",
-    OperationId = "Author.Create",
+    OperationId = "Author_Create",
     Tags = new[] { "AuthorEndpoint" })
 ]
 public override async Task<ActionResult<CreateAuthorResult>> HandleAsync([FromBody]CreateAuthorCommand request)
@@ -159,7 +159,7 @@ public class List : BaseAsyncEndpoint
     [SwaggerOperation(
         Summary = "List all Authors",
         Description = "List all Authors",
-        OperationId = "Author.List",
+        OperationId = "Author_List",
         Tags = new[] { "AuthorEndpoint" })
     ]
     public override async Task<ActionResult<IList<AuthorListResult>>> HandleAsync(
@@ -237,7 +237,7 @@ public class Post : BaseAsyncEndpoint
     [SwaggerOperation(
         Summary = "Submit a new article",
         Description = "Enables the submission of new articles",
-        OperationId = "B349A6C4-1198-4B53-B9BE-85232E06F16E",
+        OperationId = "Article_Create",
         Tags = new[] {"Article"})
     ]
     public override Task<ActionResult> HandleAsync([FromRoute] NewArticleRequest request,
