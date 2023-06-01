@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <PackageId>Ardalis.ApiEndpoints.NSwag</PackageId>
-    <Version>4.0.1</Version>
-    <Authors>Steve Smith (@ardalis), Maksym Koshovyi</Authors>
-    <Description>OpenAPI support for ApiEndpoints using NSwag</Description>
-    <Summary>OpenAPI support for ApiEndpoints using NSwag</Summary>
-    <PackageTags>api endpoints openapi nswag</PackageTags>
-  </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="NSwag.Generation.AspNetCore" Version="13.0.0" />
-  </ItemGroup>
+    <PropertyGroup>
+        <PackageId>Ardalis.ApiEndpoints.NSwag</PackageId>
+        <Version>4.1.0</Version>
+        <Authors>Steve Smith (@ardalis), Maksym Koshovyi</Authors>
+        <Description>OpenAPI support for ApiEndpoints using NSwag</Description>
+        <Summary>OpenAPI support for ApiEndpoints using NSwag</Summary>
+        <PackageTags>api endpoints openapi nswag</PackageTags>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="NSwag.Generation.AspNetCore" Version="13.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Ardalis.ApiEndpoints\Ardalis.ApiEndpoints.csproj" />
+    </ItemGroup>
 
 </Project>
