@@ -12,6 +12,10 @@
 
 A project for supporting API Endpoints in ASP.NET Core web applications.
 
+## Sponsors
+
+A HUGE Thank-You to [AWS](https://github.com/aws) for sponsoring this project in June 2023 with an annual sponsorship!
+
 ## Give a Star! :star:
 
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
