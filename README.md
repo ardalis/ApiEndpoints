@@ -189,6 +189,46 @@ public class List : BaseAsyncEndpoint
 
 Examples of the configuration can be found in the sample API project
 
+### File Upload Example
+
+[See Issue 170 for more details](https://github.com/ardalis/ApiEndpoints/issues/170)
+
+```csharp
+using Ardalis.ApiEndpoints;
+using Microsoft.AspNetCore.Mvc;
+
+namespace SampleEndpointApp.Endpoints.Authors;
+
+public class File : EndpointBaseAsync
+    .WithRequest<IFormFile>
+    .WithResult<ActionResult<string[]>>
+{
+  /// <summary>
+  /// Post author's photo or something
+  /// </summary>
+  [HttpPost("api/[namespace]/file")]
+  public override async Task<ActionResult<string[]>> HandleAsync(
+    IFormFile file,
+    CancellationToken cancellationToken = default)
+  {
+    string filePath = Path.GetTempFileName();
+    using (var fileStream = System.IO.File.Create(filePath))
+    {
+      await file.CopyToAsync(fileStream, cancellationToken);
+    }
+
+    return new[]
+    {
+      filePath,
+      file.FileName,
+      file.ContentType,
+      file.ContentDisposition,
+      file.Length.ToString()
+    };
+  }
+}
+```
+
 ## 4. Animated Screenshots
 
 ### Working with Endpoints, Requests, and Results in Visual Studio
