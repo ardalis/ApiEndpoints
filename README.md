@@ -20,6 +20,10 @@ A HUGE Thank-You to [AWS](https://github.com/aws) for sponsoring this project in
 
 If you like or are using this project to learn or start your solution, please give it a star. Thanks!
 
+## Discover a Practical Example
+
+If you're eager to dive into a practical example of using `Ardalis.ApiEndpoints`, check out our [Getting Started guide](#3-getting-started). This guide walks you through setting up your environment and creating your first API endpoint using the latest features in version 4.x.
+
 ## Upgrade to 4.x Notes
 
 The fluent generics and base types involved in ApiEndpoints were updated in version 4.x, resulting in breaking changes. The updates required should be pretty straightforward, and have a few additional features that weren't supported in previous versions.
@@ -55,6 +59,14 @@ For version 3.0 we implemented a new way to define the base classes using "fluen
 [2. Introducing ASP.NET Core API Endpoints](#2-introducing-aspnet-core-api-endpoints)
 
 [3. Getting Started](#3-getting-started)
+
+- [Set Up an Empty Web API Project](#set-up-an-empty-web-api-project)
+
+- [Adding Controllers with Ardalis.ApiEndpoints](#adding-controllers-with-ardalisapiendpoints)
+
+- [Adding common endpoint groupings using Swagger](#adding-common-endpoint-groupings-using-swagger)
+
+- [File Upload Example](#file-upload-example)
 
 [4. Animated Screenshots](#4-animated-screenshots)
 
@@ -98,15 +110,141 @@ Most REST APIs have groups of endpoints for a given resource. In Controller-base
 
 ## 3. Getting Started
 
-I'll look to add detailed documentation in the future but for now here's all you need to get started (you can also check the sample project):
+### Set Up an Empty Web API Project
 
-1. Add the [Ardalis.ApiEndpoints NuGet package](https://www.nuget.org/packages/Ardalis.ApiEndpoints/) to your ASP.NET Core web project.
-2. Create Endpoint classes by inheriting from either `EndpointBaseSync<TRequest,TResponse>` (for endpoints that accept a model as input) or `EndpointBaseSync<TResponse>` (for endpoints that simply return a response). For example, a POST endpoint that creates a resource and then returns the newly created record would use the version that includes both a Request and a Response. A GET endpoint that just returns a list of records and doesn't accept any arguments would use the second version.
-3. Implement the base class's abstract `Handle()` method.
-4. Make sure to add a `[HttpGet]` or similar attribute to your `Handle()` method, specifying its route.
-5. Define your `TResponse` type in a file in the same folder as its corresponding endpoint (or in the same file if you prefer). 
-6. Define your `TRequest` type (if any) just like the `TResponse` class.
-7. Test your ASP.NET Core API Endpoint. If you're using Swagger/OpenAPI it should just work with it automatically.
+#### Overview
+
+When starting a new Web API project using .NET, you might want to begin with an empty project structure to have more control over dependencies and configurations. 
+
+#### Setting Up the Project
+
+1. **Create the Project:**
+
+   Start by creating a new empty web API project. You can do this using the .NET CLI:
+
+   ```bash
+   dotnet new web -n MyWebApi
+   cd MyWebApi
+   ```
+
+   This creates a basic project structure for a web application.
+
+2. **Update Program.cs:**
+
+   Open the `Program.cs` file, which serves as the entry point for your application. By default, it might contain the following code:
+
+   ```csharp
+   var builder = WebApplication.CreateBuilder(args);
+   var app = builder.Build();
+
+   // app.MapGet("/", () => "Hello World!");
+
+   app.Run();
+   ```
+
+   Remove the `app.MapGet("/", () => "Hello World!");` line as it sets up a minimal endpoint which we'll replace with controller routing.
+
+3. **Configure Services and Routing:**
+
+   Modify the `Program.cs` file to include controller services and routing:
+
+   ```csharp
+   var builder = WebApplication.CreateBuilder(args);
+
+   // Add controllers
+   builder.Services.AddControllers();
+
+   var app = builder.Build();
+
+   // Map controllers to endpoints
+   app.MapControllers();
+
+   app.Run();
+   ```
+
+   - **`builder.Services.AddControllers()`**: Adds services required for controllers to handle HTTP requests.
+   - **`app.MapControllers()`**: Maps controllers to appropriate endpoints based on routing attributes and conventions.
+   
+   These two methods are required for the endpoint to work.
+
+### Adding Controllers with Ardalis.ApiEndpoints
+
+1. **Install Ardalis.ApiEndpoints NuGet Package**
+
+   Add the `Ardalis.ApiEndpoints` package to your ASP.NET Core web project. You can do this using the NuGet Package Manager or via the .NET CLI:
+
+   ```bash
+   dotnet add package Ardalis.ApiEndpoints
+   ```
+
+2. **Create Endpoint Classes**
+
+   Create your endpoint classes by inheriting from `EndpointBaseSync` or `EndpointBaseAsync`, and add `.WithRequest<TRequest>` or `.WithResult<TResponse>`, or both, depending on whether your endpoint accepts input (POST) or simply returns a response (GET).
+
+3. **Implement Handle Method**
+
+   Implement the `Handle` method from the base class (`EndpointBaseSync`) in your endpoint class. This method contains the logic to process the request and return the response.
+
+   ```csharp
+   public class MyEndpoint : EndpointBaseSync
+    .WithRequest<string>
+    .WithActionResult<IActionResult>
+    {
+        [HttpGet("my-endpoint")]
+        public override ActionResult<IActionResult> Handle(string request)
+        {
+            // Your logic here
+
+            return Ok();
+        }
+    }
+   ```
+
+4. **Add Routing Attributes**
+
+   Decorate your `Handle` method with `[HttpGet]`, `[HttpPost]`, or other appropriate HTTP method attributes, specifying the route for your endpoint.
+
+5. **Define Request and Response Types**
+
+   Define your `TRequest` and `TResponse` types in the same file as your endpoint class or in separate files as per your project structure.
+
+6. **Test Your API Endpoint**
+
+   Test your ASP.NET Core API endpoint. If you're using Swagger/OpenAPI, it should automatically document your endpoint based on the attributes provided.
+
+#### Example Endpoint Class
+
+Here's an example of a GET endpoint that returns a list of books using `Ardalis.ApiEndpoints`:
+
+```csharp
+public class ListBooksEndpoint : EndpointBaseSync
+.WithoutRequest
+.WithResult<IList<BookDto>>
+{
+    private readonly IRepository<Book> repository;
+    private readonly IMapper mapper;
+
+    public ListBooksEndpoint(
+        IRepository<Book> repository,
+        IMapper mapper)
+    {
+        this.repository = repository;
+        this.mapper = mapper;
+    }
+
+    [HttpGet("/books")]
+    public override IList<BookDto> Handle()
+    {
+        var books = repository.ListAll();
+
+        var bookDtos = books.Select(book => mapper.Map<BookDto>(book)).ToList();
+
+        return bookDtos;
+    }
+}
+```
+
+This endpoint demonstrates listing books and uses the `HttpGet` annotation.
 
 ### Adding common endpoint groupings using Swagger
 
