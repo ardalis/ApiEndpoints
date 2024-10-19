@@ -14,7 +14,7 @@ A project for supporting API Endpoints in ASP.NET Core web applications.
 
 ## Fast Endpoints
 
-If you're on .NET 6 or later (if you're no longer on .NET 4.x you should be on at least .NET 8) you're probably better off using Minimal APIs than Controllers. MVC is a [dull edge technology](https://ardalis.com/technology-edges-bleeding-leading-rusting/) at this point. If you like the organization used by this library and the [REPR Pattern](https://deviq.com/design-patterns/repr-design-pattern) in general, I am not recommending the [FastEndpoints](https://fast-endpoints.com/) library. It has a *lot* of additional functionality you can use or not, but its core api endpoint functionality is very solid and fast.
+If you're on .NET 6 or later (if you're no longer on .NET 4.x you should be on at least .NET 8) you're probably better off using Minimal APIs than Controllers. MVC is a [dull edge technology](https://ardalis.com/technology-edges-bleeding-leading-rusting/) at this point. If you like the organization used by this library and the [REPR Pattern](https://deviq.com/design-patterns/repr-design-pattern) in general, I am now recommending the [FastEndpoints](https://fast-endpoints.com/) library. It has a *lot* of additional functionality you can use or not, but its core api endpoint functionality is very solid and fast.
 
 ## Give a Star! :star:
 
