@@ -6,8 +6,6 @@ has_children: false
 ---
 # Overview
 
-To do: Change this to cover API Endpoints.
-
 ASP.NET Core API Endpoints are essentially Razor Pages for APIs. They break apart bloated controllers and group the API models used by individual endpoints with the endpoint logic itself. They provide a simple way to have a single file for the logic and linked files for the model types.
 
 When working with ASP.NET Core API Endpoints your project won't need any Controller classes. You can organize the Endpoints however you want. By feature. In a giant Endpoints folder. It doesn't matter - they'll work regardless of where you put them.
@@ -18,7 +16,7 @@ Instead of Model-View-Controller (MVC) the pattern becomes Request-EndPoint-Resp
 
 ## Installing Ardalis.ApiEndpoints
 
-Install Ardalis.Specification from NuGet. The latest version is available here:
+Install Ardalis.ApiEndpoints from NuGet. The latest version is available here:
 
 [https://www.nuget.org/packages/Ardalis.ApiEndpoints/](https://www.nuget.org/packages/Ardalis.ApiEndpoints/)
 
