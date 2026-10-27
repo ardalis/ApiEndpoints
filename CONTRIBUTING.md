@@ -1,4 +1,4 @@
-# Contributing to Ardalis.GuardClauses
+# Contributing to Ardalis.ApiEndpoints
 
 We love your input! We want to make contributing to this project as easy and transparent as possible, whether it's:
 
@@ -31,15 +31,15 @@ You can just add a pull request out of the blue if you want, but it's much bette
 
 ## Getting Started
 
-Look for [issues marked with 'help wanted'](https://github.com/ardalis/guardclauses/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) to find good places to start contributing.
+Look for [issues marked with 'help wanted'](https://github.com/ardalis/ApiEndpoints/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) to find good places to start contributing.
 
 ## Any contributions you make will be under the MIT Software License
 
 In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers this project.
 
-## Report bugs using Github's [issues](https://github.com/ardalis/guardclauses/issues)
+## Report bugs using Github's [issues](https://github.com/ardalis/ApiEndpoints/issues)
 
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/ardalis/GuardClauses/issues/new/choose); it's that easy!
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](https://github.com/ardalis/ApiEndpoints/issues/new/choose); it's that easy!
 
 ## Sponsor us
 
